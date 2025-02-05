@@ -9,6 +9,7 @@ import 'package:focus_planner/features/auth/presentation/cubits/auth_states.dart
 import 'package:focus_planner/features/auth/presentation/pages/auth_page.dart';
 import 'package:focus_planner/features/l10n/app_localizations.dart';
 import 'package:focus_planner/themes/ligth_mode.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyApp extends StatefulWidget {
   // auth repo
@@ -37,18 +38,8 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
-        locale: _locale,
-        localizationsDelegates: const [
-          AppLocalizationsDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en', ''), // English
-          Locale('ar', ''), // Arabic
-          Locale('fr', '') // French
-        ],
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: BlocConsumer<AuthCubit, AuthState>(
           builder: (context, authState) {
             // Unauthenticated -> Auth Page
