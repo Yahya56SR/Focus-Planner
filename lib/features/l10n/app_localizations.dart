@@ -12,7 +12,7 @@ class AppLocalizations {
   }
 
   late Map<String, String> _localizedStrings;
-
+  
   Future<bool> load() async {
     String jsonString =
         await rootBundle.loadString('l10n/${locale.languageCode}.json');

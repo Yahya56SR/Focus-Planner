@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:focus_planner/features/Intro/presentation/pages/intro.dart';
 import 'package:focus_planner/features/auth/data/firebase_auth_repo.dart';
 import 'package:focus_planner/features/auth/domain/repos/auth_repo.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_states.dart';
 import 'package:focus_planner/features/auth/presentation/pages/auth_page.dart';
-import 'package:focus_planner/features/l10n/app_localizations.dart';
 import 'package:focus_planner/themes/ligth_mode.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'l10n/app_localizations.dart';
 
 class MyApp extends StatefulWidget {
   // auth repo
@@ -23,14 +22,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale = const Locale('en', '');
-
-  void setLocale(Locale locale) {
-    setState(() {
-      _locale = locale;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
