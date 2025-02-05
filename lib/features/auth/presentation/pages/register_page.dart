@@ -124,200 +124,204 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // logo
-                Padding(
-                  padding: const EdgeInsets.only(top: 25.0),
-                  child: Icon(
-                    Icons.lock_open_rounded,
-                    size: 80,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-                ),
-
-                AddSpace(height: 50),
-
-                // welcome text
-                Text(
-                  AppLocalizations.of(context)!.createAccountTitle,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontSize: 25,
-                      ),
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  AppLocalizations.of(context)!.createAccountSubtitle,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  textAlign: TextAlign.center,
-                ),
-
-                AddSpace(height: 12),
-
-                // username input
-                MyTextField(
-                  controller: usernameController,
-                  hintText: AppLocalizations.of(context)!.username,
-                  obscureText: false,
-                ),
-
-                AddSpace(
-                  height: 10,
-                ),
-
-                // email input
-                MyTextField(
-                  hintText: AppLocalizations.of(context)!.email,
-                  obscureText: false,
-                  controller: emailController,
-                ),
-
-                AddSpace(height: 10),
-
-                // pw input
-                MyTextField(
-                  hintText: AppLocalizations.of(context)!.password,
-                  obscureText: true,
-                  controller: pwController,
-                ),
-
-                AddSpace(height: 10),
-
-                // pw input
-                MyTextField(
-                  hintText: AppLocalizations.of(context)!.pwConfirm,
-                  obscureText: true,
-                  controller: confirmPwController,
-                ),
-
-                AddSpace(height: 20),
-
-                // login button
-                MyButton(
-                  onTap: register,
-                  text: AppLocalizations.of(context)!.register,
-                ),
-
-                AddSpace(height: 20),
-
-                GestureDetector(
-                  child: Text(
-                    AppLocalizations.of(context)!.forgotPassword,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-
-                AddSpace(height: 10),
-
-                // Other ways to sign in
-                Divider(),
-
-                AddSpace(height: 10),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                ListView(
                   children: [
-                    InkWell(
-                      onTap: registerGoogle,
-                      child: Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Image.asset(
-                          'images/google_logo.png',
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          scale: 3,
-                        ),
+                    // logo
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25.0),
+                      child: Icon(
+                        Icons.lock_open_rounded,
+                        size: 80,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
+                  
+                    AddSpace(height: 50),
+                  
+                    // welcome text
+                    Text(
+                      AppLocalizations.of(context)!.createAccountTitle,
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                            fontSize: 25,
+                          ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.createAccountSubtitle,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                  
+                    AddSpace(height: 12),
+                  
+                    // username input
+                    MyTextField(
+                      controller: usernameController,
+                      hintText: AppLocalizations.of(context)!.username,
+                      obscureText: false,
+                    ),
+                  
                     AddSpace(
-                      width: 25,
+                      height: 10,
                     ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
-                          borderRadius: BorderRadius.circular(10),
+                  
+                    // email input
+                    MyTextField(
+                      hintText: AppLocalizations.of(context)!.email,
+                      obscureText: false,
+                      controller: emailController,
+                    ),
+                  
+                    AddSpace(height: 10),
+                  
+                    // pw input
+                    MyTextField(
+                      hintText: AppLocalizations.of(context)!.password,
+                      obscureText: true,
+                      controller: pwController,
+                    ),
+                  
+                    AddSpace(height: 10),
+                  
+                    // pw input
+                    MyTextField(
+                      hintText: AppLocalizations.of(context)!.pwConfirm,
+                      obscureText: true,
+                      controller: confirmPwController,
+                    ),
+                  
+                    AddSpace(height: 20),
+                  
+                    // login button
+                    MyButton(
+                      onTap: register,
+                      text: AppLocalizations.of(context)!.register,
+                    ),
+                  
+                    AddSpace(height: 20),
+                  
+                    GestureDetector(
+                      child: Text(
+                        AppLocalizations.of(context)!.forgotPassword,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
                         ),
-                        child: Image.asset(
-                          'images/apple_logo.png',
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          scale: 3,
-                        ),
+                        textAlign: TextAlign.left,
                       ),
                     ),
-                    AddSpace(
-                      width: 25,
+                  
+                    AddSpace(height: 10),
+                  
+                    // Other ways to sign in
+                    Divider(),
+                  
+                    AddSpace(height: 10),
+                  
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: registerGoogle,
+                          child: Container(
+                            padding: EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.secondary,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Image.asset(
+                              'images/google_logo.png',
+                              color: Theme.of(context).colorScheme.onSecondary,
+                              scale: 3,
+                            ),
+                          ),
+                        ),
+                        AddSpace(
+                          width: 25,
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Container(
+                            padding: EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.secondary,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Image.asset(
+                              'images/apple_logo.png',
+                              color: Theme.of(context).colorScheme.onSecondary,
+                              scale: 3,
+                            ),
+                          ),
+                        ),
+                        AddSpace(
+                          width: 25,
+                        ),
+                        InkWell(
+                          onTap: registerPatreon,
+                          child: Container(
+                            padding: EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.secondary,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Image.asset(
+                              'images/patreon_logo.png',
+                              color: Theme.of(context).colorScheme.onSecondary,
+                              scale: 3,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    InkWell(
-                      onTap: registerPatreon,
-                      child: Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Image.asset(
-                          'images/patreon_logo.png',
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          scale: 3,
-                        ),
+                  
+                    const Spacer(),
+                  
+                    // lang changer
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () => lookupAppLocalizations(Locale('en')),
+                            child: Text(
+                              AppLocalizations.of(context)!.en,
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ),
+                          AddSpace(width: 5),
+                          Icon(
+                            Icons.radio_button_checked_sharp,
+                            size: 20,
+                          ),
+                          AddSpace(width: 5),
+                          GestureDetector(
+                            onTap: () => lookupAppLocalizations(Locale('ar')),
+                            child: Text(
+                              AppLocalizations.of(context)!.ar,
+                              style: Theme.of(context).textTheme.bodyMedium
+                            ),
+                          ),
+                          AddSpace(width: 5),
+                          Icon(
+                            Icons.radio_button_checked_sharp,
+                            size: 20,
+                          ),
+                          AddSpace(width: 5),
+                          GestureDetector(
+                            onTap: () => lookupAppLocalizations(Locale('fr')),
+                            child: Text(
+                              AppLocalizations.of(context)!.fr,
+                              style: Theme.of(context).textTheme.bodyMedium
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                    )
                   ],
                 ),
-
-                const Spacer(),
-
-                // lang changer
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () => lookupAppLocalizations(Locale('en')),
-                        child: Text(
-                          AppLocalizations.of(context)!.en,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                        ),
-                      ),
-                      AddSpace(width: 5),
-                      Icon(
-                        Icons.radio_button_checked_sharp,
-                        size: 20,
-                      ),
-                      AddSpace(width: 5),
-                      GestureDetector(
-                        onTap: () => lookupAppLocalizations(Locale('ar')),
-                        child: Text(
-                          AppLocalizations.of(context)!.ar,
-                          style: Theme.of(context).textTheme.bodyMedium
-                        ),
-                      ),
-                      AddSpace(width: 5),
-                      Icon(
-                        Icons.radio_button_checked_sharp,
-                        size: 20,
-                      ),
-                      AddSpace(width: 5),
-                      GestureDetector(
-                        onTap: () => lookupAppLocalizations(Locale('fr')),
-                        child: Text(
-                          AppLocalizations.of(context)!.fr,
-                          style: Theme.of(context).textTheme.bodyMedium
-                        ),
-                      ),
-                    ],
-                  ),
-                )
               ],
             ),
           ),
