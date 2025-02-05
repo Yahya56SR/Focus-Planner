@@ -139,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                     Padding(
                   padding: const EdgeInsets.only(top: 50.0),
                   child: GestureDetector(
-                    onTap: () => _controller.toggle(),
+                    onTap: () => _controller.reset(),
                     child: Lottie.asset(
                       'animations/Auth_Animation.json', 
                       repeat: false, 
@@ -149,7 +149,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                       controller: _controller,
                       onLoaded: (composition) {
                         _controller
-                          ..duration = Duration(seconds: 2)
+                          ..duration = composition.duration
                           ..forward();
                       },
                     ),
