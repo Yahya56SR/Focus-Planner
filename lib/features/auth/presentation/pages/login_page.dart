@@ -4,6 +4,7 @@ import 'package:focus_planner/features/auth/presentation/components/button.dart'
 import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
 import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? togglePages;
@@ -85,11 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                 // logo
                 Padding(
                   padding: const EdgeInsets.only(top: 50.0),
-                  child: Icon(
-                    Icons.lock_open_rounded,
-                    size: 80,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                  child: Lottie.asset('animations/Auth_Animation.json', repeat: false,),
                 ),
 
                 AddSpace(height: 50),
