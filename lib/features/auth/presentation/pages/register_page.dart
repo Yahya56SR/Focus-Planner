@@ -4,7 +4,7 @@ import 'package:focus_planner/features/auth/presentation/components/button.dart'
 import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
 import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
-import '../../../l10n/app_localizations.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? togglePages;
@@ -24,14 +24,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController pwController = TextEditingController();
   final TextEditingController confirmPwController = TextEditingController();
-  // ignore: unused_field
-  Locale _currentLocale = Locale('en', '');
-
-  void _changeLanguage(Locale locale) {
-    setState(() {
-      _currentLocale = locale;
-    });
-  }
 
   void register() {
     // prepare email & pw
@@ -54,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            AppLocalizations.of(context)!.translate('enterName'),
+            AppLocalizations.of(context)!.enterName,
           ),
         ),
       );
@@ -62,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            AppLocalizations.of(context)!.translate('enterEmail'),
+            AppLocalizations.of(context)!.enterEmail,
           ),
         ),
       );
@@ -70,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            AppLocalizations.of(context)!.translate('enterPw'),
+            AppLocalizations.of(context)!.enterPw,
           ),
         ),
       );
@@ -78,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            AppLocalizations.of(context)!.translate('enterNameEmailPw'),
+            AppLocalizations.of(context)!.enterNameEmailPw,
           ),
         ),
       );
@@ -86,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            AppLocalizations.of(context)!.translate('pwNotMatch'),
+            AppLocalizations.of(context)!.pwNotMatch,
           ),
         ),
       );
@@ -146,14 +138,14 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 // welcome text
                 Text(
-                  AppLocalizations.of(context)!.translate('createAccountTitle'),
+                  AppLocalizations.of(context)!.createAccountTitle,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontSize: 25,
                       ),
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  AppLocalizations.of(context)!.translate('createAccountSubtitle'),
+                  AppLocalizations.of(context)!.createAccountSubtitle,
                   style: Theme.of(context).textTheme.bodyLarge,
                   textAlign: TextAlign.center,
                 ),
@@ -163,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 // username input
                 MyTextField(
                   controller: usernameController,
-                  hintText: AppLocalizations.of(context)!.translate('username'),
+                  hintText: AppLocalizations.of(context)!.username,
                   obscureText: false,
                 ),
 
@@ -173,7 +165,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 // email input
                 MyTextField(
-                  hintText: AppLocalizations.of(context)!.translate('email'),
+                  hintText: AppLocalizations.of(context)!.email,
                   obscureText: false,
                   controller: emailController,
                 ),
@@ -182,7 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 // pw input
                 MyTextField(
-                  hintText: AppLocalizations.of(context)!.translate('password'),
+                  hintText: AppLocalizations.of(context)!.password,
                   obscureText: true,
                   controller: pwController,
                 ),
@@ -191,7 +183,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 // pw input
                 MyTextField(
-                  hintText: AppLocalizations.of(context)!.translate('pwConfirm'),
+                  hintText: AppLocalizations.of(context)!.pwConfirm,
                   obscureText: true,
                   controller: confirmPwController,
                 ),
@@ -201,14 +193,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 // login button
                 MyButton(
                   onTap: register,
-                  text: AppLocalizations.of(context)!.translate('register'),
+                  text: AppLocalizations.of(context)!.register,
                 ),
 
                 AddSpace(height: 20),
 
                 GestureDetector(
                   child: Text(
-                    AppLocalizations.of(context)!.translate('forgotPassword'),
+                    AppLocalizations.of(context)!.forgotPassword,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -289,9 +281,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () => _changeLanguage(Locale('en', '')),
+                        onTap: () => lookupAppLocalizations(Locale('en')),
                         child: Text(
-                          AppLocalizations.of(context)!.translate('en'),
+                          AppLocalizations.of(context)!.en,
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -304,9 +296,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       AddSpace(width: 5),
                       GestureDetector(
-                        onTap: () => _changeLanguage(Locale('ar', '')),
+                        onTap: () => lookupAppLocalizations(Locale('ar')),
                         child: Text(
-                          AppLocalizations.of(context)!.translate('ar'),
+                          AppLocalizations.of(context)!.ar,
                           style: Theme.of(context).textTheme.bodyMedium
                         ),
                       ),
@@ -317,9 +309,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       AddSpace(width: 5),
                       GestureDetector(
-                        onTap: () => _changeLanguage(Locale('fr', '')),
+                        onTap: () => lookupAppLocalizations(Locale('fr')),
                         child: Text(
-                          AppLocalizations.of(context)!.translate('fr'),
+                          AppLocalizations.of(context)!.fr,
                           style: Theme.of(context).textTheme.bodyMedium
                         ),
                       ),
