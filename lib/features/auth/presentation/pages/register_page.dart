@@ -5,6 +5,7 @@ import 'package:focus_planner/features/auth/presentation/components/spacer.dart'
 import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
 import '../../../../l10n/app_localizations.dart';
+import 'package:lottie/lottie.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? togglePages;
@@ -18,12 +19,19 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMixin {
   // text controllers
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController pwController = TextEditingController();
   final TextEditingController confirmPwController = TextEditingController();
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(vsync: this);
+    super.initState();
+  }
 
   void register() {
     // prepare email & pw
@@ -87,6 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
+    _controller.dispose();
     usernameController.dispose();
     emailController.dispose();
     pwController.dispose();
@@ -128,13 +137,24 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     // logo
                     Padding(
-                      padding: const EdgeInsets.only(top: 25.0),
-                      child: Icon(
-                        Icons.lock_open_rounded,
-                        size: 80,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: GestureDetector(
+                    onTap: () => _controller.toggle(),
+                    child: Lottie.asset(
+                      'animations/Auth_Animation.json', 
+                      repeat: false, 
+                      width: 120,
+                      height: 120,
+                      fit: BoxFit.fill,
+                      controller: _controller,
+                      onLoaded: (composition) {
+                        _controller
+                          ..duration = Duration(seconds: 2)
+                          ..forward();
+                      },
                     ),
+                  ),
+                ),
                   
                     AddSpace(height: 50),
                   

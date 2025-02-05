@@ -18,10 +18,17 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   // text controllers
   final TextEditingController emailController = TextEditingController();
   final TextEditingController pwController = TextEditingController();
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(vsync: this);
+    super.initState();
+  }
 
   void login() {
     // prepare email & pw
@@ -64,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
+    _controller.dispose();
     emailController.dispose();
     pwController.dispose();
     super.dispose();
@@ -79,14 +87,29 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // logo
                 Padding(
                   padding: const EdgeInsets.only(top: 50.0),
-                  child: Lottie.asset('animations/Auth_Animation.json', repeat: false,),
+                  child: GestureDetector(
+                    onTap: () => _controller.toggle(),
+                    child: Lottie.asset(
+                      'animations/Auth_Animation.json', 
+                      repeat: false, 
+                      width: 120,
+                      height: 120,
+                      fit: BoxFit.fill,
+                      controller: _controller,
+                      onLoaded: (composition) {
+                        _controller
+                          ..duration = Duration(seconds: 2)
+                          ..forward();
+                      },
+                    ),
+                  ),
                 ),
 
                 AddSpace(height: 50),
