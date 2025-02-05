@@ -26,8 +26,6 @@ class AppLocalizations {
   }
 
   String translate(String key) {
-    // ignore: unnecessary_null_comparison
-    if (_localizedStrings == null) return key;
     return _localizedStrings[key] ?? key;
   }
 }
