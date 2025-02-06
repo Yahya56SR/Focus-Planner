@@ -4,8 +4,8 @@ import 'package:focus_planner/features/Intro/presentation/pages/intro.dart';
 import 'package:focus_planner/features/auth/data/firebase_auth_repo.dart';
 import 'package:focus_planner/features/auth/domain/repos/auth_repo.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:focus_planner/features/auth/presentation/cubits/auth_states.dart';
 import 'package:focus_planner/features/auth/presentation/pages/auth_page.dart';
+import 'package:focus_planner/features/handle/presentation/screens/bloc_consumer.dart';
 import 'package:focus_planner/themes/ligth_mode.dart';
 import 'l10n/app_localizations.dart';
 
@@ -16,6 +16,7 @@ class MyApp extends StatefulWidget {
   MyApp({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
@@ -38,38 +39,12 @@ class _MyAppState extends State<MyApp> {
         theme: lightTheme,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: BlocConsumer<AuthCubit, AuthState>(
-          builder: (context, authState) {
-            // Unauthenticated -> Auth Page
-            if (authState is Unauthenticated) {
-              return AuthPage( // Your toggle function here
-                setLocale: setLocale,
-              );
-            }
+        routes: {
+          '/': (context) => MyBlocConsumer(setLocale: setLocale,),
+          '/auth': (context) => AuthPage(setLocale: setLocale,),
+          '/intro': (context) => IntroPage(),
 
-            // Authenticated -> Home Page
-            if (authState is Authenticated) {
-              return const IntroPage();
-            }
-
-            // loading
-            else if (authState is AuthLoading) {
-              return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-              );
-            }
-
-            // default case
-            return const Scaffold(
-              body: Center(
-                child: Text('Unknown state'),
-              ),
-            );
-          },
-          listener: (BuildContext context, state) {},
-        ),
+        },
       ),
     );
   }

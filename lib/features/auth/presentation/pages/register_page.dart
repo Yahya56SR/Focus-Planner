@@ -135,8 +135,6 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ListView(
-                  children: [
                     // logo
                     Padding(
                   padding: const EdgeInsets.only(top: 50.0),
@@ -145,8 +143,8 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                     child: Lottie.asset(
                       'animations/Auth_Animation.json', 
                       repeat: false, 
-                      width: 120,
-                      height: 120,
+                      width: 65,
+                      height: 65,
                       fit: BoxFit.fill,
                       controller: _controller,
                       onLoaded: (composition) {
@@ -168,11 +166,24 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                           ),
                       textAlign: TextAlign.center,
                     ),
+                    Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     Text(
-                      AppLocalizations.of(context)!.createAccountSubtitle,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      textAlign: TextAlign.center,
+                      AppLocalizations.of(context)!.selectionCreateAccount,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
+                    GestureDetector(
+                      onTap: widget.togglePages,
+                      child: Text(
+                        AppLocalizations.of(context)!.createAccount,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
                   
                     AddSpace(height: 12),
                   
@@ -344,11 +355,9 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                     )
                   ],
                 ),
-              ],
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

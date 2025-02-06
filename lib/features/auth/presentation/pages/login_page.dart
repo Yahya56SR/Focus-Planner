@@ -4,6 +4,7 @@ import 'package:focus_planner/features/auth/presentation/components/button.dart'
 import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
 import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:focus_planner/l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget {
@@ -116,7 +117,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
                 // welcome text
                 Text(
-                  'Sign In to your account',
+                  AppLocalizations.of(context)!.selectionSignIn,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontSize: 25,
                       ),
@@ -125,34 +126,13 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 AddSpace(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'or',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    GestureDetector(
-                      onTap: widget.togglePages,
-                      child: Text(
-                        ' Create an account ',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                    ),
-                    Text(
-                      'if you do not have one',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    )
-                  ],
-                ),
+               
 
                 AddSpace(height: 25),
                 // email input
                 MyTextField(
                   controller: emailController,
-                  hintText: 'Email',
+                  hintText: AppLocalizations.of(context)!.idOrEmail,
                   obscureText: false,
                 ),
 
@@ -162,7 +142,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
                 // pw input
                 MyTextField(
-                  hintText: 'Password',
+                  hintText: AppLocalizations.of(context)!.password,
                   obscureText: true,
                   controller: pwController,
                 ),
@@ -172,7 +152,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 // login button
                 MyButton(
                   onTap: login,
-                  text: 'Login',
+                  text: AppLocalizations.of(context)!.signIn,
                 ),
 
                 AddSpace(height: 20),
@@ -182,7 +162,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Or, if you have already an account ; ',
+                      AppLocalizations.of(context)!.selectionCreateAccount,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     GestureDetector(

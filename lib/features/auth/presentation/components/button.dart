@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class MyButton extends StatelessWidget {
   final void Function()? onTap;
   final String text;
+  final Locale? currentLocale;
 
   const MyButton({
     super.key,
     this.onTap,
     required this.text,
+    this.currentLocale,
   });
 
   @override
@@ -15,8 +17,7 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 100,
-        height: 50,
+        width: 125,
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
@@ -33,7 +34,7 @@ class MyButton extends StatelessWidget {
                     ),
               ),
               Icon(
-                Icons.arrow_circle_right_outlined,
+                currentLocale == Locale('en') || currentLocale == Locale('fr') ? Icons.arrow_circle_right_outlined : Icons.arrow_circle_left_outlined,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
             ],
