@@ -9,10 +9,12 @@ import 'package:lottie/lottie.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? togglePages;
+  final void Function(Locale)? setLocale;
 
   const RegisterPage({
     super.key,
     required this.togglePages,
+    this.setLocale
   });
 
   @override
@@ -303,7 +305,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap: () => lookupAppLocalizations(Locale('en')),
+                            onTap: () => widget.setLocale!(Locale('en')),
                             child: Text(
                               AppLocalizations.of(context)!.en,
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -318,7 +320,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                           ),
                           AddSpace(width: 5),
                           GestureDetector(
-                            onTap: () => lookupAppLocalizations(Locale('ar')),
+                            onTap: () => widget.setLocale!(Locale('ar')),
                             child: Text(
                               AppLocalizations.of(context)!.ar,
                               style: Theme.of(context).textTheme.bodyMedium
@@ -331,7 +333,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                           ),
                           AddSpace(width: 5),
                           GestureDetector(
-                            onTap: () => lookupAppLocalizations(Locale('fr')),
+                            onTap: () => widget.setLocale!(Locale('fr')),
                             child: Text(
                               AppLocalizations.of(context)!.fr,
                               style: Theme.of(context).textTheme.bodyMedium

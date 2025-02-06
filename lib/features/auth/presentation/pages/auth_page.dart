@@ -3,7 +3,9 @@ import 'package:focus_planner/features/auth/presentation/pages/login_page.dart';
 import 'package:focus_planner/features/auth/presentation/pages/register_page.dart';
 
 class AuthPage extends StatefulWidget {
-  const AuthPage({super.key});
+  final void Function(Locale)? setLocale;
+
+  const AuthPage({super.key, this.setLocale});
 
   @override
   State<AuthPage> createState() => _AuthPageState();
@@ -29,6 +31,7 @@ class _AuthPageState extends State<AuthPage> {
     } else {
       return RegisterPage(
         togglePages: togglePages,
+        setLocale: widget.setLocale,
       );
     }
   }
