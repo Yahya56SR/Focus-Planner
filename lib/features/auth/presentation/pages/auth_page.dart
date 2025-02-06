@@ -27,6 +27,7 @@ class _AuthPageState extends State<AuthPage> {
     if (showLoginPage == true) {
       return LoginPage(
         togglePages: togglePages,
+        setLocale: widget.setLocale,
       );
     } else {
       return RegisterPage(

@@ -137,14 +137,14 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
               children: [
                     // logo
                     Padding(
-                  padding: const EdgeInsets.only(top: 50.0),
+                  padding: const EdgeInsets.only(top: 10.0),
                   child: GestureDetector(
                     onTap: () => _controller.reset(),
                     child: Lottie.asset(
                       'animations/Auth_Animation.json', 
                       repeat: false, 
-                      width: 65,
-                      height: 65,
+                      width: 100,
+                      height: 100,
                       fit: BoxFit.fill,
                       controller: _controller,
                       onLoaded: (composition) {
@@ -156,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                   ),
                 ),
                   
-                    AddSpace(height: 50),
+                    AddSpace(height: 12),
                   
                     // welcome text
                     Text(

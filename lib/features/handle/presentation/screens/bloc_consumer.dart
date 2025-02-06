@@ -4,8 +4,7 @@ import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart'
 import 'package:focus_planner/features/auth/presentation/cubits/auth_states.dart';
 
 class MyBlocConsumer extends StatelessWidget {
-  final void Function(Locale)? setLocale;
-  const MyBlocConsumer({super.key, this.setLocale});
+  const MyBlocConsumer({super.key});
 
   @override
   Widget build(BuildContext context) {

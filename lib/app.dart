@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         routes: {
-          '/': (context) => MyBlocConsumer(setLocale: setLocale,),
+          '/': (context) => MyBlocConsumer(),
           '/auth': (context) => AuthPage(setLocale: setLocale,),
           '/intro': (context) => IntroPage(),
 

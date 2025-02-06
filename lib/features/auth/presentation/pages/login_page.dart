@@ -9,10 +9,12 @@ import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? togglePages;
+  final void Function(Locale)? setLocale;
 
   const LoginPage({
     super.key,
     required this.togglePages,
+    this.setLocale,
   });
 
   @override
@@ -94,14 +96,14 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               children: [
                 // logo
                 Padding(
-                  padding: const EdgeInsets.only(top: 50.0),
+                  padding: const EdgeInsets.only(top: 10.0),
                   child: GestureDetector(
                     onTap: () => _controller.toggle(),
                     child: Lottie.asset(
                       'animations/Auth_Animation.json', 
                       repeat: false, 
-                      width: 120,
-                      height: 120,
+                      width: 100,
+                      height: 100,
                       fit: BoxFit.fill,
                       controller: _controller,
                       onLoaded: (composition) {
@@ -113,11 +115,11 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                   ),
                 ),
 
-                AddSpace(height: 50),
+                AddSpace(height: 12),
 
                 // welcome text
                 Text(
-                  AppLocalizations.of(context)!.selectionSignIn,
+                  AppLocalizations.of(context)!.signInTitle,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontSize: 25,
                       ),
@@ -213,11 +215,14 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'English',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                      GestureDetector(
+                        onTap: () => widget.setLocale!(Locale('en')),
+                        child: Text(
+                          'English',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
                       ),
                       AddSpace(width: 5),
                       Icon(
@@ -225,8 +230,11 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         size: 20,
                       ),
                       AddSpace(width: 5),
-                      Text('عربي',
-                          style: Theme.of(context).textTheme.bodyMedium),
+                      GestureDetector(
+                        onTap: () => widget.setLocale!(Locale('en')),
+                        child: Text('عربي',
+                            style: Theme.of(context).textTheme.bodyMedium),
+                      ),
                     ],
                   ),
                 )
