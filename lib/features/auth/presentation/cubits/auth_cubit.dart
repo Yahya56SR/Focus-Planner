@@ -74,7 +74,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   // Register with Patreon credentials
-  Future<void> registerPatreon() async {
+  Future<void> registerGithub() async {
     try {
       emit(AuthLoading());
       final user = await authRepo.loginWithGithubCredentials();
@@ -89,6 +89,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(Unauthenticated());
     }
   }
+
   // logout
   Future<void> logout() async {
     await authRepo.logout();

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_planner/features/auth/presentation/components/button.dart';
@@ -23,7 +24,8 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMixin {
+class _RegisterPageState extends State<RegisterPage>
+    with TickerProviderStateMixin {
   // text controllers
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -96,21 +98,39 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
       );
     }
   }
-  
+
   void registerGoogle() {
     // auth cubit
     final authCubit = context.read<AuthCubit>();
 
-    // register
-    authCubit.registerGoogle();
+    try {
+      // register
+      authCubit.registerGoogle();
+    } on FirebaseException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Authentication Failed $e',
+          ),
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Authentication Failed $e',
+          ),
+        ),
+      );
+    }
   }
 
-  void registerPatreon() {
+  void registerGithub() {
     // auth cubit
     final authCubit = context.read<AuthCubit>();
 
     // register
-    authCubit.registerPatreon();
+    authCubit.registerGithub();
   }
 
   @override
@@ -122,7 +142,6 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
     confirmPwController.dispose();
     super.dispose();
   }
-
 
   // BUILD UI
   @override
@@ -138,14 +157,14 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                    // logo
-                    Padding(
+                // logo
+                Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: GestureDetector(
                     onTap: () => _controller.reset(),
                     child: Lottie.asset(
-                      'animations/Auth_Animation.json', 
-                      repeat: false, 
+                      'animations/Auth_Animation.json',
+                      repeat: false,
                       width: 100,
                       height: 100,
                       fit: BoxFit.fill,
@@ -158,18 +177,18 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                     ),
                   ),
                 ),
-                  
-                    AddSpace(height: 12),
-                  
-                    // welcome text
-                    Text(
-                      AppLocalizations.of(context)!.createAccountTitle,
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontSize: 25,
-                          ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Row(
+
+                AddSpace(height: 12),
+
+                // welcome text
+                Text(
+                  AppLocalizations.of(context)!.createAccountTitle,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontSize: 25,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -187,188 +206,197 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                     ),
                   ],
                 ),
-                  
-                    AddSpace(height: 12),
-                  
-                    // username input
-                    MyTextField(
-                      controller: usernameController,
-                      hintText: AppLocalizations.of(context)!.username,
-                      obscureText: false,
-                    ),
-                  
-                    AddSpace(
-                      height: 10,
-                    ),
-                  
-                    // email input
-                    MyTextField(
-                      hintText: AppLocalizations.of(context)!.email,
-                      obscureText: false,
-                      controller: emailController,
-                    ),
-                  
-                    AddSpace(height: 10),
-                  
-                    // pw input
-                    MyTextField(
-                      hintText: AppLocalizations.of(context)!.password,
-                      obscureText: true,
-                      controller: pwController,
-                    ),
-                  
-                    AddSpace(height: 10),
-                  
-                    // pw input
-                    MyTextField(
-                      hintText: AppLocalizations.of(context)!.pwConfirm,
-                      obscureText: true,
-                      controller: confirmPwController,
-                    ),
-                  
-                    AddSpace(height: 20),
-                  
-                    // login button
-                    MyButton(
-                      onTap: register,
-                      text: AppLocalizations.of(context)!.register,
-                    ),
-                  
-                    AddSpace(height: 20),
-                  
-                    GestureDetector(
-                      child: Text(
-                        AppLocalizations.of(context)!.forgotPassword,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+
+                AddSpace(height: 12),
+
+                // username input
+                MyTextField(
+                  controller: usernameController,
+                  hintText: AppLocalizations.of(context)!.username,
+                  obscureText: false,
+                ),
+
+                AddSpace(
+                  height: 10,
+                ),
+
+                // email input
+                MyTextField(
+                  hintText: AppLocalizations.of(context)!.email,
+                  obscureText: false,
+                  controller: emailController,
+                ),
+
+                AddSpace(height: 10),
+
+                // pw input
+                MyTextField(
+                  hintText: AppLocalizations.of(context)!.password,
+                  obscureText: true,
+                  controller: pwController,
+                ),
+
+                AddSpace(height: 10),
+
+                // pw input
+                MyTextField(
+                  hintText: AppLocalizations.of(context)!.pwConfirm,
+                  obscureText: true,
+                  controller: confirmPwController,
+                ),
+
+                AddSpace(height: 20),
+
+                // login button
+                MyButton(
+                  onTap: register,
+                  text: AppLocalizations.of(context)!.register,
+                ),
+
+                AddSpace(height: 20),
+
+                GestureDetector(
+                  child: Text(
+                    AppLocalizations.of(context)!.forgotPassword,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
-                        textAlign: TextAlign.left,
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+
+                AddSpace(height: 10),
+
+                // Other ways to sign in
+                Divider(),
+
+                AddSpace(height: 10),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: registerGoogle,
+                      child: Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.secondary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Image.asset(
+                          'images/google_logo.png',
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          scale: 2,
+                        ),
                       ),
                     ),
-                  
-                    AddSpace(height: 10),
-                  
-                    // Other ways to sign in
-                    Divider(),
-                  
-                    AddSpace(height: 10),
-                  
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [ 
-                        InkWell(
-                            onTap: registerGoogle,
-                            child: Container(
-                              padding: EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.secondary,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Expanded(
-                                child: Image.asset(
-                                  'images/google_logo.png',
-                                  color: Theme.of(context).colorScheme.onSecondary,
-                                ),
-                              
-                            ),
-                          ),
-                        ),
-                        AddSpace(
-                          width: 25,
-                        ),
-                        InkWell(
-                            onTap: () {},
-                            child: Container(
-                              padding: EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.secondary,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Expanded(
-                                child: Image.asset(
-                                  'images/apple_logo.png',
-                                  color: Theme.of(context).colorScheme.onSecondary,
-                                ),
-                            ),
-                          ),
-                        ),
-                        AddSpace(
-                          width: 25,
-                        ),
-                        InkWell(
-                            onTap: registerPatreon,
-                            child: Container(
-                              padding: EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.secondary,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Expanded(
-                                child: Image.asset(
-                                  'images/patreon_logo.png',
-                                  color: Theme.of(context).colorScheme.onSecondary,
-                                ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    AddSpace(
+                      width: 25,
                     ),
-                  
-                    const Spacer(),
-                  
-                    // lang changer
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () => widget.setLocale!(Locale('en')),
-                            child: Text(
-                              'English',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    fontWeight: widget.currentLocale == Locale('en') ? FontWeight.bold : null,
-                                  ),
-                            ),
-                          ),
-                          AddSpace(width: 5),
-                          Icon(
-                            Icons.radio_button_checked_sharp,
-                            size: 20,
-                          ),
-                          AddSpace(width: 5),
-                          GestureDetector(
-                            onTap: () => widget.setLocale!(Locale('ar')),
-                            child: Text(
-                              'عربي',
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                fontWeight: widget.currentLocale == Locale('ar') ? FontWeight.bold : null,
-                              )
-                            ),
-                          ),
-                          AddSpace(width: 5),
-                          Icon(
-                            Icons.radio_button_checked_sharp,
-                            size: 20,
-                          ),
-                          AddSpace(width: 5),
-                          GestureDetector(
-                            onTap: () => widget.setLocale!(Locale('fr')),
-                            child: Text(
-                              'Français',
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                fontWeight: widget.currentLocale == Locale('fr') ? FontWeight.bold : null,
-                              )
-                            ),
-                          ),
-                        ],
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.secondary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Image.asset(
+                          'images/apple_logo.png',
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          scale: 2,
+                        ),
                       ),
-                    )
+                    ),
+                    AddSpace(
+                      width: 25,
+                    ),
+                    InkWell(
+                      onTap: registerGithub,
+                      child: Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.secondary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Image.asset(
+                          'images/github_logo.png',
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          scale: 2,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
+
+                const Spacer(),
+
+                // lang changer
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () => widget.setLocale!(Locale('en')),
+                        child: Text(
+                          'English',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                fontWeight: widget.currentLocale == Locale('en')
+                                    ? FontWeight.bold
+                                    : null,
+                              ),
+                        ),
+                      ),
+                      AddSpace(width: 5),
+                      Icon(
+                        Icons.radio_button_checked_sharp,
+                        size: 20,
+                      ),
+                      AddSpace(width: 5),
+                      GestureDetector(
+                        onTap: () => widget.setLocale!(Locale('ar')),
+                        child: Text('عربي',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  fontWeight:
+                                      widget.currentLocale == Locale('ar')
+                                          ? FontWeight.bold
+                                          : null,
+                                )),
+                      ),
+                      AddSpace(width: 5),
+                      Icon(
+                        Icons.radio_button_checked_sharp,
+                        size: 20,
+                      ),
+                      AddSpace(width: 5),
+                      GestureDetector(
+                        onTap: () => widget.setLocale!(Locale('fr')),
+                        child: Text('Français',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  fontWeight:
+                                      widget.currentLocale == Locale('fr')
+                                          ? FontWeight.bold
+                                          : null,
+                                )),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }
