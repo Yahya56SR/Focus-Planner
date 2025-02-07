@@ -4,8 +4,13 @@ import 'package:focus_planner/features/auth/presentation/pages/register_page.dar
 
 class AuthPage extends StatefulWidget {
   final void Function(Locale)? setLocale;
+  final Locale? currentLocale;
 
-  const AuthPage({super.key, this.setLocale});
+  const AuthPage({
+    super.key, 
+    this.setLocale,
+    this.currentLocale,
+  });
 
   @override
   State<AuthPage> createState() => _AuthPageState();
@@ -28,11 +33,13 @@ class _AuthPageState extends State<AuthPage> {
       return LoginPage(
         togglePages: togglePages,
         setLocale: widget.setLocale,
+        currentLocale: widget.currentLocale,
       );
     } else {
       return RegisterPage(
         togglePages: togglePages,
         setLocale: widget.setLocale,
+        currentLocale: widget.currentLocale,
       );
     }
   }

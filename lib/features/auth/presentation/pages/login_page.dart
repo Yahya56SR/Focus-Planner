@@ -10,11 +10,13 @@ import 'package:lottie/lottie.dart';
 class LoginPage extends StatefulWidget {
   final void Function()? togglePages;
   final void Function(Locale)? setLocale;
+  final Locale? currentLocale;
 
   const LoginPage({
     super.key,
     required this.togglePages,
     this.setLocale,
+    this.currentLocale,
   });
 
   @override
@@ -170,7 +172,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     GestureDetector(
                       onTap: widget.togglePages,
                       child: Text(
-                        'Register Now',
+                        AppLocalizations.of(context)!.register,
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium
@@ -183,22 +185,22 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 AddSpace(height: 20),
 
                 // agree
-                Text('If you create an account, you agree our'),
+                Text(AppLocalizations.of(context)!.selectionCreateAccount),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Privacy Policy',
+                      AppLocalizations.of(context)!.privacyPolicy,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline,
                           ),
                     ),
                     AddSpace(width: 10),
-                    Text('&'),
+                    Text(AppLocalizations.of(context)!.and),
                     AddSpace(width: 10),
                     Text(
-                      'Terms of Use',
+                      AppLocalizations.of(context)!.termsOfUse,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline,
@@ -220,7 +222,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         child: Text(
                           'English',
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
+                                fontWeight: widget.currentLocale == Locale('en') ? FontWeight.bold : null,
                               ),
                         ),
                       ),
@@ -233,8 +235,26 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       GestureDetector(
                         onTap: () => widget.setLocale!(Locale('en')),
                         child: Text('عربي',
-                            style: Theme.of(context).textTheme.bodyMedium),
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: widget.currentLocale == Locale('ar') ? FontWeight.bold : null,
+                            )
+                          ),
                       ),
+                      AddSpace(width: 5),
+                          Icon(
+                            Icons.radio_button_checked_sharp,
+                            size: 20,
+                          ),
+                          AddSpace(width: 5),
+                          GestureDetector(
+                            onTap: () => widget.setLocale!(Locale('fr')),
+                            child: Text(
+                              'Français',
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                fontWeight: widget.currentLocale == Locale('fr') ? FontWeight.bold : null,
+                              )
+                            ),
+                          ),
                     ],
                   ),
                 )

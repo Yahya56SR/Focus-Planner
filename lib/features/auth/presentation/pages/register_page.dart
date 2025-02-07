@@ -10,11 +10,13 @@ import 'package:lottie/lottie.dart';
 class RegisterPage extends StatefulWidget {
   final void Function()? togglePages;
   final void Function(Locale)? setLocale;
+  final Locale? currentLocale;
 
   const RegisterPage({
     super.key,
     required this.togglePages,
-    this.setLocale
+    this.setLocale,
+    this.currentLocale,
   });
 
   @override
@@ -318,9 +320,9 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                           GestureDetector(
                             onTap: () => widget.setLocale!(Locale('en')),
                             child: Text(
-                              AppLocalizations.of(context)!.en,
+                              'English',
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: widget.currentLocale == Locale('en') ? FontWeight.bold : null,
                                   ),
                             ),
                           ),
@@ -333,8 +335,10 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                           GestureDetector(
                             onTap: () => widget.setLocale!(Locale('ar')),
                             child: Text(
-                              AppLocalizations.of(context)!.ar,
-                              style: Theme.of(context).textTheme.bodyMedium
+                              'عربي',
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                fontWeight: widget.currentLocale == Locale('ar') ? FontWeight.bold : null,
+                              )
                             ),
                           ),
                           AddSpace(width: 5),
@@ -346,8 +350,10 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                           GestureDetector(
                             onTap: () => widget.setLocale!(Locale('fr')),
                             child: Text(
-                              AppLocalizations.of(context)!.fr,
-                              style: Theme.of(context).textTheme.bodyMedium
+                              'Français',
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                fontWeight: widget.currentLocale == Locale('fr') ? FontWeight.bold : null,
+                              )
                             ),
                           ),
                         ],

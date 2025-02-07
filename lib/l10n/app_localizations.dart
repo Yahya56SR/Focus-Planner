@@ -178,7 +178,7 @@ abstract class AppLocalizations {
   /// No description provided for @and.
   ///
   /// In en, this message translates to:
-  /// **'and'**
+  /// **'&'**
   String get and;
 
   /// No description provided for @termsOfUse.

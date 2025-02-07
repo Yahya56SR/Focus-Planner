@@ -46,7 +46,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get privacyPolicy => 'Politique de Confidentialité';
 
   @override
-  String get and => 'et';
+  String get and => '&';
 
   @override
   String get termsOfUse => 'Conditions d\'Utilisation';

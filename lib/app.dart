@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
         supportedLocales: AppLocalizations.supportedLocales,
         routes: {
           '/': (context) => MyBlocConsumer(),
-          '/auth': (context) => AuthPage(setLocale: setLocale,),
+          '/auth': (context) => AuthPage(setLocale: setLocale, currentLocale: _locale,),
           '/intro': (context) => IntroPage(),
 
         },
