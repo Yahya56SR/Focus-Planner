@@ -96,17 +96,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
       );
     }
   }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    usernameController.dispose();
-    emailController.dispose();
-    pwController.dispose();
-    confirmPwController.dispose();
-    super.dispose();
-  }
-
+  
   void registerGoogle() {
     // auth cubit
     final authCubit = context.read<AuthCubit>();
@@ -122,6 +112,17 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
     // register
     authCubit.registerPatreon();
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    usernameController.dispose();
+    emailController.dispose();
+    pwController.dispose();
+    confirmPwController.dispose();
+    super.dispose();
+  }
+
 
   // BUILD UI
   @override
