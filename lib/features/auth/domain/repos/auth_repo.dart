@@ -7,5 +7,5 @@ abstract class AuthRepo {
   Future<void> logout();
   Future<AppUser?> getCurrentUser();
   Future<AppUser?> loginWithGoogleCredentials();
-  Future<AppUser?> loginWithPatreonCredentials();
+  Future<AppUser?> loginWithGithubCredentials();
 }

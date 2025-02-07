@@ -97,22 +97,25 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // logo
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: GestureDetector(
-                    onTap: () => _controller.toggle(),
-                    child: Lottie.asset(
-                      'animations/Auth_Animation.json', 
-                      repeat: false, 
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.fill,
-                      controller: _controller,
-                      onLoaded: (composition) {
-                        _controller
-                          ..duration = Duration(seconds: 2)
-                          ..forward();
-                      },
+                Expanded(
+                  flex: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: GestureDetector(
+                      onTap: () => _controller.toggle(),
+                      child: Lottie.asset(
+                        'animations/Auth_Animation.json', 
+                        repeat: false, 
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.fill,
+                        controller: _controller,
+                        onLoaded: (composition) {
+                          _controller
+                            ..duration = Duration(seconds: 2)
+                            ..forward();
+                        },
+                      ),
                     ),
                   ),
                 ),

@@ -255,19 +255,21 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                   
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: [ 
                         InkWell(
-                          onTap: registerGoogle,
-                          child: Container(
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondary,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Image.asset(
-                              'images/google_logo.png',
-                              color: Theme.of(context).colorScheme.onSecondary,
-                              scale: 3,
+                            onTap: registerGoogle,
+                            child: Container(
+                              padding: EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.secondary,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Expanded(
+                                child: Image.asset(
+                                  'images/google_logo.png',
+                                  color: Theme.of(context).colorScheme.onSecondary,
+                                ),
+                              
                             ),
                           ),
                         ),
@@ -275,17 +277,18 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                           width: 25,
                         ),
                         InkWell(
-                          onTap: () {},
-                          child: Container(
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondary,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Image.asset(
-                              'images/apple_logo.png',
-                              color: Theme.of(context).colorScheme.onSecondary,
-                              scale: 3,
+                            onTap: () {},
+                            child: Container(
+                              padding: EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.secondary,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Expanded(
+                                child: Image.asset(
+                                  'images/apple_logo.png',
+                                  color: Theme.of(context).colorScheme.onSecondary,
+                                ),
                             ),
                           ),
                         ),
@@ -293,17 +296,18 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                           width: 25,
                         ),
                         InkWell(
-                          onTap: registerPatreon,
-                          child: Container(
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondary,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Image.asset(
-                              'images/patreon_logo.png',
-                              color: Theme.of(context).colorScheme.onSecondary,
-                              scale: 3,
+                            onTap: registerPatreon,
+                            child: Container(
+                              padding: EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.secondary,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Expanded(
+                                child: Image.asset(
+                                  'images/patreon_logo.png',
+                                  color: Theme.of(context).colorScheme.onSecondary,
+                                ),
                             ),
                           ),
                         ),

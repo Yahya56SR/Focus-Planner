@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
 import 'package:focus_planner/features/auth/domain/repos/auth_repo.dart';
@@ -76,18 +77,19 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> registerPatreon() async {
     try {
       emit(AuthLoading());
-      final user = await authRepo.loginWithPatreonCredentials();
+      final user = await authRepo.loginWithGithubCredentials();
       if (user != null) {
         _currentUser = user;
         emit(Authenticated(user));
       }
+    } on FirebaseAuthException catch (e) {
+      emit(AuthError('Authentication Failer $e'));
     } catch (e) {
       emit(AuthError(e.toString()));
       emit(Unauthenticated());
     }
   }
-
-  //logout
+  // logout
   Future<void> logout() async {
     await authRepo.logout();
     emit(Unauthenticated());
