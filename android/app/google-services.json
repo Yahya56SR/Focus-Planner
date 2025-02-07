@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1023060754466",
+    "project_id": "nexordev-focus-planner",
+    "storage_bucket": "nexordev-focus-planner.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023060754466:android:5487f997a91d9dc25c4a7b",
+        "android_client_info": {
+          "package_name": "com.nexordev.focusplanner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxQ1j1zE1kplA8tgmlffrWr0ATPrHgcEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

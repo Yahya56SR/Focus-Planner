@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -50,19 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD1tXWW6dPzZ2-jY2Ahz0DeYKGHJxWLLZE',
-    appId: '1:1082533412920:android:d7b2b9b1bf32db126ee6cd',
-    messagingSenderId: '1082533412920',
-    projectId: 'focus-planner-b3ff2',
-    storageBucket: 'focus-planner-b3ff2.firebasestorage.app',
+    apiKey: 'AIzaSyCxQ1j1zE1kplA8tgmlffrWr0ATPrHgcEA',
+    appId: '1:1023060754466:android:5487f997a91d9dc25c4a7b',
+    messagingSenderId: '1023060754466',
+    projectId: 'nexordev-focus-planner',
+    storageBucket: 'nexordev-focus-planner.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBhHybrUn5cbkcgpqeQALXUk3vTW_sW0ds',
-    appId: '1:1082533412920:ios:de82bc990dd602106ee6cd',
-    messagingSenderId: '1082533412920',
-    projectId: 'focus-planner-b3ff2',
-    storageBucket: 'focus-planner-b3ff2.firebasestorage.app',
+    apiKey: 'AIzaSyBmHuBTphJ2hnyt7D76FFHnezpCVEqNJQ4',
+    appId: '1:1023060754466:ios:720fbc6ea8db2f435c4a7b',
+    messagingSenderId: '1023060754466',
+    projectId: 'nexordev-focus-planner',
+    storageBucket: 'nexordev-focus-planner.firebasestorage.app',
     iosBundleId: 'com.nexordev.focusplanner',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAMD4OzrOeCoRjQVmpKXtcRWdFjwROof3g',
+    appId: '1:1023060754466:web:a13045936ea7973e5c4a7b',
+    messagingSenderId: '1023060754466',
+    projectId: 'nexordev-focus-planner',
+    authDomain: 'nexordev-focus-planner.firebaseapp.com',
+    storageBucket: 'nexordev-focus-planner.firebasestorage.app',
+    measurementId: 'G-CK0X1JCBS5',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBmHuBTphJ2hnyt7D76FFHnezpCVEqNJQ4',
+    appId: '1:1023060754466:ios:720fbc6ea8db2f435c4a7b',
+    messagingSenderId: '1023060754466',
+    projectId: 'nexordev-focus-planner',
+    storageBucket: 'nexordev-focus-planner.firebasestorage.app',
+    iosBundleId: 'com.nexordev.focusplanner',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAMD4OzrOeCoRjQVmpKXtcRWdFjwROof3g',
+    appId: '1:1023060754466:web:ae954cf3a96c2dd65c4a7b',
+    messagingSenderId: '1023060754466',
+    projectId: 'nexordev-focus-planner',
+    authDomain: 'nexordev-focus-planner.firebaseapp.com',
+    storageBucket: 'nexordev-focus-planner.firebasestorage.app',
+    measurementId: 'G-KR02FMQ8BB',
+  );
+
 }
