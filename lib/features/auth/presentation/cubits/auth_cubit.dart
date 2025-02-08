@@ -73,11 +73,28 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  // Register with Patreon credentials
+  // Register with Github credentials
   Future<void> registerGithub() async {
     try {
       emit(AuthLoading());
       final user = await authRepo.loginWithGithubCredentials();
+      if (user != null) {
+        _currentUser = user;
+        emit(Authenticated(user));
+      }
+    } on FirebaseAuthException catch (e) {
+      emit(AuthError('Authentication Failer $e'));
+    } catch (e) {
+      emit(AuthError(e.toString()));
+      emit(Unauthenticated());
+    }
+  }
+
+  // Register with Facebook Credentials
+  Future<void> registerFacebook() async {
+    try {
+      emit(AuthLoading());
+      final user = await authRepo.loginWithFacebookCredentials();
       if (user != null) {
         _currentUser = user;
         emit(Authenticated(user));

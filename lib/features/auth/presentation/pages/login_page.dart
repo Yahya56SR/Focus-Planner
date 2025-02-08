@@ -104,8 +104,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     child: GestureDetector(
                       onTap: () => _controller.toggle(),
                       child: Lottie.asset(
-                        'animations/Auth_Animation.json', 
-                        repeat: false, 
+                        'animations/Auth_Animation.json',
+                        repeat: false,
                         width: 100,
                         height: 100,
                         fit: BoxFit.fill,
@@ -133,7 +133,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 AddSpace(
                   height: 10,
                 ),
-               
 
                 AddSpace(height: 25),
                 // email input
@@ -224,8 +223,13 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         onTap: () => widget.setLocale!(Locale('en')),
                         child: Text(
                           'English',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                fontWeight: widget.currentLocale == Locale('en') ? FontWeight.bold : null,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                fontWeight: widget.currentLocale == Locale('en')
+                                    ? FontWeight.bold
+                                    : null,
                               ),
                         ),
                       ),
@@ -238,26 +242,35 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       GestureDetector(
                         onTap: () => widget.setLocale!(Locale('en')),
                         child: Text('عربي',
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontWeight: widget.currentLocale == Locale('ar') ? FontWeight.bold : null,
-                            )
-                          ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  fontWeight:
+                                      widget.currentLocale == Locale('ar')
+                                          ? FontWeight.bold
+                                          : null,
+                                )),
                       ),
                       AddSpace(width: 5),
-                          Icon(
-                            Icons.radio_button_checked_sharp,
-                            size: 20,
-                          ),
-                          AddSpace(width: 5),
-                          GestureDetector(
-                            onTap: () => widget.setLocale!(Locale('fr')),
-                            child: Text(
-                              'Français',
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                fontWeight: widget.currentLocale == Locale('fr') ? FontWeight.bold : null,
-                              )
-                            ),
-                          ),
+                      Icon(
+                        Icons.radio_button_checked_sharp,
+                        size: 20,
+                      ),
+                      AddSpace(width: 5),
+                      GestureDetector(
+                        onTap: () => widget.setLocale!(Locale('fr')),
+                        child: Text('Français',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  fontWeight:
+                                      widget.currentLocale == Locale('fr')
+                                          ? FontWeight.bold
+                                          : null,
+                                )),
+                      ),
                     ],
                   ),
                 )

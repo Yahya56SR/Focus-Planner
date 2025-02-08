@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
 import 'package:focus_planner/features/auth/domain/repos/auth_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthRepo implements AuthRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
-  
 
   @override
   Future<AppUser?> loginWithEmailPassword(String email, String password) async {
@@ -91,6 +90,7 @@ class FirebaseAuthRepo implements AuthRepo {
       throw Exception('Failed to register using Google: $e');
     }
   }
+
   @override
   Future<AppUser?> loginWithGithubCredentials() async {
     // Define GitHub's OAuth credentials
@@ -98,14 +98,49 @@ class FirebaseAuthRepo implements AuthRepo {
 
     try {
       // Trigger the sign-in flow
-      UserCredential userCredential = await firebaseAuth.signInWithProvider(githubProvider);
-      
+      UserCredential userCredential =
+          await firebaseAuth.signInWithProvider(githubProvider);
+
       // Get the signed-in user
       User? user = userCredential.user;
-      return AppUser(uid: user!.uid, email: user.email!, name: user.displayName!);
+      return AppUser(
+          uid: user!.uid, email: user.email!, name: user.displayName!);
     } catch (e) {
       throw Exception("GitHub sign-in failed: $e");
     }
   }
-  
+
+  @override
+  Future<AppUser?> loginWithFacebookCredentials() async {
+    try {
+      // Trigger Facebook login
+      final LoginResult result = await FacebookAuth.instance.login();
+
+      if (result.status == LoginStatus.success) {
+        final AccessToken accessToken = result.accessToken!;
+
+        // Create a credential for Firebase authentication
+        final OAuthCredential facebookAuthCredential =
+            FacebookAuthProvider.credential(accessToken.tokenString);
+
+        // Sign in to Firebase with the Facebook user credential
+        final UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithCredential(facebookAuthCredential);
+
+        return AppUser(
+          uid: userCredential.user!.uid,
+          email: userCredential.user!.email!,
+          name: userCredential.user!.displayName!,
+        );
+      } else if (result.status == LoginStatus.cancelled) {
+        throw Exception('Facebook Login Cancelled');
+      } else if (result.status == LoginStatus.failed) {
+        throw Exception(
+            'An unexpected error has occurred while logging in using Facebook');
+      }
+    } catch (e) {
+      throw Exception('Facebook login error: $e');
+    }
+    return null;
+  }
 }

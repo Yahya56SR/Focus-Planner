@@ -12,7 +12,20 @@
           "package_name": "com.nexordev.focusplanner"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1023060754466-lcsc56vhncnmrpe0grcsbk8uuftdq9n2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nexordev.focusplanner",
+            "certificate_hash": "46e9dd88ed0334d16df4d56d3bccc4dad591c16a"
+          }
+        },
+        {
+          "client_id": "1023060754466-d8lph8t24211uc0fsvp3caim3m98mnl4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCxQ1j1zE1kplA8tgmlffrWr0ATPrHgcEA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023060754466-d8lph8t24211uc0fsvp3caim3m98mnl4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1023060754466-rp37bduh2cm5bvfvg1fl43b971nkh398.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nexordev.focusplanner"
+              }
+            }
+          ]
         }
       }
     }
