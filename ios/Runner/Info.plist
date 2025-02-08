@@ -33,6 +33,25 @@
 	        </array>
 	    </dict>
 	</array>
+	<array>
+    	<dict>
+        	<key>CFBundleURLSchemes</key>
+        	<array>
+            	<string>fb9663888486977405</string>
+        	</array>
+    	</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>9663888486977405</string>
+	<key>FacebookDisplayName</key>
+	<string>Focus Planner</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	    <string>fbapi</string>
+	    <string>fb-messenger-share-api</string>
+	    <string>fbauth2</string>
+	    <string>fbshareextension</string>
+	</array>
 	<key>CFBundleLocalizations</key>
 	<array>
 	  <string>ar</string>

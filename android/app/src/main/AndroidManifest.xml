@@ -51,6 +51,21 @@
             </intent-filter>
         </activity>
 
+        <!-- Metadata for Facebook Login -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="e5242f0085fb666cc9a00344575c0ffd" />
+
+        <!-- Queries for Facebook SDK -->
+        <queries>
+            <intent>
+                <action android:name="com.facebook.katana" />
+            </intent>
+        </queries>
+
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
@@ -59,7 +74,6 @@
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT" />
-
             <data android:mimeType="text/plain" />
         </intent>
     </queries>
