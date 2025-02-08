@@ -16,7 +16,7 @@
     "termsOfUse": "Conditions d'Utilisation",
     "signInTitle": "Connectez-vous à votre compte",
     "selectionCreateAccount": "Ou, si vous n'avez pas de compte ;",
-    "createAccount": "Créer un compte",
+    "createAccount": " Créer un compte",
     "forgotPassword": "Mot de passe oublié ?",
     "choice": "Ou",
     "email": "Email",
@@ -343,7 +343,7 @@
     "pwNotMatch": "Les mots de passe ne correspondent pas !",
     "username": "Nom d'utilisateur",
     "pwConfirm": "Confirmez le mot de passe",
-    "register": "S'inscrire",
+    "register": " S'inscrire",
     "en": "Anglais",
     "ar": "Arabe",
     "fr": "Français"

@@ -58,7 +58,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectionCreateAccount => 'Or, if you don\'t have an account;';
 
   @override
-  String get createAccount => 'Create an Account';
+  String get createAccount => ' Create an Account';
 
   @override
   String get forgotPassword => 'Forgot password ?';
@@ -1039,7 +1039,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pwConfirm => 'Confirm Password';
 
   @override
-  String get register => 'Register';
+  String get register => ' Register';
 
   @override
   String get en => 'English';

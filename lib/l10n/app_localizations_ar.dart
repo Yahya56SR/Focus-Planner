@@ -58,7 +58,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectionCreateAccount => 'أو، إذا لم يكن لديك حساب؛';
 
   @override
-  String get createAccount => 'إنشاء حساب';
+  String get createAccount => ' إنشاء حساب';
 
   @override
   String get forgotPassword => 'هل نسيت كلمة المرور؟';
@@ -1039,7 +1039,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pwConfirm => 'تأكيد كلمة المرور';
 
   @override
-  String get register => 'تسجيل';
+  String get register => ' تسجيل';
 
   @override
   String get en => 'Anglais';

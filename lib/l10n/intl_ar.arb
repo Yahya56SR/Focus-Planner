@@ -16,7 +16,7 @@
     "termsOfUse": "شروط الاستخدام",
     "signInTitle": "تسجيل الدخول إلى حسابك",
     "selectionCreateAccount": "أو، إذا لم يكن لديك حساب؛",
-    "createAccount": "إنشاء حساب",
+    "createAccount": " إنشاء حساب",
     "forgotPassword": "هل نسيت كلمة المرور؟",
     "choice": "أو",
     "email": "البريد الإلكتروني",
@@ -343,7 +343,7 @@
     "pwNotMatch": "كلمات المرور غير متطابقة!",
     "username": "اسم المستخدم",
     "pwConfirm": "تأكيد كلمة المرور",
-    "register": "تسجيل",
+    "register": " تسجيل",
     "en": "Anglais",
     "ar": "Arabe",
     "fr": "Français"

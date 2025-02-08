@@ -202,7 +202,7 @@ abstract class AppLocalizations {
   /// No description provided for @createAccount.
   ///
   /// In en, this message translates to:
-  /// **'Create an Account'**
+  /// **' Create an Account'**
   String get createAccount;
 
   /// No description provided for @forgotPassword.
@@ -2164,7 +2164,7 @@ abstract class AppLocalizations {
   /// No description provided for @register.
   ///
   /// In en, this message translates to:
-  /// **'Register'**
+  /// **' Register'**
   String get register;
 
   /// No description provided for @en.
