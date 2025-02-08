@@ -7,6 +7,9 @@
             <action android:name="android.intent.action.PROCESS_TEXT" />
             <data android:mimeType="text/plain" />
         </intent>
+        <intent>
+            <action android:name="com.facebook.katana" />
+        </intent>
     </queries>
 
     <application
@@ -65,13 +68,6 @@
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
             android:value="e5242f0085fb666cc9a00344575c0ffd" />
-
-        <!-- Queries for Facebook SDK -->
-        <queries>
-            <intent>
-                <action android:name="com.facebook.katana" />
-            </intent>
-        </queries>
 
         <meta-data
             android:name="flutterEmbedding"
