@@ -90,23 +90,6 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  // Register with Facebook Credentials
-  Future<void> registerFacebook() async {
-    try {
-      emit(AuthLoading());
-      final user = await authRepo.loginWithFacebookCredentials();
-      if (user != null) {
-        _currentUser = user;
-        emit(Authenticated(user));
-      }
-    } on FirebaseAuthException catch (e) {
-      emit(AuthError('Authentication Failer $e'));
-    } catch (e) {
-      emit(AuthError(e.toString()));
-      emit(Unauthenticated());
-    }
-  }
-
   // logout
   Future<void> logout() async {
     await authRepo.logout();

@@ -133,14 +133,6 @@ class _RegisterPageState extends State<RegisterPage>
     authCubit.registerGithub();
   }
 
-  void registerFacebook() {
-    // auth cubit
-    final authCubit = context.read<AuthCubit>();
-
-    // register
-    authCubit.registerFacebook();
-  }
-
   @override
   void dispose() {
     _controller.dispose();
@@ -293,24 +285,6 @@ class _RegisterPageState extends State<RegisterPage>
                         ),
                         child: Image.asset(
                           'images/google_logo.png',
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          scale: 2,
-                        ),
-                      ),
-                    ),
-                    AddSpace(
-                      width: 25,
-                    ),
-                    InkWell(
-                      onTap: () => registerFacebook(),
-                      child: Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Image.asset(
-                          'images/facebook_logo.png',
                           color: Theme.of(context).colorScheme.onSecondary,
                           scale: 2,
                         ),

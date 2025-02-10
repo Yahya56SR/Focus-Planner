@@ -8,5 +8,4 @@ abstract class AuthRepo {
   Future<AppUser?> getCurrentUser();
   Future<AppUser?> loginWithGoogleCredentials();
   Future<AppUser?> loginWithGithubCredentials();
-  Future<AppUser?> loginWithFacebookCredentials();
 }
