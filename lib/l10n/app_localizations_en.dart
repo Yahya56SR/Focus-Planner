@@ -88,7 +88,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get start => 'Start';
 
   @override
-  String get hello => 'Hello';
+  String get hello => 'H E L L O !';
 
   @override
   String get helloMessage => 'Hi, you\'ve created (or logged in) your account, and now; let\'s take the';

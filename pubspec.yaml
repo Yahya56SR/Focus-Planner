@@ -48,6 +48,7 @@ dependencies:
   http: null
   universal_html: ^2.2.4
   lottie: ^3.3.1
+  smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
   flutter_test:

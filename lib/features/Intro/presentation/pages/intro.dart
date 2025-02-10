@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:focus_planner/features/overall%20components/my_lang_changer.dart';
+import 'package:focus_planner/l10n/app_localizations.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class IntroPage extends StatefulWidget {
-  const IntroPage({super.key});
+  final Locale? currentLocale;
+  final void Function(Locale)? setLocale;
+  const IntroPage({
+    super.key,
+    this.currentLocale,
+    this.setLocale,
+  });
 
   @override
   State<IntroPage> createState() => _IntroPageState();
 }
 
 class _IntroPageState extends State<IntroPage> {
+  final PageController _pageController = PageController();
+
   void logout() {
     // auth cubit
     final AuthCubit authCubit = context.read<AuthCubit>();
@@ -20,21 +32,211 @@ class _IntroPageState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            color: Theme.of(context).colorScheme.surface,
-            child: GestureDetector(
-              onTap: logout,
-              child: Icon(Icons.logout),
-            ),
+          Column(
+            children: [
+              SizedBox(
+                height: 650.0,
+                child: PageView(
+                  controller: _pageController,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      color: Theme.of(context).colorScheme.surface,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.bolt_outlined,
+                            size: 125,
+                          ),
+                          AddSpace(
+                            height: 22,
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.hello,
+                            style: Theme.of(context).textTheme.displayLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                          AddSpace(
+                            height: 22,
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.helloMessage,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      letterSpacing: 3.25,
+                                    ),
+                            textAlign: TextAlign.justify,
+                          ),
+                          AddSpace(
+                            height: 10,
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.slogan,
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayLarge!
+                                .copyWith(
+                                  wordSpacing: 65,
+                                ),
+                            textAlign: TextAlign.center,
+                          ),
+                          AddSpace(
+                            height: 25,
+                          ),
+                          GestureDetector(
+                            onTap: () => _pageController.animateToPage(
+                              1,
+                              duration: Duration(milliseconds: 250),
+                              curve: Curves.easeInOut,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              child: Icon(
+                                Icons.arrow_circle_right_outlined,
+                                size: 100.0,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      color: Theme.of(context).colorScheme.surface,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.today_rounded,
+                            size: 125,
+                          ),
+                          AddSpace(
+                            height: 22,
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.timetableIntroTitle,
+                            style: Theme.of(context).textTheme.displayLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                          AddSpace(
+                            height: 22,
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.timetableSubtitle,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      letterSpacing: 3.25,
+                                    ),
+                            textAlign: TextAlign.justify,
+                          ),
+                          AddSpace(
+                            height: 25,
+                          ),
+                          GestureDetector(
+                            onTap: () => _pageController.animateToPage(
+                              1,
+                              duration: Duration(milliseconds: 250),
+                              curve: Curves.easeInOut,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context)!.enter,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                          ),
+                                    ),
+                                    AddSpace(
+                                      width: 10,
+                                    ),
+                                    Icon(
+                                      Icons.arrow_circle_right_outlined,
+                                      size: 50.0,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!.choice,
+                                ),
+                                AddSpace(
+                                  width: 4,
+                                ),
+                                GestureDetector(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.importXlsx,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          decoration: TextDecoration.underline,
+                                          decorationStyle:
+                                              TextDecorationStyle.solid,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      color: Colors.blue,
+                    ),
+                  ],
+                ),
+              ),
+              SmoothPageIndicator(
+                controller: _pageController,
+                count: 7,
+                effect: ExpandingDotsEffect(),
+                onDotClicked: (index) => _pageController.animateToPage(index,
+                    duration: Duration(milliseconds: 250),
+                    curve: Curves.easeInOut),
+              ),
+            ],
           ),
-          Container(
-            color: Colors.green,
-          ),
-          Container(
-            color: Colors.blue,
-          ),
+          const Spacer(),
+          MyLangChanger(
+            setLocale: widget.setLocale,
+            currentLocale: widget.currentLocale,
+          )
         ],
       ),
     );

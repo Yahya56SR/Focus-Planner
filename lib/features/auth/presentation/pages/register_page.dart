@@ -5,6 +5,7 @@ import 'package:focus_planner/features/auth/presentation/components/button.dart'
 import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
 import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:focus_planner/features/overall%20components/my_lang_changer.dart';
 import '../../../../l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
 
@@ -314,66 +315,9 @@ class _RegisterPageState extends State<RegisterPage>
                 const Spacer(),
 
                 // lang changer
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () => widget.setLocale!(Locale('en')),
-                        child: Text(
-                          'English',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                fontWeight: widget.currentLocale == Locale('en')
-                                    ? FontWeight.bold
-                                    : null,
-                              ),
-                        ),
-                      ),
-                      AddSpace(width: 5),
-                      Icon(
-                        Icons.radio_button_checked_sharp,
-                        size: 20,
-                      ),
-                      AddSpace(width: 5),
-                      GestureDetector(
-                        onTap: () => widget.setLocale!(Locale('ar')),
-                        child: Text('عربي',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  fontWeight:
-                                      widget.currentLocale == Locale('ar')
-                                          ? FontWeight.bold
-                                          : null,
-                                )),
-                      ),
-                      AddSpace(width: 5),
-                      Icon(
-                        Icons.radio_button_checked_sharp,
-                        size: 20,
-                      ),
-                      AddSpace(width: 5),
-                      GestureDetector(
-                        onTap: () => widget.setLocale!(Locale('fr')),
-                        child: Text('Français',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  fontWeight:
-                                      widget.currentLocale == Locale('fr')
-                                          ? FontWeight.bold
-                                          : null,
-                                )),
-                      ),
-                    ],
-                  ),
-                )
+                MyLangChanger(
+                    setLocale: widget.setLocale,
+                    currentLocale: widget.currentLocale),
               ],
             ),
           ),
