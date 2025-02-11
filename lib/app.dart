@@ -5,6 +5,7 @@ import 'package:focus_planner/features/auth/data/firebase_auth_repo.dart';
 import 'package:focus_planner/features/auth/domain/repos/auth_repo.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_states.dart';
+import 'package:focus_planner/features/import/xlsx/blocs/timetable_bloc.dart';
 import 'package:focus_planner/themes/ligth_mode.dart';
 import 'features/auth/presentation/pages/auth_page.dart';
 import 'l10n/app_localizations.dart';
@@ -31,8 +32,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(widget.authRepo)..checkAuth(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthCubit(widget.authRepo)..checkAuth(),
+        ),
+        BlocProvider(
+          create: (context) => TimetableBloc(),
+        ),
+      ],
       child: MaterialApp(
         locale: _locale,
         debugShowCheckedModeBanner: false,

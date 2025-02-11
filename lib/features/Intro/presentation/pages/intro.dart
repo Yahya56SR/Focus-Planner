@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:focus_planner/features/import/xlsx/blocs/timetable_event.dart';
+import 'package:focus_planner/features/import/xlsx/blocs/timetable_state.dart';
 import 'package:focus_planner/features/overall%20components/my_lang_changer.dart';
 import 'package:focus_planner/l10n/app_localizations.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:focus_planner/features/import/xlsx/blocs/timetable_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class IntroPage extends StatefulWidget {
@@ -27,6 +31,34 @@ class _IntroPageState extends State<IntroPage> {
     final AuthCubit authCubit = context.read<AuthCubit>();
 
     authCubit.logout();
+  }
+
+  void importTimetable() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['xlsx', 'xls'],
+    );
+
+    if (result != null && result.files.single.path != null) {
+      final filePath = result.files.single.path!;
+      final TimetableBloc timetableBloc = context.read<TimetableBloc>();
+      timetableBloc.add(LoadTimetable(filePath));
+
+      timetableBloc.stream.listen((state) {
+        if (state is TimetableLoaded) {
+          if (state.entries.isNotEmpty) {
+            print('Timetable found:');
+            for (var entry in state.entries) {
+              print(entry);
+            }
+          } else {
+            print('No timetable found.');
+          }
+        } else if (state is TimetableError) {
+          print('Error loading timetable: ${state.message}');
+        }
+      });
+    }
   }
 
   @override
@@ -142,11 +174,8 @@ class _IntroPageState extends State<IntroPage> {
                             height: 25,
                           ),
                           GestureDetector(
-                            onTap: () => _pageController.animateToPage(
-                              1,
-                              duration: Duration(milliseconds: 250),
-                              curve: Curves.easeInOut,
-                            ),
+                            onTap:
+                                importTimetable, // Implement import function here
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
@@ -158,7 +187,7 @@ class _IntroPageState extends State<IntroPage> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      AppLocalizations.of(context)!.enter,
+                                      AppLocalizations.of(context)!.importXlsx,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headlineLarge
@@ -197,6 +226,8 @@ class _IntroPageState extends State<IntroPage> {
                                   width: 4,
                                 ),
                                 GestureDetector(
+                                  onTap:
+                                      importTimetable, // Implement import function here
                                   child: Text(
                                     AppLocalizations.of(context)!.importXlsx,
                                     style: Theme.of(context)
