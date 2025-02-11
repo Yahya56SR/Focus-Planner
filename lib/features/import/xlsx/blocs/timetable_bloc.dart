@@ -1,9 +1,10 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:excel/excel.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_event.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_state.dart';
 import 'package:focus_planner/features/import/xlsx/models/timetable_entry.dart';
 import 'dart:io';
+import 'dart:convert';
 
 class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
   TimetableBloc() : super(TimetableInitial()) {
@@ -40,6 +41,28 @@ class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
           continue;
         }
       }
+
+      // Convert entries to a JSON map
+      Map<String, String> jsonMap = {};
+      for (var entry in entries) {
+        jsonMap[entry.time] = jsonEncode({
+          'monday': entry.monday,
+          'tuesday': entry.tuesday,
+          'wednesday': entry.wednesday,
+          'thursday': entry.thursday,
+          'friday': entry.friday,
+        });
+      }
+
+      // Create output directory if it doesn't exist
+      final outputDir = Directory('output');
+      if (!outputDir.existsSync()) {
+        outputDir.createSync(recursive: true);
+      }
+
+      // Save JSON map to a file
+      final jsonFile = File('${outputDir.path}/timetable.json');
+      jsonFile.writeAsStringSync(jsonEncode(jsonMap));
 
       emit(TimetableLoaded(entries: entries, filteredEntries: entries));
     } catch (e) {
