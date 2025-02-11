@@ -18,13 +18,16 @@ class TimetableEntry extends Equatable {
   });
 
   factory TimetableEntry.fromExcelRow(List<dynamic> row) {
+    if (row.length < 6) {
+      throw StateError('Row does not have enough columns');
+    }
     return TimetableEntry(
-      time: row[0].toString(),
-      monday: row[1].toString(),
-      tuesday: row[2].toString(),
-      wednesday: row[3].toString(),
-      thursday: row[4].toString(),
-      friday: row[5].toString(),
+      time: row[0]?.toString() ?? '',
+      monday: row[1]?.toString() ?? '',
+      tuesday: row[2]?.toString() ?? '',
+      wednesday: row[3]?.toString() ?? '',
+      thursday: row[4]?.toString() ?? '',
+      friday: row[5]?.toString() ?? '',
     );
   }
 
@@ -35,6 +38,17 @@ class TimetableEntry extends Equatable {
         wednesday.isNotEmpty &&
         thursday.isNotEmpty &&
         friday.isNotEmpty;
+  }
+
+  Map<String, String> toJson() {
+    return {
+      'time': time,
+      'monday': monday,
+      'tuesday': tuesday,
+      'wednesday': wednesday,
+      'thursday': thursday,
+      'friday': friday,
+    };
   }
 
   @override

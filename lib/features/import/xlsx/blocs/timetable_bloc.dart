@@ -42,27 +42,28 @@ class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
         }
       }
 
-      // Convert entries to a JSON map
-      Map<String, String> jsonMap = {};
+      // Convert entries to a map of subjects
+      List<Map<String, String>> subjectMaps = [];
       for (var entry in entries) {
-        jsonMap[entry.time] = jsonEncode({
-          'monday': entry.monday,
-          'tuesday': entry.tuesday,
-          'wednesday': entry.wednesday,
-          'thursday': entry.thursday,
-          'friday': entry.friday,
-        });
+        final days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+        for (var day in days) {
+          final subject = entry.toJson()[day];
+          if (subject!.isNotEmpty) {
+            final timeRange = entry.time.split('-');
+            final from = timeRange[0].trim();
+            final to = timeRange[1].trim();
+            subjectMaps.add({
+              'subjectName': subject,
+              'from': from,
+              'to': to,
+              'day': day,
+            });
+          }
+        }
       }
 
-      // Create output directory if it doesn't exist
-      final outputDir = Directory('output');
-      if (!outputDir.existsSync()) {
-        outputDir.createSync(recursive: true);
-      }
-
-      // Save JSON map to a file
-      final jsonFile = File('${outputDir.path}/timetable.json');
-      jsonFile.writeAsStringSync(jsonEncode(jsonMap));
+      // Print subjects map to the console
+      print(const JsonEncoder.withIndent('  ').convert(subjectMaps));
 
       emit(TimetableLoaded(entries: entries, filteredEntries: entries));
     } catch (e) {
