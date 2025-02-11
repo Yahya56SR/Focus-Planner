@@ -16,7 +16,7 @@ class LoadTimetable extends TimetableEvent {
 
 class SearchTimetable extends TimetableEvent {
   final String query;
-  final String filterBy; // 'subject', 'teacher', 'class', etc.
+  final String filterBy; // 'time', 'monday', 'tuesday', etc.
 
   SearchTimetable({
     required this.query,

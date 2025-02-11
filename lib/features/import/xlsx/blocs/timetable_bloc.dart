@@ -1,4 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 import 'package:excel/excel.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_event.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_state.dart';
@@ -27,6 +27,10 @@ class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
       // Skip header row
       for (var row in sheet.rows.skip(1)) {
         try {
+          if (row.every(
+              (cell) => cell == null || cell.toString().trim().isEmpty)) {
+            continue; // Skip empty rows
+          }
           final entry = TimetableEntry.fromExcelRow(row);
           if (entry.isValid()) {
             entries.add(entry);
@@ -61,14 +65,18 @@ class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
 
       final filteredEntries = currentState.entries.where((entry) {
         switch (event.filterBy) {
-          case 'subject':
-            return entry.subject.toLowerCase().contains(query);
-          case 'teacher':
-            return entry.teacher.toLowerCase().contains(query);
-          case 'room':
-            return entry.room.toLowerCase().contains(query);
-          case 'class':
-            return entry.className.toLowerCase().contains(query);
+          case 'time':
+            return entry.time.toLowerCase().contains(query);
+          case 'monday':
+            return entry.monday.toLowerCase().contains(query);
+          case 'tuesday':
+            return entry.tuesday.toLowerCase().contains(query);
+          case 'wednesday':
+            return entry.wednesday.toLowerCase().contains(query);
+          case 'thursday':
+            return entry.thursday.toLowerCase().contains(query);
+          case 'friday':
+            return entry.friday.toLowerCase().contains(query);
           default:
             return false;
         }
