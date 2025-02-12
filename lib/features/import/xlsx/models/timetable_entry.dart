@@ -8,7 +8,7 @@ class TimetableEntry extends Equatable {
   final String thursday;
   final String friday;
 
-  TimetableEntry({
+  const TimetableEntry({
     required this.time,
     required this.monday,
     required this.tuesday,
