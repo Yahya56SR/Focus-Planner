@@ -13,4 +13,14 @@ class Timetable {
     required this.to,
     required this.day,
   });
+
+  factory Timetable.fromSnapshot(DocumentSnapshot snapshot) {
+    final data = snapshot.data() as Map<String, dynamic>;
+    return Timetable(
+      day: data['day'],
+      subjectName: data['subjectName'],
+      from: data['from'],
+      to: data['to'],
+    );
+  }
 }

@@ -17,4 +17,16 @@ class Task {
     required this.progTime,
     required this.todoBefore,
   });
+
+  factory Task.fromSnapshot(DocumentSnapshot snapshot) {
+    final data = snapshot.data() as Map<String, dynamic>;
+    return Task(
+      thumbPath: data['thumbPath'],
+      taskTitle: data['taskTitle'],
+      tag: data['tag'],
+      progDate: data['progDate'],
+      progTime: data['progTime'],
+      todoBefore: data['todoBefore'],
+    );
+  }
 }

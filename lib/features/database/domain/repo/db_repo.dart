@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
-import 'package:focus_planner/features/database/domain/entities/challenge.dart';
 import 'package:focus_planner/features/database/domain/entities/connected_devices.dart';
 import 'package:focus_planner/features/database/domain/entities/exercice.dart';
 import 'package:focus_planner/features/database/domain/entities/holiday.dart';

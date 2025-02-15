@@ -15,4 +15,15 @@ class Exercice {
     required this.forDate,
     required this.isFinished,
   });
+
+  factory Exercice.fromSnapshot(DocumentSnapshot snapshot) {
+    final data = snapshot.data() as Map<String, dynamic>;
+    return Exercice(
+      subName: data['subName'],
+      forDate: data['forDate'],
+      atTime: data['atTime'],
+      difficulty: Difficulty.values[data['difficulty']],
+      isFinished: data['isFinished'],
+    );
+  }
 }
