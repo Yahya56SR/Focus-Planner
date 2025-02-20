@@ -3,6 +3,7 @@ import 'package:excel/excel.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_event.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_state.dart';
 import 'package:focus_planner/features/import/xlsx/models/timetable_entry.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
 import 'dart:convert';
 
@@ -42,8 +43,8 @@ class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
         }
       }
 
-      // Convert entries to a map of subjects
-      List<Map<String, String>> subjectMaps = [];
+      // Convert entries to a map of subjects and save to Firebase
+      List<Map<String, dynamic>> subjectMaps = [];
       for (var entry in entries) {
         final days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
         for (var day in days) {
@@ -52,12 +53,18 @@ class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
             final timeRange = entry.time.split('-');
             final from = timeRange[0].trim();
             final to = timeRange[1].trim();
-            subjectMaps.add({
+            final subjectMap = {
               'subjectName': subject,
-              'from': from,
-              'to': to,
+              'from': Timestamp.fromDate(DateTime.parse(from)),
+              'to': Timestamp.fromDate(DateTime.parse(to)),
               'day': day,
-            });
+            };
+            subjectMaps.add(subjectMap);
+
+            // Save to Firebase
+            await FirebaseFirestore.instance
+                .collection('timetables')
+                .add(subjectMap);
           }
         }
       }
