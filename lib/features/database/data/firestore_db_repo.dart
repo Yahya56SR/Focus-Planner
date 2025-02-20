@@ -11,7 +11,8 @@ import 'package:focus_planner/features/database/domain/repo/db_repo.dart';
 class FirestoreDbRepo implements DbRepo {
   CollectionReference timetableData =
       FirebaseFirestore.instance.collection('Timetables');
-  CollectionReference taskData = FirebaseFirestore.instance.collection('Tasks');
+  CollectionReference taskData =
+      FirebaseFirestore.instance.collection('Tasks');
   CollectionReference holidaysData =
       FirebaseFirestore.instance.collection('Holidays');
   CollectionReference exercicesData =
