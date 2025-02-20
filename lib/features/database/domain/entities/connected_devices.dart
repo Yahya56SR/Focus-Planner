@@ -16,4 +16,12 @@ class ConnectedDevices {
       deviceType: DeviceType.values[data['deviceType']],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ipAddress': ipAddress,
+      'deviceName': deviceName,
+      'deviceType': deviceType,
+    };
+  }
 }

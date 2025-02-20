@@ -29,4 +29,15 @@ class Task {
       todoBefore: data['todoBefore'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'thumbPath': thumbPath,
+      'taskTitle': taskTitle,
+      'progDate': progDate,
+      'progTime': progTime,
+      'todoBefore': todoBefore,
+      'tag': tag,
+    };
+  }
 }

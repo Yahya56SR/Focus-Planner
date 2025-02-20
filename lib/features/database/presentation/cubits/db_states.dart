@@ -6,6 +6,12 @@ class DbInitial extends DbStates {}
 // loading
 class DbLoading extends DbStates {}
 
+// loaded
+class DbLoaded extends DbStates {
+  final List<Map<String, dynamic>> data;
+  DbLoaded(this.data);
+}
+
 // get data
 class DbData extends DbStates {
   final List<Map<String, dynamic>> data;

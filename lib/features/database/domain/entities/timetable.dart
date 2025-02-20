@@ -23,4 +23,13 @@ class Timetable {
       to: data['to'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'day': day,
+      'subjectName': subjectName,
+      'from': from,
+      'to': to,
+    };
+  }
 }

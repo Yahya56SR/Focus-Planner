@@ -26,4 +26,14 @@ class Exercice {
       isFinished: data['isFinished'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'subName': subName,
+      'forDate': forDate,
+      'atTime': atTime,
+      'difficulty': difficulty,
+      'isFinished': isFinished,
+    };
+  }
 }

@@ -17,4 +17,11 @@ class Holiday {
       holidays: List<String>.from(data['holidays']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'country': country,
+      'holidays': holidays,
+    };
+  }
 }
