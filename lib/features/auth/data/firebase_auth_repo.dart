@@ -92,15 +92,12 @@ class FirebaseAuthRepo implements AuthRepo {
 
   @override
   Future<AppUser?> loginWithGithubCredentials() async {
-    // Define GitHub's OAuth credentials
     final githubProvider = GithubAuthProvider();
 
     try {
-      // Trigger the sign-in flow
       UserCredential userCredential =
           await firebaseAuth.signInWithProvider(githubProvider);
 
-      // Get the signed-in user
       User? user = userCredential.user;
       return AppUser(
           uid: user!.uid, email: user.email!, name: user.displayName!);
