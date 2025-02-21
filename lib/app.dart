@@ -11,13 +11,11 @@ import 'features/auth/presentation/pages/auth_page.dart';
 import 'l10n/app_localizations.dart';
 
 class MyApp extends StatefulWidget {
-  // auth repo
   final AuthRepo authRepo = FirebaseAuthRepo();
 
   MyApp({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
@@ -49,7 +47,6 @@ class _MyAppState extends State<MyApp> {
         supportedLocales: AppLocalizations.supportedLocales,
         home: BlocConsumer<AuthCubit, AuthState>(
           builder: (context, authState) {
-            // Unauthenticated -> Auth Page
             if (authState is Unauthenticated) {
               return AuthPage(
                 setLocale: setLocale,
@@ -57,7 +54,6 @@ class _MyAppState extends State<MyApp> {
               );
             }
 
-            // Authenticated -> Home Page
             if (authState is Authenticated) {
               return IntroPage(
                 setLocale: setLocale,
@@ -65,8 +61,7 @@ class _MyAppState extends State<MyApp> {
               );
             }
 
-            // loading
-            else if (authState is AuthLoading) {
+            if (authState is AuthLoading) {
               return const Scaffold(
                 body: Center(
                   child: CircularProgressIndicator.adaptive(),
@@ -74,7 +69,6 @@ class _MyAppState extends State<MyApp> {
               );
             }
 
-            // default case
             return const Scaffold(
               body: Center(
                 child: Text('Unknown state'),

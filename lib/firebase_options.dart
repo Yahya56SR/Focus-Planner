@@ -54,17 +54,19 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1023060754466',
     projectId: 'nexordev-focus-planner',
     storageBucket: 'nexordev-focus-planner.firebasestorage.app',
+    androidClientId: '1023060754466-lcsc56vhncnmrpe0grcsbk8uuftdq9n2.apps.googleusercontent.com',
+    iosClientId: '1023060754466-rp37bduh2cm5bvfvg1fl43b971nkh398.apps.googleusercontent.com',
     iosBundleId: 'com.nexordev.focusplanner',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyAMD4OzrOeCoRjQVmpKXtcRWdFjwROof3g',
-    appId: '1:1023060754466:web:a13045936ea7973e5c4a7b',
+    appId: '1:1023060754466:web:83b7b4cc4e2b2f495c4a7b',
     messagingSenderId: '1023060754466',
     projectId: 'nexordev-focus-planner',
     authDomain: 'nexordev-focus-planner.firebaseapp.com',
     storageBucket: 'nexordev-focus-planner.firebasestorage.app',
-    measurementId: 'G-CK0X1JCBS5',
+    measurementId: 'G-6X3GR7JFQ9',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -73,6 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1023060754466',
     projectId: 'nexordev-focus-planner',
     storageBucket: 'nexordev-focus-planner.firebasestorage.app',
+    androidClientId: '1023060754466-lcsc56vhncnmrpe0grcsbk8uuftdq9n2.apps.googleusercontent.com',
+    iosClientId: '1023060754466-rp37bduh2cm5bvfvg1fl43b971nkh398.apps.googleusercontent.com',
     iosBundleId: 'com.nexordev.focusplanner',
   );
 

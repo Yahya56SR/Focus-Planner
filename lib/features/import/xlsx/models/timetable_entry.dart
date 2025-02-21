@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:excel/excel.dart';
 
 class TimetableEntry extends Equatable {
   final String time;
@@ -17,17 +18,17 @@ class TimetableEntry extends Equatable {
     required this.friday,
   });
 
-  factory TimetableEntry.fromExcelRow(List<dynamic> row) {
+  factory TimetableEntry.fromExcelRow(List<Data?> row) {
     if (row.length < 6) {
       throw StateError('Row does not have enough columns');
     }
     return TimetableEntry(
-      time: row[0]?.toString() ?? '',
-      monday: row[1]?.toString() ?? '',
-      tuesday: row[2]?.toString() ?? '',
-      wednesday: row[3]?.toString() ?? '',
-      thursday: row[4]?.toString() ?? '',
-      friday: row[5]?.toString() ?? '',
+      time: row[0]?.value.toString() ?? '',
+      monday: row[1]?.value.toString() ?? '',
+      tuesday: row[2]?.value.toString() ?? '',
+      wednesday: row[3]?.value.toString() ?? '',
+      thursday: row[4]?.value.toString() ?? '',
+      friday: row[5]?.value.toString() ?? '',
     );
   }
 

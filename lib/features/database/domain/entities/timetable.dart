@@ -3,9 +3,9 @@ import 'package:focus_planner/features/Timetables/domain/entities/subject.dart';
 
 class Timetable {
   final Subject subjectName;
-  final Timestamp from;
-  final Timestamp to;
-  final Timestamp day;
+  final String from;
+  final String to;
+  final String day;
 
   Timetable({
     required this.subjectName,

@@ -33,16 +33,16 @@ class _IntroPageState extends State<IntroPage> {
     authCubit.logout();
   }
 
-  void importTimetable() async {
+  void importExcelTimetable() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['xlsx', 'xls'],
     );
 
-    if (result != null && result.files.single.path != null) {
-      final filePath = result.files.single.path!;
+    if (result != null && result.files.single.bytes != null) {
+      final filePath = result.files.single.bytes!;
       final TimetableBloc timetableBloc = context.read<TimetableBloc>();
-      timetableBloc.add(LoadTimetable(filePath));
+      timetableBloc.add(LoadTimetable(filePath.toString()));
 
       timetableBloc.stream.listen((state) {
         if (state is TimetableLoaded) {
@@ -175,7 +175,7 @@ class _IntroPageState extends State<IntroPage> {
                           ),
                           GestureDetector(
                             onTap:
-                                importTimetable, // Implement import function here
+                                importExcelTimetable, // Implement import function here
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
@@ -227,7 +227,7 @@ class _IntroPageState extends State<IntroPage> {
                                 ),
                                 GestureDetector(
                                   onTap:
-                                      importTimetable, // Implement import function here
+                                      importExcelTimetable, // Implement import function here
                                   child: Text(
                                     AppLocalizations.of(context)!.importXlsx,
                                     style: Theme.of(context)
