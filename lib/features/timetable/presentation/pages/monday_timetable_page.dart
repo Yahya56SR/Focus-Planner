@@ -205,7 +205,7 @@ class _MondayPageState extends State<MondayPage> {
             child: Row(
               children: [
                 IconButton.filled(
-                  onPressed: () => widget.nextDay('Monday'),
+                  onPressed: () => widget.nextDay('monday'),
                   icon: Icon(
                     Icons.arrow_circle_right_outlined,
                   ),

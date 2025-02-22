@@ -28,19 +28,44 @@ class _TimetablePageState extends State<TimetablePage> {
     void nextDay(String thisPage) {
       switch (thisPage) {
         case 'monday':
+          showMondayPage = false;
           showTuesdayPage = true;
+          showWednesdayPage = false;
+          showThursdayPage = false;
+          showFridayPage = false;
+          showSaturdayPage = false;
           break;
         case 'tuesday':
-          showWednesdayPage = true;
+          showMondayPage = false;
+          showTuesdayPage = true;
+          showWednesdayPage = false;
+          showThursdayPage = false;
+          showFridayPage = false;
+          showSaturdayPage = false;
           break;
         case 'wednesday':
-          showThursdayPage = true;
+          showMondayPage = false;
+          showTuesdayPage = true;
+          showWednesdayPage = false;
+          showThursdayPage = false;
+          showFridayPage = false;
+          showSaturdayPage = false;
           break;
         case 'thursday':
-          showFridayPage = true;
+          showMondayPage = false;
+          showTuesdayPage = true;
+          showWednesdayPage = false;
+          showThursdayPage = false;
+          showFridayPage = false;
+          showSaturdayPage = false;
           break;
         case 'friday':
-          showSaturdayPage = true;
+          showMondayPage = false;
+          showTuesdayPage = true;
+          showWednesdayPage = false;
+          showThursdayPage = false;
+          showFridayPage = false;
+          showSaturdayPage = false;
           break;
         case 'saturday':
           Navigator.pop(context);
@@ -51,17 +76,41 @@ class _TimetablePageState extends State<TimetablePage> {
     }
 
     if (showSaturdayPage == true) {
-      return SaturdayPage();
+      return SaturdayPage(
+        setLocale: widget.setLocale,
+        nextDay: nextDay,
+        currentLocale: widget.currentLocale,
+      );
     } else if (showFridayPage == true) {
-      return FridayPage();
+      return FridayPage(
+        setLocale: widget.setLocale,
+        nextDay: nextDay,
+        currentLocale: widget.currentLocale,
+      );
     } else if (showThursdayPage == true) {
-      return ThursdayPage();
+      return ThursdayPage(
+        setLocale: widget.setLocale,
+        nextDay: nextDay,
+        currentLocale: widget.currentLocale,
+      );
     } else if (showWednesdayPage == true) {
-      return WednesdayPage();
+      return WednesdayPage(
+        setLocale: widget.setLocale,
+        nextDay: nextDay,
+        currentLocale: widget.currentLocale,
+      );
     } else if (showTuesdayPage == true) {
-      return TuesdayPage();
+      return TuesdayPage(
+        setLocale: widget.setLocale,
+        nextDay: nextDay,
+        currentLocale: widget.currentLocale,
+      );
     } else if (showMondayPage == true) {
-      return MondayPage(setLocale: widget.setLocale, nextDay: nextDay);
+      return MondayPage(
+        setLocale: widget.setLocale,
+        nextDay: nextDay,
+        currentLocale: widget.currentLocale,
+      );
     } else {
       return ScaffoldMessenger(
         child: Text('Unknown Error'),
