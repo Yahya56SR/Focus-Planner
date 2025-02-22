@@ -34,19 +34,21 @@ class _MondayPageState extends State<MondayPage> {
       ),
       body: Column(
         children: [
-          ListView.builder(
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  MyTextField(
-                    controller: subjectController,
-                    hintText: 'Subject',
-                    obscureText: false,
-                  ),
-                ],
-              );
-            },
+          Expanded(
+            child: ListView.builder(
+              itemCount: 1,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    MyTextField(
+                      controller: subjectController,
+                      hintText: 'Subject',
+                      obscureText: false,
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         ],
       ),
