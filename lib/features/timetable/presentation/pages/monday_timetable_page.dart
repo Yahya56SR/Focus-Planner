@@ -24,11 +24,29 @@ class _MondayPageState extends State<MondayPage> {
   final subjectController = TextEditingController();
   TimeOfDay? _pickedTime;
   int itemCount = 2;
+  List<String?> selectedSubjects =
+      List<String?>.filled(2, null, growable: true);
+  final List<String> subjectNames =
+      subjects.map((subject) => subject.subName!).toList();
 
   @override
   void dispose() {
     subjectController.dispose();
     super.dispose();
+  }
+
+  void _addItem() {
+    setState(() {
+      itemCount++;
+      selectedSubjects.add(null);
+    });
+  }
+
+  void _removeItem(int index) {
+    setState(() {
+      itemCount--;
+      selectedSubjects.removeAt(index);
+    });
   }
 
   @override
@@ -52,9 +70,7 @@ class _MondayPageState extends State<MondayPage> {
                       motion: ScrollMotion(),
                       children: [
                         SlidableAction(
-                          onPressed: (context) => setState(() {
-                            itemCount--;
-                          }),
+                          onPressed: (context) => _removeItem(index),
                           icon: Icons.delete_outlined,
                           label: 'Delete',
                           borderRadius: BorderRadius.circular(8),
@@ -65,14 +81,20 @@ class _MondayPageState extends State<MondayPage> {
                     ),
                     child: Column(
                       children: [
-                        DropdownButton(
-                          items: [
-                            DropdownMenuItem(
-                                child: Text(
-                              subjects.elementAt(0).subName!,
-                            ))
-                          ],
-                          onChanged: (value) {},
+                        DropdownButton<String>(
+                          value: selectedSubjects[index],
+                          hint: Text('Select a subject'),
+                          items: subjectNames.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedSubjects[index] = newValue;
+                            });
+                          },
                         ),
                         AddSpace(
                           height: 12,
@@ -186,9 +208,7 @@ class _MondayPageState extends State<MondayPage> {
                 ),
                 Spacer(),
                 IconButton.filled(
-                  onPressed: () => setState(() {
-                    itemCount++;
-                  }),
+                  onPressed: _addItem,
                   icon: Icon(
                     Icons.add,
                   ),
