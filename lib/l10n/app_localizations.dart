@@ -304,7 +304,7 @@ abstract class AppLocalizations {
   /// No description provided for @subject.
   ///
   /// In en, this message translates to:
-  /// **'Subject No°'**
+  /// **'Subject No.'**
   String get subject;
 
   /// No description provided for @from.

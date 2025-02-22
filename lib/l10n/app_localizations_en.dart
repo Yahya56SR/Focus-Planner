@@ -109,7 +109,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mondayTitle => 'Monday Timetable';
 
   @override
-  String get subject => 'Subject No°';
+  String get subject => 'Subject No.';
 
   @override
   String get from => 'From';

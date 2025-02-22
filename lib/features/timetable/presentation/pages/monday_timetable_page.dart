@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
 import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
+import 'package:focus_planner/features/database/domain/entities/subject.dart';
+import 'package:focus_planner/l10n/app_localizations.dart';
+import 'package:focus_planner/l10n/components/my_lang_changer.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class MondayPage extends StatefulWidget {
   final Locale? currentLocale;
@@ -17,6 +22,8 @@ class MondayPage extends StatefulWidget {
 
 class _MondayPageState extends State<MondayPage> {
   final subjectController = TextEditingController();
+  TimeOfDay? _pickedTime;
+  int itemCount = 2;
 
   @override
   void dispose() {
@@ -36,20 +43,164 @@ class _MondayPageState extends State<MondayPage> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: 1,
+              itemCount: itemCount,
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    MyTextField(
-                      controller: subjectController,
-                      hintText: 'Subject',
-                      obscureText: false,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Slidable(
+                    endActionPane: ActionPane(
+                      motion: ScrollMotion(),
+                      children: [
+                        SlidableAction(
+                          onPressed: (context) => setState(() {
+                            itemCount--;
+                          }),
+                          icon: Icons.delete_outlined,
+                          label: 'Delete',
+                          borderRadius: BorderRadius.circular(8),
+                          backgroundColor: Theme.of(context).colorScheme.error,
+                          autoClose: true,
+                        ),
+                      ],
                     ),
-                  ],
+                    child: Column(
+                      children: [
+                        DropdownButton(
+                          items: [
+                            DropdownMenuItem(
+                                child: Text(
+                              subjects.elementAt(0).subName!,
+                            ))
+                          ],
+                          onChanged: (value) {},
+                        ),
+                        AddSpace(
+                          height: 12,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${AppLocalizations.of(context)!.from} :',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                final timePicked = showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now(),
+                                );
+                                timePicked.then((value) {
+                                  setState(() {
+                                    _pickedTime = value;
+                                  });
+                                });
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .inputDecorationTheme
+                                      .fillColor,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                width: 250,
+                                child: Text(
+                                  _pickedTime == null
+                                      ? ' : '
+                                      : '${_pickedTime!.hour} : ${_pickedTime!.minute}',
+                                  textAlign: TextAlign.center,
+                                  style: _pickedTime != null
+                                      ? Theme.of(context).textTheme.bodyMedium
+                                      : Theme.of(context)
+                                          .inputDecorationTheme
+                                          .hintStyle,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        AddSpace(
+                          height: 9,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${AppLocalizations.of(context)!.to} :',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                final timePicked = showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now(),
+                                );
+                                timePicked.then((value) {
+                                  setState(() {
+                                    _pickedTime = value;
+                                  });
+                                });
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .inputDecorationTheme
+                                      .fillColor,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                width: 250,
+                                child: Text(
+                                  _pickedTime == null
+                                      ? ' : '
+                                      : '${_pickedTime!.hour} : ${_pickedTime!.minute}',
+                                  textAlign: TextAlign.center,
+                                  style: _pickedTime != null
+                                      ? Theme.of(context).textTheme.bodyMedium
+                                      : Theme.of(context)
+                                          .inputDecorationTheme
+                                          .hintStyle,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                IconButton.filled(
+                  onPressed: () => widget.nextDay('Monday'),
+                  icon: Icon(
+                    Icons.arrow_circle_right_outlined,
+                  ),
+                  iconSize: 75,
+                ),
+                Spacer(),
+                IconButton.filled(
+                  onPressed: () => setState(() {
+                    itemCount++;
+                  }),
+                  icon: Icon(
+                    Icons.add,
+                  ),
+                  iconSize: 75,
+                ),
+              ],
+            ),
+          ),
+          MyLangChanger(
+            setLocale: widget.setLocale,
+            currentLocale: widget.currentLocale,
+          )
         ],
       ),
     );
