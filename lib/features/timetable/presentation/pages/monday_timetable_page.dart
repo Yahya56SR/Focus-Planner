@@ -22,10 +22,12 @@ class MondayPage extends StatefulWidget {
 
 class _MondayPageState extends State<MondayPage> {
   final subjectController = TextEditingController();
-  TimeOfDay? _pickedTime;
   int itemCount = 2;
   List<String?> selectedSubjects =
       List<String?>.filled(2, null, growable: true);
+  List<TimeOfDay?> startTimes =
+      List<TimeOfDay?>.filled(2, null, growable: true);
+  List<TimeOfDay?> endTimes = List<TimeOfDay?>.filled(2, null, growable: true);
   final List<String> subjectNames =
       subjects.map((subject) => subject.subName!).toList();
 
@@ -39,6 +41,8 @@ class _MondayPageState extends State<MondayPage> {
     setState(() {
       itemCount++;
       selectedSubjects.add(null);
+      startTimes.add(null);
+      endTimes.add(null);
     });
   }
 
@@ -46,7 +50,27 @@ class _MondayPageState extends State<MondayPage> {
     setState(() {
       itemCount--;
       selectedSubjects.removeAt(index);
+      startTimes.removeAt(index);
+      endTimes.removeAt(index);
     });
+  }
+
+  Future<void> _pickTime(
+      BuildContext context, int index, bool isStartTime) async {
+    final timePicked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (timePicked != null) {
+      setState(() {
+        if (isStartTime) {
+          startTimes[index] = timePicked;
+        } else {
+          endTimes[index] = timePicked;
+        }
+      });
+    }
   }
 
   @override
@@ -95,6 +119,7 @@ class _MondayPageState extends State<MondayPage> {
                               selectedSubjects[index] = newValue;
                             });
                           },
+                          isExpanded: true,
                         ),
                         AddSpace(
                           height: 12,
@@ -107,17 +132,7 @@ class _MondayPageState extends State<MondayPage> {
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                             GestureDetector(
-                              onTap: () {
-                                final timePicked = showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay.now(),
-                                );
-                                timePicked.then((value) {
-                                  setState(() {
-                                    _pickedTime = value;
-                                  });
-                                });
-                              },
+                              onTap: () => _pickTime(context, index, true),
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),
                                 decoration: BoxDecoration(
@@ -128,11 +143,11 @@ class _MondayPageState extends State<MondayPage> {
                                 ),
                                 width: 250,
                                 child: Text(
-                                  _pickedTime == null
+                                  startTimes[index] == null
                                       ? ' : '
-                                      : '${_pickedTime!.hour} : ${_pickedTime!.minute}',
+                                      : '${startTimes[index]!.hour} : ${startTimes[index]!.minute}',
                                   textAlign: TextAlign.center,
-                                  style: _pickedTime != null
+                                  style: startTimes[index] != null
                                       ? Theme.of(context).textTheme.bodyMedium
                                       : Theme.of(context)
                                           .inputDecorationTheme
@@ -153,17 +168,7 @@ class _MondayPageState extends State<MondayPage> {
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                             GestureDetector(
-                              onTap: () {
-                                final timePicked = showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay.now(),
-                                );
-                                timePicked.then((value) {
-                                  setState(() {
-                                    _pickedTime = value;
-                                  });
-                                });
-                              },
+                              onTap: () => _pickTime(context, index, false),
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),
                                 decoration: BoxDecoration(
@@ -174,11 +179,11 @@ class _MondayPageState extends State<MondayPage> {
                                 ),
                                 width: 250,
                                 child: Text(
-                                  _pickedTime == null
+                                  endTimes[index] == null
                                       ? ' : '
-                                      : '${_pickedTime!.hour} : ${_pickedTime!.minute}',
+                                      : '${endTimes[index]!.hour} : ${endTimes[index]!.minute}',
                                   textAlign: TextAlign.center,
-                                  style: _pickedTime != null
+                                  style: endTimes[index] != null
                                       ? Theme.of(context).textTheme.bodyMedium
                                       : Theme.of(context)
                                           .inputDecorationTheme
