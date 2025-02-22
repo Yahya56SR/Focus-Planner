@@ -5,7 +5,6 @@ import 'package:focus_planner/features/import/xlsx/blocs/timetable_event.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_state.dart';
 import 'package:focus_planner/features/import/xlsx/models/timetable_entry.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'dart:typed_data';
@@ -30,7 +29,7 @@ class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
       } else {
         bytes = File(event.filePath).readAsBytesSync();
       }
-
+      
       final excel = Excel.decodeBytes(Uint8List.fromList(bytes));
       final sheet = excel.tables[excel.tables.keys.first]!;
 
@@ -62,20 +61,18 @@ class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
           if (subject!.isNotEmpty) {
             final timeRange = entry.time.split('-');
             try {
-              final from = _parseTime(timeRange[0].trim());
-              final to = _parseTime(timeRange[1].trim());
+              final from = timeRange[0].trim();
+              final to = timeRange[1].trim();
               final subjectMap = {
                 'subjectName': subject,
-                'from': Timestamp.fromDate(from),
-                'to': Timestamp.fromDate(to),
+                'from': from,
+                'to': to,
                 'day': day,
               };
               subjectMaps.add(subjectMap);
 
               // Save to Firebase
-              await FirebaseFirestore.instance
-                  .collection('timetables')
-                  .add(subjectMap);
+              await FirebaseFirestore.instance.collection('timetables').add(subjectMap);
             } catch (e) {
               print('Error parsing time for entry: ${entry.toJson()}');
               print('Error details: ${e.toString()}');
@@ -134,13 +131,5 @@ class TimetableBloc extends Bloc<TimetableEvent, TimetableState> {
         filteredEntries: filteredEntries,
       ));
     }
-  }
-
-  DateTime _parseTime(String timeStr) {
-    final timeFormat = DateFormat('HH:mm');
-    final today = DateTime.now();
-    final parsedTime = timeFormat.parse(timeStr);
-    return DateTime(
-        today.year, today.month, today.day, parsedTime.hour, parsedTime.minute);
   }
 }

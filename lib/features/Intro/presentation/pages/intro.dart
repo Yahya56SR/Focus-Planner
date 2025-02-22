@@ -4,8 +4,8 @@ import 'package:focus_planner/features/auth/presentation/components/spacer.dart'
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_event.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_state.dart';
-import 'package:focus_planner/features/overall%20components/my_lang_changer.dart';
 import 'package:focus_planner/l10n/app_localizations.dart';
+import 'package:focus_planner/l10n/components/my_lang_changer.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -132,7 +132,10 @@ class _IntroPageState extends State<IntroPage> {
                                 color: Theme.of(context).colorScheme.primary,
                               ),
                               child: Icon(
-                                Icons.arrow_circle_right_outlined,
+                                widget.currentLocale == Locale('en') ||
+                                        widget.currentLocale == Locale('fr')
+                                    ? Icons.arrow_circle_right_outlined
+                                    : Icons.arrow_circle_left_outlined,
                                 size: 100.0,
                                 color: Theme.of(context).colorScheme.onPrimary,
                               ),
@@ -174,8 +177,7 @@ class _IntroPageState extends State<IntroPage> {
                             height: 25,
                           ),
                           GestureDetector(
-                            onTap:
-                                importExcelTimetable, // Implement import function here
+                            onTap: () => Navigator.pushNamed(context, '/timetable'),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
@@ -187,7 +189,7 @@ class _IntroPageState extends State<IntroPage> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      AppLocalizations.of(context)!.importXlsx,
+                                      AppLocalizations.of(context)!.enter,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headlineLarge
@@ -201,7 +203,11 @@ class _IntroPageState extends State<IntroPage> {
                                       width: 10,
                                     ),
                                     Icon(
-                                      Icons.arrow_circle_right_outlined,
+                                      widget.currentLocale == Locale('en') ||
+                                              widget.currentLocale ==
+                                                  Locale('fr')
+                                          ? Icons.arrow_circle_right_outlined
+                                          : Icons.arrow_circle_left_outlined,
                                       size: 50.0,
                                       color: Theme.of(context)
                                           .colorScheme

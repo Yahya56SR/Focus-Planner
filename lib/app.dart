@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:focus_planner/features/Bloc/presentation/components/my_bloc_consumer.dart';
 import 'package:focus_planner/features/Intro/presentation/pages/intro.dart';
 import 'package:focus_planner/features/auth/data/firebase_auth_repo.dart';
 import 'package:focus_planner/features/auth/domain/repos/auth_repo.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:focus_planner/features/auth/presentation/cubits/auth_states.dart';
+import 'package:focus_planner/features/auth/presentation/pages/auth_page.dart';
 import 'package:focus_planner/features/import/xlsx/blocs/timetable_bloc.dart';
+import 'package:focus_planner/features/timetable/presentation/pages/timetable_page.dart';
 import 'package:focus_planner/themes/ligth_mode.dart';
-import 'features/auth/presentation/pages/auth_page.dart';
 import 'l10n/app_localizations.dart';
 
 class MyApp extends StatefulWidget {
@@ -16,6 +17,7 @@ class MyApp extends StatefulWidget {
   MyApp({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
@@ -45,38 +47,12 @@ class _MyAppState extends State<MyApp> {
         theme: lightTheme,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: BlocConsumer<AuthCubit, AuthState>(
-          builder: (context, authState) {
-            if (authState is Unauthenticated) {
-              return AuthPage(
-                setLocale: setLocale,
-                currentLocale: _locale,
-              );
-            }
-
-            if (authState is Authenticated) {
-              return IntroPage(
-                setLocale: setLocale,
-                currentLocale: _locale,
-              );
-            }
-
-            if (authState is AuthLoading) {
-              return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-              );
-            }
-
-            return const Scaffold(
-              body: Center(
-                child: Text('Unknown state'),
-              ),
-            );
-          },
-          listener: (BuildContext context, state) {},
-        ),
+        routes: {
+          '/': (context) => MyBlocConsumer(setLocale: setLocale, currentLocale: _locale,),
+          '/auth': (context) => AuthPage(setLocale: setLocale, currentLocale: _locale),
+          '/into': (context) => IntroPage(currentLocale: _locale, setLocale: setLocale,),
+          '/timetable': (context) => TimetablePage(currentLocale: _locale, setLocale: setLocale,)
+        },
       ),
     );
   }
