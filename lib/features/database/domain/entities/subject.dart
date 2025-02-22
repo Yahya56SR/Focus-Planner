@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:focus_planner/l10n/app_localizations.dart';
+
 class Subject {
   final String? subId;
   final String? subName;
@@ -18,59 +21,117 @@ class Subject {
   });
 }
 
-List<Subject> subjects = [
-  Subject(
-    subId: '1',
-    subName: 'Mathematics',
-    thumbPath: 'path/to/math_thumb.png',
-    subLang: 'English',
-    subLessons: ['Algebra', 'Geometry', 'Calculus'],
-    isLitter: false,
-    isScience: true,
-  ),
-  Subject(
-    subId: '2',
-    subName: 'History',
-    thumbPath: 'path/to/history_thumb.png',
-    subLang: 'English',
-    subLessons: ['Ancient', 'Medieval', 'Modern'],
-    isLitter: true,
-    isScience: false,
-  ),
-  Subject(
-    subId: '3',
-    subName: 'Biology',
-    thumbPath: 'path/to/biology_thumb.png',
-    subLang: 'English',
-    subLessons: ['Botany', 'Zoology', 'Genetics'],
-    isLitter: false,
-    isScience: true,
-  ),
-  Subject(
-    subId: '4',
-    subName: 'Literature',
-    thumbPath: 'path/to/literature_thumb.png',
-    subLang: 'English',
-    subLessons: ['Poetry', 'Prose', 'Drama'],
-    isLitter: true,
-    isScience: false,
-  ),
-  Subject(
-    subId: '5',
-    subName: 'Physics',
-    thumbPath: 'path/to/physics_thumb.png',
-    subLang: 'English',
-    subLessons: ['Mechanics', 'Optics', 'Thermodynamics'],
-    isLitter: false,
-    isScience: true,
-  ),
-  Subject(
-    subId: '6',
-    subName: 'Chemistry',
-    thumbPath: 'path/to/chemistry_thumb.png',
-    subLang: 'English',
-    subLessons: ['Organic', 'Inorganic', 'Physical'],
-    isLitter: false,
-    isScience: true,
-  ),
-];
+List<Subject> getSubjects(BuildContext context) {
+  final l10n = AppLocalizations.of(context)!;
+
+  return [
+    Subject(
+      subId: '1',
+      subName: l10n.subjectMathematics,
+      thumbPath: 'assets/subjects/math_thumb.png',
+      subLang: l10n.langFrench,
+      subLessons: [],
+      isLitter: false,
+      isScience: true,
+    ),
+    Subject(
+      subId: '2',
+      subName: l10n.subjectHistoryGeography,
+      thumbPath: 'assets/subjects/history_geo_thumb.png',
+      subLang: l10n.langFrench,
+      subLessons: [],
+      isLitter: true,
+      isScience: false,
+    ),
+    Subject(
+      subId: '3',
+      subName: l10n.subjectScienceLife,
+      thumbPath: 'assets/subjects/svt_thumb.png',
+      subLang: l10n.langFrench,
+      subLessons: [],
+      isLitter: false,
+      isScience: true,
+    ),
+    Subject(
+      subId: '4',
+      subName: l10n.langArabic,
+      thumbPath: 'assets/subjects/arabic_thumb.png',
+      subLang: l10n.langArabic,
+      subLessons: [],
+      isLitter: true,
+      isScience: false,
+    ),
+    Subject(
+      subId: '5',
+      subName: l10n.subjectPhysics,
+      thumbPath: 'assets/subjects/physics_thumb.png',
+      subLang: l10n.langFrench,
+      subLessons: [],
+      isLitter: false,
+      isScience: true,
+    ),
+    Subject(
+      subId: '6',
+      subName: l10n.subjectChemistry,
+      thumbPath: 'assets/subjects/chemistry_thumb.png',
+      subLang: l10n.langFrench,
+      subLessons: [],
+      isLitter: false,
+      isScience: true,
+    ),
+    Subject(
+      subId: '7',
+      subName: l10n.langEnglish,
+      thumbPath: 'assets/subjects/english_thumb.png',
+      subLang: l10n.langEnglish,
+      subLessons: [],
+      isLitter: true,
+      isScience: false,
+    ),
+    Subject(
+      subId: '8',
+      subName: l10n.langFrench,
+      thumbPath: 'assets/subjects/french_thumb.png',
+      subLang: l10n.langFrench,
+      subLessons: [],
+      isLitter: true,
+      isScience: false,
+    ),
+    Subject(
+      subId: '9',
+      subName: l10n.subjectIslamicEducation,
+      thumbPath: 'assets/subjects/islamic_ed_thumb.png',
+      subLang: l10n.langArabic,
+      subLessons: [],
+      isLitter: true,
+      isScience: false,
+    ),
+    Subject(
+      subId: '10',
+      subName: l10n.subjectPhilosophy,
+      thumbPath: 'assets/subjects/philosophy_thumb.png',
+      subLang: l10n.langFrench,
+      subLessons: [],
+      isLitter: true,
+      isScience: false,
+    ),
+    Subject(
+      subId: '11',
+      subName: l10n.subjectPhysicalEducation,
+      thumbPath: 'assets/subjects/sport_thumb.png',
+      subLang: l10n.langFrench,
+      subLessons: [],
+      isLitter: false,
+      isScience: false,
+    ),
+    Subject(
+      subId: '12',
+      subName: l10n.subjectArts,
+      thumbPath: 'assets/subjects/art_thumb.png',
+      subLang: l10n.langFrench,
+      subLessons: [],
+      isLitter: true,
+      isScience: false,
+    ),
+  ];
+}

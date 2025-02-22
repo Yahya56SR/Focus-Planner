@@ -78,7 +78,7 @@ class _SaturdayPageState extends State<SaturdayPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Monday Timetable',
+          AppLocalizations.of(context)!.saturdayTitle,
         ),
       ),
       body: Column(
@@ -96,7 +96,7 @@ class _SaturdayPageState extends State<SaturdayPage> {
                         SlidableAction(
                           onPressed: (context) => _removeItem(index),
                           icon: Icons.delete_outlined,
-                          label: 'Delete',
+                          label: AppLocalizations.of(context)!.delete,
                           borderRadius: BorderRadius.circular(8),
                           backgroundColor: Theme.of(context).colorScheme.error,
                           autoClose: true,
@@ -107,7 +107,7 @@ class _SaturdayPageState extends State<SaturdayPage> {
                       children: [
                         DropdownButton<String>(
                           value: selectedSubjects[index],
-                          hint: Text('Select a subject'),
+                          hint: Text(AppLocalizations.of(context)!.subjectChoice),
                           items: subjectNames.map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -205,7 +205,7 @@ class _SaturdayPageState extends State<SaturdayPage> {
             child: Row(
               children: [
                 IconButton.filled(
-                  onPressed: () => widget.nextDay('tuesday'),
+                  onPressed: () => widget.nextDay('Saturday'),
                   icon: Icon(
                     Icons.arrow_circle_right_outlined,
                   ),

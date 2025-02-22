@@ -1045,8 +1045,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get en => 'Anglais';
 
   @override
-  String get ar => 'Arabe';
+  String get ar => 'عربي';
 
   @override
   String get fr => 'Français';
+
+  @override
+  String get delete => 'حذف';
 }

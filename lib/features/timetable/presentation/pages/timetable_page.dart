@@ -16,105 +16,75 @@ class TimetablePage extends StatefulWidget {
 }
 
 class _TimetablePageState extends State<TimetablePage> {
-  @override
-  Widget build(BuildContext context) {
-    bool showMondayPage = true;
-    bool showTuesdayPage = false;
-    bool showWednesdayPage = false;
-    bool showThursdayPage = false;
-    bool showFridayPage = false;
-    bool showSaturdayPage = false;
+  String currentPage = 'monday';
 
-    void nextDay(String thisPage) {
-      switch (thisPage) {
+  void nextDay(String thisPage) {
+    setState(() {
+      switch (thisPage.toLowerCase()) {
         case 'monday':
-          showMondayPage = false;
-          showTuesdayPage = true;
-          showWednesdayPage = false;
-          showThursdayPage = false;
-          showFridayPage = false;
-          showSaturdayPage = false;
+          currentPage = 'tuesday';
           break;
         case 'tuesday':
-          showMondayPage = false;
-          showTuesdayPage = true;
-          showWednesdayPage = false;
-          showThursdayPage = false;
-          showFridayPage = false;
-          showSaturdayPage = false;
+          currentPage = 'wednesday';
           break;
         case 'wednesday':
-          showMondayPage = false;
-          showTuesdayPage = true;
-          showWednesdayPage = false;
-          showThursdayPage = false;
-          showFridayPage = false;
-          showSaturdayPage = false;
+          currentPage = 'thursday';
           break;
         case 'thursday':
-          showMondayPage = false;
-          showTuesdayPage = true;
-          showWednesdayPage = false;
-          showThursdayPage = false;
-          showFridayPage = false;
-          showSaturdayPage = false;
+          currentPage = 'friday';
           break;
         case 'friday':
-          showMondayPage = false;
-          showTuesdayPage = true;
-          showWednesdayPage = false;
-          showThursdayPage = false;
-          showFridayPage = false;
-          showSaturdayPage = false;
+          currentPage = 'saturday';
           break;
         case 'saturday':
           Navigator.pop(context);
           break;
         default:
-          throw Error();
+          throw ErrorSummary('Unknown day: $thisPage');
       }
-    }
+    });
+  }
 
-    if (showSaturdayPage == true) {
-      return SaturdayPage(
-        setLocale: widget.setLocale,
-        nextDay: nextDay,
-        currentLocale: widget.currentLocale,
-      );
-    } else if (showFridayPage == true) {
-      return FridayPage(
-        setLocale: widget.setLocale,
-        nextDay: nextDay,
-        currentLocale: widget.currentLocale,
-      );
-    } else if (showThursdayPage == true) {
-      return ThursdayPage(
-        setLocale: widget.setLocale,
-        nextDay: nextDay,
-        currentLocale: widget.currentLocale,
-      );
-    } else if (showWednesdayPage == true) {
-      return WednesdayPage(
-        setLocale: widget.setLocale,
-        nextDay: nextDay,
-        currentLocale: widget.currentLocale,
-      );
-    } else if (showTuesdayPage == true) {
-      return TuesdayPage(
-        setLocale: widget.setLocale,
-        nextDay: nextDay,
-        currentLocale: widget.currentLocale,
-      );
-    } else if (showMondayPage == true) {
-      return MondayPage(
-        setLocale: widget.setLocale,
-        nextDay: nextDay,
-        currentLocale: widget.currentLocale,
-      );
-    } else {
-      return ScaffoldMessenger(
-        child: Text('Unknown Error'),
-      );
+  @override
+  Widget build(BuildContext context) {
+    switch (currentPage.toLowerCase()) {
+      case 'saturday':
+        return SaturdayPage(
+          setLocale: widget.setLocale,
+          nextDay: nextDay,
+          currentLocale: widget.currentLocale,
+        );
+      case 'friday':
+        return FridayPage(
+          setLocale: widget.setLocale,
+          nextDay: nextDay,
+          currentLocale: widget.currentLocale,
+        );
+      case 'thursday':
+        return ThursdayPage(
+          setLocale: widget.setLocale,
+          nextDay: nextDay,
+          currentLocale: widget.currentLocale,
+        );
+      case 'wednesday':
+        return WednesdayPage(
+          setLocale: widget.setLocale,
+          nextDay: nextDay,
+          currentLocale: widget.currentLocale,
+        );
+      case 'tuesday':
+        return TuesdayPage(
+          setLocale: widget.setLocale,
+          nextDay: nextDay,
+          currentLocale: widget.currentLocale,
+        );
+      case 'monday':
+      default:
+        return MondayPage(
+          setLocale: widget.setLocale,
+          nextDay: nextDay,
+          currentLocale: widget.currentLocale,
+        );
     }
   }
 }

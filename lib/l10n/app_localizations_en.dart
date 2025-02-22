@@ -1045,8 +1045,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get en => 'English';
 
   @override
-  String get ar => 'Arabic';
+  String get ar => 'عربي';
 
   @override
   String get fr => 'French';
+
+  @override
+  String get delete => 'delete';
 }

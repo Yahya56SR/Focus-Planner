@@ -78,7 +78,7 @@ class _TuesdayPageState extends State<TuesdayPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Tuesday Timetable',
+          AppLocalizations.of(context)!.tuesdayTitle,
         ),
       ),
       body: Column(
@@ -96,7 +96,7 @@ class _TuesdayPageState extends State<TuesdayPage> {
                         SlidableAction(
                           onPressed: (context) => _removeItem(index),
                           icon: Icons.delete_outlined,
-                          label: 'Delete',
+                          label: AppLocalizations.of(context)!.delete,
                           borderRadius: BorderRadius.circular(8),
                           backgroundColor: Theme.of(context).colorScheme.error,
                           autoClose: true,
@@ -107,7 +107,7 @@ class _TuesdayPageState extends State<TuesdayPage> {
                       children: [
                         DropdownButton<String>(
                           value: selectedSubjects[index],
-                          hint: Text('Select a subject'),
+                          hint: Text(AppLocalizations.of(context)!.subjectChoice),
                           items: subjectNames.map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -205,17 +205,17 @@ class _TuesdayPageState extends State<TuesdayPage> {
             child: Row(
               children: [
                 IconButton.filled(
-                  onPressed: () => widget.nextDay('monday'),
+                  onPressed: _addItem,
                   icon: Icon(
-                    Icons.arrow_circle_right_outlined,
+                    Icons.add,
                   ),
                   iconSize: 75,
                 ),
                 Spacer(),
                 IconButton.filled(
-                  onPressed: _addItem,
+                  onPressed: () => widget.nextDay('Tuesday'),
                   icon: Icon(
-                    Icons.add,
+                    Icons.arrow_circle_right_outlined,
                   ),
                   iconSize: 75,
                 ),

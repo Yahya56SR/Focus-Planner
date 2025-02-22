@@ -2176,7 +2176,7 @@ abstract class AppLocalizations {
   /// No description provided for @ar.
   ///
   /// In en, this message translates to:
-  /// **'Arabic'**
+  /// **'عربي'**
   String get ar;
 
   /// No description provided for @fr.
@@ -2184,6 +2184,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'French'**
   String get fr;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'delete'**
+  String get delete;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
