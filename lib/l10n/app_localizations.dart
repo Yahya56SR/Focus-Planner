@@ -2190,6 +2190,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'delete'**
   String get delete;
+
+  /// No description provided for @mathematics.
+  ///
+  /// In en, this message translates to:
+  /// **'Mathematics'**
+  String get mathematics;
+
+  /// No description provided for @physics.
+  ///
+  /// In en, this message translates to:
+  /// **'Physics'**
+  String get physics;
+
+  /// No description provided for @chemistry.
+  ///
+  /// In en, this message translates to:
+  /// **'Chemistry'**
+  String get chemistry;
+
+  /// No description provided for @biology.
+  ///
+  /// In en, this message translates to:
+  /// **'Biology'**
+  String get biology;
+
+  /// No description provided for @computerScience.
+  ///
+  /// In en, this message translates to:
+  /// **'Computer Science'**
+  String get computerScience;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic Language'**
+  String get arabic;
+
+  /// No description provided for @french.
+  ///
+  /// In en, this message translates to:
+  /// **'French'**
+  String get french;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @historyGeography.
+  ///
+  /// In en, this message translates to:
+  /// **'History & Geography'**
+  String get historyGeography;
+
+  /// No description provided for @islamicEducation.
+  ///
+  /// In en, this message translates to:
+  /// **'Islamic Education'**
+  String get islamicEducation;
+
+  /// No description provided for @philosophy.
+  ///
+  /// In en, this message translates to:
+  /// **'Philosophy'**
+  String get philosophy;
+
+  /// No description provided for @economics.
+  ///
+  /// In en, this message translates to:
+  /// **'Economics'**
+  String get economics;
+
+  /// No description provided for @physicalEducation.
+  ///
+  /// In en, this message translates to:
+  /// **'Physical Education'**
+  String get physicalEducation;
+
+  /// No description provided for @arts.
+  ///
+  /// In en, this message translates to:
+  /// **'Arts'**
+  String get arts;
+
+  /// No description provided for @scienceLife.
+  ///
+  /// In en, this message translates to:
+  /// **'Life and Earth Sciences'**
+  String get scienceLife;
+
+  /// No description provided for @scientificSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Scientific Subjects'**
+  String get scientificSubjects;
+
+  /// No description provided for @literarySubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Literary Subjects'**
+  String get literarySubjects;
+
+  /// No description provided for @languageSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Subjects'**
+  String get languageSubjects;
+
+  /// No description provided for @socialSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Social Studies'**
+  String get socialSubjects;
+
+  /// No description provided for @otherSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Other Subjects'**
+  String get otherSubjects;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

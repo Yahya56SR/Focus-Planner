@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
 
 // Define color constants
-const Color primaryBlue = Color(0xFF2196F3);    // Primary Blue
-const Color blue700 = Color(0xFF1976D2);        // Blue 700
-const Color blue400 = Color(0xFF42A5F5);        // Blue 400
-const Color blue200 = Color(0xFF90CAF9);        // Blue 200
-const Color blue50 = Color(0xFFE3F2FD);         // Blue 50
-const Color grey900 = Color(0xFF212121);        // Grey 900
-const Color grey700 = Color(0xFF616161);        // Grey 700
-const Color grey400 = Color(0xFFBDBDBD);        // Grey 400
-const Color grey200 = Color(0xFFEEEEEE);        // Grey 200
-const Color grey50 = Color(0xFFFAFAFA);         // Grey 50
+const Color primaryBlue = Color(0xFF2196F3); // Primary Blue
+const Color blue700 = Color(0xFF1976D2); // Blue 700
+const Color blue400 = Color(0xFF42A5F5); // Blue 400
+const Color blue200 = Color(0xFF90CAF9); // Blue 200
+const Color blue50 = Color(0xFFE3F2FD); // Blue 50
+const Color grey900 = Color(0xFF212121); // Grey 900
+const Color grey700 = Color(0xFF616161); // Grey 700
+const Color grey400 = Color(0xFFBDBDBD); // Grey 400
+const Color grey200 = Color(0xFFEEEEEE); // Grey 200
+const Color grey50 = Color(0xFFFAFAFA); // Grey 50
 
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: grey50,
 
   colorScheme: ColorScheme.light(
-    primary: primaryBlue,
-    secondary: blue700,
-    tertiary: blue400,
-    surface: grey50,
-    background: grey50,
+    primary: const Color(0xFF2196F3),
+    secondary: const Color(0xFF1976D2),
+    surface: const Color(0xFFFAFAFA), // Use this instead of background
+    onSurface: const Color(0xFF212121), // Use this instead of onBackground
     onPrimary: Colors.white,
     onSecondary: Colors.white,
-    onSurface: grey900,
-    onBackground: grey900,
   ),
 
   // Card Theme

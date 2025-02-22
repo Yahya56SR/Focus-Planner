@@ -1052,4 +1052,64 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get delete => 'حذف';
+
+  @override
+  String get mathematics => 'الرياضيات';
+
+  @override
+  String get physics => 'الفيزياء';
+
+  @override
+  String get chemistry => 'الكيمياء';
+
+  @override
+  String get biology => 'علم الأحياء';
+
+  @override
+  String get computerScience => 'علوم الحاسوب';
+
+  @override
+  String get arabic => 'اللغة العربية';
+
+  @override
+  String get french => 'اللغة الفرنسية';
+
+  @override
+  String get english => 'اللغة الإنجليزية';
+
+  @override
+  String get historyGeography => 'التاريخ والجغرافيا';
+
+  @override
+  String get islamicEducation => 'التربية الإسلامية';
+
+  @override
+  String get philosophy => 'الفلسفة';
+
+  @override
+  String get economics => 'العلوم الاقتصادية';
+
+  @override
+  String get physicalEducation => 'التربية البدنية';
+
+  @override
+  String get arts => 'الفنون التشكيلية';
+
+  @override
+  String get scienceLife => 'علوم الحياة والأرض';
+
+  @override
+  String get scientificSubjects => 'المواد العلمية';
+
+  @override
+  String get literarySubjects => 'المواد الأدبية';
+
+  @override
+  String get languageSubjects => 'المواد اللغوية';
+
+  @override
+  String get socialSubjects => 'العلوم الاجتماعية';
+
+  @override
+  String get otherSubjects => 'مواد أخرى';
 }

@@ -37,7 +37,7 @@ class _TimetablePageState extends State<TimetablePage> {
           currentPage = 'saturday';
           break;
         case 'saturday':
-          Navigator.pop(context);
+          Navigator.pop(context, 'Timetable Completed');
           break;
         default:
           throw ErrorSummary('Unknown day: $thisPage');

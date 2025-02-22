@@ -1052,4 +1052,64 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get delete => 'delete';
+
+  @override
+  String get mathematics => 'Mathematics';
+
+  @override
+  String get physics => 'Physics';
+
+  @override
+  String get chemistry => 'Chemistry';
+
+  @override
+  String get biology => 'Biology';
+
+  @override
+  String get computerScience => 'Computer Science';
+
+  @override
+  String get arabic => 'Arabic Language';
+
+  @override
+  String get french => 'French';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get historyGeography => 'History & Geography';
+
+  @override
+  String get islamicEducation => 'Islamic Education';
+
+  @override
+  String get philosophy => 'Philosophy';
+
+  @override
+  String get economics => 'Economics';
+
+  @override
+  String get physicalEducation => 'Physical Education';
+
+  @override
+  String get arts => 'Arts';
+
+  @override
+  String get scienceLife => 'Life and Earth Sciences';
+
+  @override
+  String get scientificSubjects => 'Scientific Subjects';
+
+  @override
+  String get literarySubjects => 'Literary Subjects';
+
+  @override
+  String get languageSubjects => 'Language Subjects';
+
+  @override
+  String get socialSubjects => 'Social Studies';
+
+  @override
+  String get otherSubjects => 'Other Subjects';
 }

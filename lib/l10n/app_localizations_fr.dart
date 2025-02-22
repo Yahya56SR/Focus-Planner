@@ -1052,4 +1052,64 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get delete => 'Supprimer';
+
+  @override
+  String get mathematics => 'Mathématiques';
+
+  @override
+  String get physics => 'Physique';
+
+  @override
+  String get chemistry => 'Chimie';
+
+  @override
+  String get biology => 'Biologie';
+
+  @override
+  String get computerScience => 'Informatique';
+
+  @override
+  String get arabic => 'Langue Arabe';
+
+  @override
+  String get french => 'Français';
+
+  @override
+  String get english => 'Anglais';
+
+  @override
+  String get historyGeography => 'Histoire-Géographie';
+
+  @override
+  String get islamicEducation => 'Éducation Islamique';
+
+  @override
+  String get philosophy => 'Philosophie';
+
+  @override
+  String get economics => 'Sciences Économiques';
+
+  @override
+  String get physicalEducation => 'Éducation Physique';
+
+  @override
+  String get arts => 'Arts Plastiques';
+
+  @override
+  String get scienceLife => 'Sciences de la Vie et de la Terre';
+
+  @override
+  String get scientificSubjects => 'Matières Scientifiques';
+
+  @override
+  String get literarySubjects => 'Matières Littéraires';
+
+  @override
+  String get languageSubjects => 'Matières Linguistiques';
+
+  @override
+  String get socialSubjects => 'Sciences Sociales';
+
+  @override
+  String get otherSubjects => 'Autres Matières';
 }

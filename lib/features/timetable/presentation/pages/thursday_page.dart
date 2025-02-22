@@ -23,13 +23,17 @@ class ThursdayPage extends StatefulWidget {
 class _ThursdayPageState extends State<ThursdayPage> {
   final subjectController = TextEditingController();
   int itemCount = 2;
-  List<String?> selectedSubjects =
-      List<String?>.filled(2, null, growable: true);
-  List<TimeOfDay?> startTimes =
-      List<TimeOfDay?>.filled(2, null, growable: true);
+  List<String?> selectedSubjects = List<String?>.filled(2, null, growable: true);
+  List<TimeOfDay?> startTimes = List<TimeOfDay?>.filled(2, null, growable: true);
   List<TimeOfDay?> endTimes = List<TimeOfDay?>.filled(2, null, growable: true);
-  final List<String> subjectNames =
-      subjects.map((subject) => subject.subName!).toList();
+  late List<String> subjectNames;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final subjectsList = getSubjects(context);
+    subjectNames = subjectsList.map((subject) => subject.subName!).toList();
+  }
 
   @override
   void dispose() {
