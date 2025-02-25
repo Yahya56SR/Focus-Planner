@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
-import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/database/domain/entities/subject.dart';
 import 'package:focus_planner/l10n/app_localizations.dart';
 import 'package:focus_planner/l10n/components/my_lang_changer.dart';

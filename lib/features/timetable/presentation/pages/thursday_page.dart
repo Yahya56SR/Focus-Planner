@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
-import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/database/domain/entities/subject.dart';
 import 'package:focus_planner/l10n/app_localizations.dart';
 import 'package:focus_planner/l10n/components/my_lang_changer.dart';
@@ -209,17 +208,17 @@ class _ThursdayPageState extends State<ThursdayPage> {
             child: Row(
               children: [
                 IconButton.filled(
-                  onPressed: () => widget.nextDay('Thursday'),
+                  onPressed: _addItem,
                   icon: Icon(
-                    Icons.arrow_circle_right_outlined,
+                    Icons.add,
                   ),
                   iconSize: 75,
                 ),
                 Spacer(),
                 IconButton.filled(
-                  onPressed: _addItem,
+                  onPressed: () => widget.nextDay('Thursday'),
                   icon: Icon(
-                    Icons.add,
+                    Icons.arrow_circle_right_outlined,
                   ),
                   iconSize: 75,
                 ),

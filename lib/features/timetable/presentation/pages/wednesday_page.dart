@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
-import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/database/domain/entities/subject.dart';
 import 'package:focus_planner/l10n/app_localizations.dart';
 import 'package:focus_planner/l10n/components/my_lang_changer.dart';
@@ -23,8 +22,10 @@ class WednesdayPage extends StatefulWidget {
 class _WednesdayPageState extends State<WednesdayPage> {
   final subjectController = TextEditingController();
   int itemCount = 2;
-  List<String?> selectedSubjects = List<String?>.filled(2, null, growable: true);
-  List<TimeOfDay?> startTimes = List<TimeOfDay?>.filled(2, null, growable: true);
+  List<String?> selectedSubjects =
+      List<String?>.filled(2, null, growable: true);
+  List<TimeOfDay?> startTimes =
+      List<TimeOfDay?>.filled(2, null, growable: true);
   List<TimeOfDay?> endTimes = List<TimeOfDay?>.filled(2, null, growable: true);
   late List<String> subjectNames;
 
@@ -40,7 +41,7 @@ class _WednesdayPageState extends State<WednesdayPage> {
     subjectController.dispose();
     super.dispose();
   }
-  
+
   void _addItem() {
     setState(() {
       itemCount++;
@@ -111,7 +112,8 @@ class _WednesdayPageState extends State<WednesdayPage> {
                       children: [
                         DropdownButton<String>(
                           value: selectedSubjects[index],
-                          hint: Text(AppLocalizations.of(context)!.subjectChoice),
+                          hint:
+                              Text(AppLocalizations.of(context)!.subjectChoice),
                           items: subjectNames.map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -209,17 +211,17 @@ class _WednesdayPageState extends State<WednesdayPage> {
             child: Row(
               children: [
                 IconButton.filled(
-                  onPressed: () => widget.nextDay('Wednesday'),
+                  onPressed: _addItem,
                   icon: Icon(
-                    Icons.arrow_circle_right_outlined,
+                    Icons.add,
                   ),
                   iconSize: 75,
                 ),
                 Spacer(),
                 IconButton.filled(
-                  onPressed: _addItem,
+                  onPressed: () => widget.nextDay('Wednesday'),
                   icon: Icon(
-                    Icons.add,
+                    Icons.arrow_circle_right_outlined,
                   ),
                   iconSize: 75,
                 ),

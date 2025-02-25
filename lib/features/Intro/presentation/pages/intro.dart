@@ -177,7 +177,17 @@ class _IntroPageState extends State<IntroPage> {
                             height: 25,
                           ),
                           GestureDetector(
-                            onTap: () => Navigator.pushNamed(context, '/timetable'),
+                            onTap: () =>
+                                Navigator.pushNamed(context, '/timetable')
+                                    .then((value) {
+                              if (value == 'Timetable Completed') {
+                                _pageController.animateToPage(
+                                  2,
+                                  duration: Duration(milliseconds: 250),
+                                  curve: Curves.easeInOut,
+                                );
+                              }
+                            }),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
@@ -254,7 +264,56 @@ class _IntroPageState extends State<IntroPage> {
                       ),
                     ),
                     Container(
-                      color: Colors.blue,
+                      padding: const EdgeInsets.all(8.0),
+                      color: Theme.of(context).colorScheme.surface,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.task_alt_outlined,
+                            size: 125,
+                          ),
+                          AddSpace(
+                            height: 22,
+                          ),
+                          SizedBox(
+                            width: 300,
+                            child: Text(
+                              AppLocalizations.of(context)!.toDoTitle,
+                              style: Theme.of(context).textTheme.displayLarge,
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                          AddSpace(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            width: 300,
+                            child: Text(
+                              AppLocalizations.of(context)!.toDoSubtitle,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                              textAlign: TextAlign.right,
+                            ),
+                          ),
+                          AddSpace(
+                            height: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  borderRadius: BorderRadius.circular(22.0)),
+                              child: Icon(
+                                Icons.arrow_circle_right_outlined,
+                                size: 125,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
