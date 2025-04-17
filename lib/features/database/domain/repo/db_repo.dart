@@ -1,0 +1,41 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
+import 'package:focus_planner/features/database/domain/entities/connected_devices.dart';
+import 'package:focus_planner/features/database/domain/entities/exercice.dart';
+import 'package:focus_planner/features/database/domain/entities/holiday.dart';
+import 'package:focus_planner/features/database/domain/entities/school_level.dart';
+import 'package:focus_planner/features/database/domain/entities/task.dart';
+import 'package:focus_planner/features/database/domain/entities/timetable.dart';
+
+abstract class DbRepo {
+  Future<void> createUserData(AppUser? user);
+  Stream<QuerySnapshot> readUserData(String? uid);
+  Future<AppUser> updateUserData(AppUser? user);
+  Future<AppUser> deleteUserData(AppUser? user);
+  Future<AppUser> getCurrentUserDoc(String? uid);
+  Future<void> createTimetableData(Timetable? data, AppUser currentUser);
+  Stream<QuerySnapshot> readTimetableData();
+  Future<Timetable> updateTimetableData(String? docId);
+  Future<Timetable> deleteTimetableData(String? docId);
+  Future<void> createTaskData(Map<String, dynamic>? data, String docId);
+  Stream<QuerySnapshot> readTaskData();
+  Future<Task> updateTaskData(String? docId);
+  Future<Task> deleteTaskData(String? docId);
+  Future<void> createHolidayData(String? data);
+  Stream<QuerySnapshot> readHolidayData();
+  Future<Holiday> updateHolidayData(String? docId);
+  Future<Holiday> deleteHolidayData(String? docId);
+  Future<void> createExerciseData(String? data);
+  Stream<QuerySnapshot> readExerciseData();
+  Future<Exercice> updateExerciseData(String? docId);
+  Future<Exercice> deleteExerciseData(String? docId);
+  Future<void> createConnectedDevicesData(String? data);
+  Stream<QuerySnapshot> readConnectedDevicesData();
+  Future<ConnectedDevices> updateConnectedDevicesData(String? docId);
+  Future<ConnectedDevices> deleteConnectedDevicesData(String? docId);
+  Future<void> createSchoolLevelData(String? data);
+  Stream<QuerySnapshot> readSchoolLevelData();
+  Future<SchoolLevel> updateSchoolLevelData(String? docId);
+  Future<SchoolLevel> deleteSchoolLevelData(String? docId);
+  Stream<QuerySnapshot> readChallengeData();
+}
