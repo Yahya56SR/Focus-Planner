@@ -58,7 +58,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectionCreateAccount => 'أو، إذا لم يكن لديك حساب؛';
 
   @override
-  String get createAccount => 'إنشاء حساب';
+  String get createAccount => ' إنشاء حساب';
 
   @override
   String get forgotPassword => 'هل نسيت كلمة المرور؟';
@@ -91,7 +91,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hello => 'مرحبًا';
 
   @override
-  String get helloMessage => 'مرحبًا، لقد أنشأت (أو سجلت الدخول) حسابك، والآن؛ دعنا نبدأ';
+  String get helloMessage => 'مرحبًا';
+
+  @override
+  String get helloMessageComplete => '، لقد أنشأت (أو سجلت الدخول) حسابك، والآن؛ دعنا نبدأ';
 
   @override
   String get timetableIntroTitle => 'أدخل جدولك الزمني';
@@ -1039,14 +1042,86 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pwConfirm => 'تأكيد كلمة المرور';
 
   @override
-  String get register => 'تسجيل';
+  String get register => ' تسجيل';
 
   @override
   String get en => 'Anglais';
 
   @override
-  String get ar => 'Arabe';
+  String get ar => 'عربي';
 
   @override
   String get fr => 'Français';
+
+  @override
+  String get delete => 'حذف';
+
+  @override
+  String get mathematics => 'الرياضيات';
+
+  @override
+  String get physics => 'الفيزياء';
+
+  @override
+  String get chemistry => 'الكيمياء';
+
+  @override
+  String get biology => 'علم الأحياء';
+
+  @override
+  String get computerScience => 'علوم الحاسوب';
+
+  @override
+  String get arabic => 'اللغة العربية';
+
+  @override
+  String get french => 'اللغة الفرنسية';
+
+  @override
+  String get english => 'اللغة الإنجليزية';
+
+  @override
+  String get historyGeography => 'التاريخ والجغرافيا';
+
+  @override
+  String get islamicEducation => 'التربية الإسلامية';
+
+  @override
+  String get philosophy => 'الفلسفة';
+
+  @override
+  String get economics => 'العلوم الاقتصادية';
+
+  @override
+  String get physicalEducation => 'التربية البدنية';
+
+  @override
+  String get arts => 'الفنون التشكيلية';
+
+  @override
+  String get scienceLife => 'علوم الحياة والأرض';
+
+  @override
+  String get scientificSubjects => 'المواد العلمية';
+
+  @override
+  String get literarySubjects => 'المواد الأدبية';
+
+  @override
+  String get languageSubjects => 'المواد اللغوية';
+
+  @override
+  String get socialSubjects => 'العلوم الاجتماعية';
+
+  @override
+  String get otherSubjects => 'مواد أخرى';
+
+  @override
+  String get timetableImportSuccess => 'تم استيراد جدولك الزمني بنجاح';
+
+  @override
+  String get timetableImportEmpty => 'ملف Excel الخاص بك فارغ أو غير صالح';
+
+  @override
+  String get timetableImportError => 'حدث خطأ غير متوقع أثناء استيراد الملف، يرجى المحاولة مرة أخرى';
 }

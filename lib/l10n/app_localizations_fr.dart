@@ -58,7 +58,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get selectionCreateAccount => 'Ou, si vous n\'avez pas de compte ;';
 
   @override
-  String get createAccount => 'Créer un compte';
+  String get createAccount => ' Créer un compte';
 
   @override
   String get forgotPassword => 'Mot de passe oublié ?';
@@ -91,7 +91,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hello => 'Bonjour';
 
   @override
-  String get helloMessage => 'Salut, vous avez créé (ou connecté) votre compte, et maintenant ; prenons la';
+  String get helloMessage => 'Salut';
+
+  @override
+  String get helloMessageComplete => ', vous avez créé (ou connecté) votre compte, et maintenant ; prenons la';
 
   @override
   String get timetableIntroTitle => 'Entrez votre emploi du temps';
@@ -1039,14 +1042,86 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pwConfirm => 'Confirmez le mot de passe';
 
   @override
-  String get register => 'S\'inscrire';
+  String get register => ' S\'inscrire';
 
   @override
   String get en => 'Anglais';
 
   @override
-  String get ar => 'Arabe';
+  String get ar => 'عربي';
 
   @override
   String get fr => 'Français';
+
+  @override
+  String get delete => 'Supprimer';
+
+  @override
+  String get mathematics => 'Mathématiques';
+
+  @override
+  String get physics => 'Physique';
+
+  @override
+  String get chemistry => 'Chimie';
+
+  @override
+  String get biology => 'Biologie';
+
+  @override
+  String get computerScience => 'Informatique';
+
+  @override
+  String get arabic => 'Langue Arabe';
+
+  @override
+  String get french => 'Français';
+
+  @override
+  String get english => 'Anglais';
+
+  @override
+  String get historyGeography => 'Histoire-Géographie';
+
+  @override
+  String get islamicEducation => 'Éducation Islamique';
+
+  @override
+  String get philosophy => 'Philosophie';
+
+  @override
+  String get economics => 'Sciences Économiques';
+
+  @override
+  String get physicalEducation => 'Éducation Physique';
+
+  @override
+  String get arts => 'Arts Plastiques';
+
+  @override
+  String get scienceLife => 'Sciences de la Vie et de la Terre';
+
+  @override
+  String get scientificSubjects => 'Matières Scientifiques';
+
+  @override
+  String get literarySubjects => 'Matières Littéraires';
+
+  @override
+  String get languageSubjects => 'Matières Linguistiques';
+
+  @override
+  String get socialSubjects => 'Sciences Sociales';
+
+  @override
+  String get otherSubjects => 'Autres Matières';
+
+  @override
+  String get timetableImportSuccess => 'Votre emploi du temps a été importé avec succès';
+
+  @override
+  String get timetableImportEmpty => 'Votre fichier Excel est vide ou invalide';
+
+  @override
+  String get timetableImportError => 'Une erreur inattendue s\'est produite lors de l\'importation de votre fichier, veuillez réessayer';
 }

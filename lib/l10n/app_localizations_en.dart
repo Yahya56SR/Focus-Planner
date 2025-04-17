@@ -58,7 +58,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectionCreateAccount => 'Or, if you don\'t have an account;';
 
   @override
-  String get createAccount => 'Create an Account';
+  String get createAccount => ' Create an Account';
 
   @override
   String get forgotPassword => 'Forgot password ?';
@@ -88,10 +88,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get start => 'Start';
 
   @override
-  String get hello => 'Hello';
+  String get hello => 'H E L L O !';
 
   @override
-  String get helloMessage => 'Hi, you\'ve created (or logged in) your account, and now; let\'s take the';
+  String get helloMessage => 'Hi';
+
+  @override
+  String get helloMessageComplete => ', you\'ve created (or logged in) your account, and now; let\'s take the';
 
   @override
   String get timetableIntroTitle => 'Enter Your Timetable';
@@ -109,7 +112,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mondayTitle => 'Monday Timetable';
 
   @override
-  String get subject => 'Subject No°';
+  String get subject => 'Subject No.';
 
   @override
   String get from => 'From';
@@ -1039,14 +1042,86 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pwConfirm => 'Confirm Password';
 
   @override
-  String get register => 'Register';
+  String get register => ' Register';
 
   @override
   String get en => 'English';
 
   @override
-  String get ar => 'Arabic';
+  String get ar => 'عربي';
 
   @override
   String get fr => 'French';
+
+  @override
+  String get delete => 'delete';
+
+  @override
+  String get mathematics => 'Mathematics';
+
+  @override
+  String get physics => 'Physics';
+
+  @override
+  String get chemistry => 'Chemistry';
+
+  @override
+  String get biology => 'Biology';
+
+  @override
+  String get computerScience => 'Computer Science';
+
+  @override
+  String get arabic => 'Arabic Language';
+
+  @override
+  String get french => 'French';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get historyGeography => 'History & Geography';
+
+  @override
+  String get islamicEducation => 'Islamic Education';
+
+  @override
+  String get philosophy => 'Philosophy';
+
+  @override
+  String get economics => 'Economics';
+
+  @override
+  String get physicalEducation => 'Physical Education';
+
+  @override
+  String get arts => 'Arts';
+
+  @override
+  String get scienceLife => 'Life and Earth Sciences';
+
+  @override
+  String get scientificSubjects => 'Scientific Subjects';
+
+  @override
+  String get literarySubjects => 'Literary Subjects';
+
+  @override
+  String get languageSubjects => 'Language Subjects';
+
+  @override
+  String get socialSubjects => 'Social Studies';
+
+  @override
+  String get otherSubjects => 'Other Subjects';
+
+  @override
+  String get timetableImportSuccess => 'Your Timetable was imported successfully';
+
+  @override
+  String get timetableImportEmpty => 'Your Excel File is Empty or Invalid';
+
+  @override
+  String get timetableImportError => 'An uncaught Error was occured while importing your file, Please try again';
 }

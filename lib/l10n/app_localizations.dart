@@ -202,7 +202,7 @@ abstract class AppLocalizations {
   /// No description provided for @createAccount.
   ///
   /// In en, this message translates to:
-  /// **'Create an Account'**
+  /// **' Create an Account'**
   String get createAccount;
 
   /// No description provided for @forgotPassword.
@@ -262,14 +262,20 @@ abstract class AppLocalizations {
   /// No description provided for @hello.
   ///
   /// In en, this message translates to:
-  /// **'Hello'**
+  /// **'H E L L O !'**
   String get hello;
 
   /// No description provided for @helloMessage.
   ///
   /// In en, this message translates to:
-  /// **'Hi, you\'ve created (or logged in) your account, and now; let\'s take the'**
+  /// **'Hi'**
   String get helloMessage;
+
+  /// No description provided for @helloMessageComplete.
+  ///
+  /// In en, this message translates to:
+  /// **', you\'ve created (or logged in) your account, and now; let\'s take the'**
+  String get helloMessageComplete;
 
   /// No description provided for @timetableIntroTitle.
   ///
@@ -304,7 +310,7 @@ abstract class AppLocalizations {
   /// No description provided for @subject.
   ///
   /// In en, this message translates to:
-  /// **'Subject No°'**
+  /// **'Subject No.'**
   String get subject;
 
   /// No description provided for @from.
@@ -2164,7 +2170,7 @@ abstract class AppLocalizations {
   /// No description provided for @register.
   ///
   /// In en, this message translates to:
-  /// **'Register'**
+  /// **' Register'**
   String get register;
 
   /// No description provided for @en.
@@ -2176,7 +2182,7 @@ abstract class AppLocalizations {
   /// No description provided for @ar.
   ///
   /// In en, this message translates to:
-  /// **'Arabic'**
+  /// **'عربي'**
   String get ar;
 
   /// No description provided for @fr.
@@ -2184,6 +2190,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'French'**
   String get fr;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'delete'**
+  String get delete;
+
+  /// No description provided for @mathematics.
+  ///
+  /// In en, this message translates to:
+  /// **'Mathematics'**
+  String get mathematics;
+
+  /// No description provided for @physics.
+  ///
+  /// In en, this message translates to:
+  /// **'Physics'**
+  String get physics;
+
+  /// No description provided for @chemistry.
+  ///
+  /// In en, this message translates to:
+  /// **'Chemistry'**
+  String get chemistry;
+
+  /// No description provided for @biology.
+  ///
+  /// In en, this message translates to:
+  /// **'Biology'**
+  String get biology;
+
+  /// No description provided for @computerScience.
+  ///
+  /// In en, this message translates to:
+  /// **'Computer Science'**
+  String get computerScience;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic Language'**
+  String get arabic;
+
+  /// No description provided for @french.
+  ///
+  /// In en, this message translates to:
+  /// **'French'**
+  String get french;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @historyGeography.
+  ///
+  /// In en, this message translates to:
+  /// **'History & Geography'**
+  String get historyGeography;
+
+  /// No description provided for @islamicEducation.
+  ///
+  /// In en, this message translates to:
+  /// **'Islamic Education'**
+  String get islamicEducation;
+
+  /// No description provided for @philosophy.
+  ///
+  /// In en, this message translates to:
+  /// **'Philosophy'**
+  String get philosophy;
+
+  /// No description provided for @economics.
+  ///
+  /// In en, this message translates to:
+  /// **'Economics'**
+  String get economics;
+
+  /// No description provided for @physicalEducation.
+  ///
+  /// In en, this message translates to:
+  /// **'Physical Education'**
+  String get physicalEducation;
+
+  /// No description provided for @arts.
+  ///
+  /// In en, this message translates to:
+  /// **'Arts'**
+  String get arts;
+
+  /// No description provided for @scienceLife.
+  ///
+  /// In en, this message translates to:
+  /// **'Life and Earth Sciences'**
+  String get scienceLife;
+
+  /// No description provided for @scientificSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Scientific Subjects'**
+  String get scientificSubjects;
+
+  /// No description provided for @literarySubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Literary Subjects'**
+  String get literarySubjects;
+
+  /// No description provided for @languageSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Subjects'**
+  String get languageSubjects;
+
+  /// No description provided for @socialSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Social Studies'**
+  String get socialSubjects;
+
+  /// No description provided for @otherSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Other Subjects'**
+  String get otherSubjects;
+
+  /// No description provided for @timetableImportSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Timetable was imported successfully'**
+  String get timetableImportSuccess;
+
+  /// No description provided for @timetableImportEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Excel File is Empty or Invalid'**
+  String get timetableImportEmpty;
+
+  /// No description provided for @timetableImportError.
+  ///
+  /// In en, this message translates to:
+  /// **'An uncaught Error was occured while importing your file, Please try again'**
+  String get timetableImportError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
