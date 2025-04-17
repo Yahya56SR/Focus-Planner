@@ -8,4 +8,5 @@ abstract class AuthRepo {
   Future<AppUser?> getCurrentUser();
   Future<AppUser?> loginWithGoogleCredentials();
   Future<AppUser?> loginWithGithubCredentials();
+  Future<List<Map<String, dynamic>>> fetchKeepNotes();
 }

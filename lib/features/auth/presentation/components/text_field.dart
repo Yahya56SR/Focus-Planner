@@ -4,12 +4,14 @@ class MyTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? hintText;
   final bool obscureText;
+  final TextInputType keyboardType;
 
   const MyTextField({
     super.key,
     required this.hintText,
     required this.obscureText,
     required this.controller,
+    required this.keyboardType,
   });
 
   @override
@@ -24,6 +26,7 @@ class MyTextField extends StatelessWidget {
         focusedBorder: Theme.of(context).inputDecorationTheme.focusedBorder,
       ),
       obscureText: obscureText,
+      keyboardType: TextInputType.emailAddress,
     );
   }
 }

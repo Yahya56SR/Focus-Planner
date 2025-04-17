@@ -5,7 +5,8 @@ import 'package:focus_planner/features/auth/presentation/components/button.dart'
 import 'package:focus_planner/features/auth/presentation/components/spacer.dart';
 import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
-import '../../../../l10n/app_localizations.dart';
+import 'package:focus_planner/l10n/app_localizations.dart';
+import 'package:focus_planner/l10n/components/my_lang_changer.dart';
 import 'package:lottie/lottie.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -55,7 +56,17 @@ class _RegisterPageState extends State<RegisterPage>
         pw.isNotEmpty &&
         confirmPw == pw) {
       // login
-      authCubit.register(name, email, pw);
+      try {
+        authCubit.register(name, email, pw);
+      } on FirebaseAuthException catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              e.toString(),
+            ),
+          ),
+        );
+      }
     } else if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -131,6 +142,23 @@ class _RegisterPageState extends State<RegisterPage>
 
     // register
     authCubit.registerGithub();
+  }
+
+  void fetchKeepNotes() async {
+    final authCubit = context.read<AuthCubit>();
+    try {
+      // ignore: unused_local_variable
+      final notes = await authCubit.fetchKeepNotes();
+      // Display or use the notes as needed
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Fetching Keep Notes Failed: $e',
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -214,6 +242,7 @@ class _RegisterPageState extends State<RegisterPage>
                   controller: usernameController,
                   hintText: AppLocalizations.of(context)!.username,
                   obscureText: false,
+                  keyboardType: TextInputType.name,
                 ),
 
                 AddSpace(
@@ -225,6 +254,7 @@ class _RegisterPageState extends State<RegisterPage>
                   hintText: AppLocalizations.of(context)!.email,
                   obscureText: false,
                   controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
                 ),
 
                 AddSpace(height: 10),
@@ -234,6 +264,7 @@ class _RegisterPageState extends State<RegisterPage>
                   hintText: AppLocalizations.of(context)!.password,
                   obscureText: true,
                   controller: pwController,
+                  keyboardType: TextInputType.visiblePassword,
                 ),
 
                 AddSpace(height: 10),
@@ -243,11 +274,12 @@ class _RegisterPageState extends State<RegisterPage>
                   hintText: AppLocalizations.of(context)!.pwConfirm,
                   obscureText: true,
                   controller: confirmPwController,
+                  keyboardType: TextInputType.visiblePassword,
                 ),
 
                 AddSpace(height: 20),
 
-                // login button
+                // register button
                 MyButton(
                   onTap: register,
                   text: AppLocalizations.of(context)!.register,
@@ -294,24 +326,6 @@ class _RegisterPageState extends State<RegisterPage>
                       width: 25,
                     ),
                     InkWell(
-                      onTap: () {},
-                      child: Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Image.asset(
-                          'images/apple_logo.png',
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          scale: 2,
-                        ),
-                      ),
-                    ),
-                    AddSpace(
-                      width: 25,
-                    ),
-                    InkWell(
                       onTap: registerGithub,
                       child: Container(
                         padding: EdgeInsets.all(12),
@@ -332,66 +346,9 @@ class _RegisterPageState extends State<RegisterPage>
                 const Spacer(),
 
                 // lang changer
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () => widget.setLocale!(Locale('en')),
-                        child: Text(
-                          'English',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                fontWeight: widget.currentLocale == Locale('en')
-                                    ? FontWeight.bold
-                                    : null,
-                              ),
-                        ),
-                      ),
-                      AddSpace(width: 5),
-                      Icon(
-                        Icons.radio_button_checked_sharp,
-                        size: 20,
-                      ),
-                      AddSpace(width: 5),
-                      GestureDetector(
-                        onTap: () => widget.setLocale!(Locale('ar')),
-                        child: Text('عربي',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  fontWeight:
-                                      widget.currentLocale == Locale('ar')
-                                          ? FontWeight.bold
-                                          : null,
-                                )),
-                      ),
-                      AddSpace(width: 5),
-                      Icon(
-                        Icons.radio_button_checked_sharp,
-                        size: 20,
-                      ),
-                      AddSpace(width: 5),
-                      GestureDetector(
-                        onTap: () => widget.setLocale!(Locale('fr')),
-                        child: Text('Français',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  fontWeight:
-                                      widget.currentLocale == Locale('fr')
-                                          ? FontWeight.bold
-                                          : null,
-                                )),
-                      ),
-                    ],
-                  ),
-                )
+                MyLangChanger(
+                    setLocale: widget.setLocale,
+                    currentLocale: widget.currentLocale),
               ],
             ),
           ),

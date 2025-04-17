@@ -7,9 +7,9 @@ class AuthPage extends StatefulWidget {
   final Locale? currentLocale;
 
   const AuthPage({
-    super.key, 
-    this.setLocale,
-    this.currentLocale,
+    super.key,
+    required this.setLocale,
+    required this.currentLocale,
   });
 
   @override

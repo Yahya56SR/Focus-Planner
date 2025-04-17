@@ -8,9 +8,25 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepo authRepo;
   AppUser? _currentUser;
 
-  AuthCubit(this.authRepo) : super(AuthInitial());
+  AuthCubit(this.authRepo) : super(AuthInitial()) {
+    _initializeAuth();
+  }
 
-  //check if user is already athenticated
+  void _initializeAuth() async {
+    emit(AuthLoading());
+    try {
+      final user = await authRepo.getCurrentUser();
+      if (user != null) {
+        emit(Authenticated(user));
+      } else {
+        emit(Unauthenticated());
+      }
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
+  }
+
+  //check if user is already authenticated
   void checkAuth() async {
     final AppUser? user = await authRepo.getCurrentUser();
 
@@ -47,7 +63,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(AuthLoading());
       final user =
-          await authRepo.registerWithEmailPassword(name, email, password);
+          await authRepo.registerWithEmailPassword(email, password, name);
       if (user != null) {
         _currentUser = user;
         emit(Authenticated(user));
@@ -73,7 +89,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  // Register with Patreon credentials
+  // Register with Github credentials
   Future<void> registerGithub() async {
     try {
       emit(AuthLoading());
@@ -83,7 +99,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(Authenticated(user));
       }
     } on FirebaseAuthException catch (e) {
-      emit(AuthError('Authentication Failer $e'));
+      emit(AuthError('Authentication Failed $e'));
     } catch (e) {
       emit(AuthError(e.toString()));
       emit(Unauthenticated());
@@ -94,5 +110,19 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> logout() async {
     await authRepo.logout();
     emit(Unauthenticated());
+  }
+
+  // fetch keep notes
+  Future<List<Map<String, dynamic>>> fetchKeepNotes() async {
+    emit(AuthLoading());
+    try {
+      final notes = await authRepo.fetchKeepNotes();
+      emit(Authenticated(_currentUser!));
+      return notes;
+    } catch (e) {
+      emit(AuthError(e.toString()));
+      emit(Unauthenticated());
+      return [];
+    }
   }
 }

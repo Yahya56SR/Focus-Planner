@@ -34,7 +34,9 @@ class MyButton extends StatelessWidget {
                     ),
               ),
               Icon(
-                currentLocale == Locale('en') || currentLocale == Locale('fr') ? Icons.arrow_circle_right_outlined : Icons.arrow_circle_left_outlined,
+                currentLocale == Locale('en') || currentLocale == Locale('fr')
+                    ? Icons.arrow_circle_left_outlined
+                    : Icons.arrow_circle_right_outlined,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
             ],

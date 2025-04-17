@@ -1,13 +1,16 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
 import 'package:focus_planner/features/auth/domain/repos/auth_repo.dart';
+import 'package:focus_planner/features/database/data/firestore_db_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 
 class FirebaseAuthRepo implements AuthRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
-  
+  final FirestoreDbRepo firestoreDbRepo = FirestoreDbRepo();
 
   @override
   Future<AppUser?> loginWithEmailPassword(String email, String password) async {
@@ -18,11 +21,26 @@ class FirebaseAuthRepo implements AuthRepo {
         password: password,
       );
 
-      return AppUser(
+      final existingUserStream = firestoreDbRepo.readUserData(userCredential.user!.uid);
+      final existingUserSnapshot = await existingUserStream.first;
+
+      if (existingUserSnapshot.docs.isNotEmpty) {
+        final userData = existingUserSnapshot.docs.first.data() as Map<String, dynamic>;
+        return AppUser(
+          uid: userData['uid'],
+          email: userData['email'],
+          name: userData['name'],
+        );
+      }
+
+      AppUser user = AppUser(
         uid: userCredential.user!.uid,
         email: email,
-        name: '',
+        name: userCredential.user!.displayName ?? '',
       );
+
+      return user;
+      
     } catch (e) {
       throw Exception('Login failed: $e');
     }
@@ -38,12 +56,17 @@ class FirebaseAuthRepo implements AuthRepo {
         password: password,
       );
 
-      return AppUser(
+      AppUser user = AppUser(
         uid: userCredential.user!.uid,
         email: email,
         name: name,
       );
+
+      await firestoreDbRepo.createUserData(user);
+
+      return user;
     } catch (e) {
+      print('Registration failed: $e');
       throw Exception('Registration failed: $e');
     }
   }
@@ -70,7 +93,14 @@ class FirebaseAuthRepo implements AuthRepo {
   @override
   Future<AppUser?> loginWithGoogleCredentials() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAccount? googleUser = await GoogleSignIn(
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/userinfo.email',
+          'openid',
+          'https://www.googleapis.com/auth/userinfo.profile',
+        ],
+      ).signIn();
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
 
@@ -82,30 +112,76 @@ class FirebaseAuthRepo implements AuthRepo {
       final UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
 
-      return AppUser(
+      AppUser user = AppUser(
         uid: userCredential.user!.uid,
         email: userCredential.user!.email!,
         name: userCredential.user!.displayName!,
       );
+
+      await firestoreDbRepo.createUserData(user);
+
+      return user;
     } catch (e) {
       throw Exception('Failed to register using Google: $e');
     }
   }
+
   @override
   Future<AppUser?> loginWithGithubCredentials() async {
-    // Define GitHub's OAuth credentials
     final githubProvider = GithubAuthProvider();
 
     try {
-      // Trigger the sign-in flow
-      UserCredential userCredential = await firebaseAuth.signInWithProvider(githubProvider);
-      
-      // Get the signed-in user
-      User? user = userCredential.user;
-      return AppUser(uid: user!.uid, email: user.email!, name: user.displayName!);
+      UserCredential userCredential =
+          await firebaseAuth.signInWithProvider(githubProvider);
+
+      AppUser user = AppUser(
+        uid: userCredential.user!.uid,
+        email: userCredential.user!.email!,
+        name: userCredential.user!.displayName!,
+      );
+
+      await firestoreDbRepo.createUserData(user);
+
+      return user;
     } catch (e) {
       throw Exception("GitHub sign-in failed: $e");
     }
   }
-  
+
+  @override
+  Future<List<Map<String, dynamic>>> fetchKeepNotes() async {
+    final currentUser = firebaseAuth.currentUser;
+    if (currentUser == null) {
+      throw Exception('User not authenticated');
+    }
+
+    final googleUser = await GoogleSignIn().signIn();
+    final authHeaders = await googleUser!.authHeaders;
+
+    final response = await http.get(
+      Uri.parse('https://keep.googleapis.com/v1/notes'),
+      headers: authHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> notes = json.decode(response.body)['notes'];
+      return notes.map((note) {
+        final createdTime = note['createdTime'] ?? '';
+        final datePart = createdTime.split('T')[0];
+        final timePart = createdTime.split('T')[1]?.split('Z')[0] ?? '';
+        final timeOfDay = TimeOfDay(
+          hour: int.parse(timePart.split(':')[0]),
+          minute: int.parse(timePart.split(':')[1]),
+        );
+
+        return {
+          'taskTitle': note['title'] ?? '',
+          'progDate': datePart,
+          'progTime': timeOfDay,
+        };
+      }).toList();
+    } else {
+      throw Exception('Failed to load notes');
+    }
+  }
 }
