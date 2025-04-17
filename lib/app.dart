@@ -14,17 +14,17 @@ import 'package:focus_planner/features/database/presentation/pages/timetables/ti
 import 'package:focus_planner/themes/ligth_mode.dart';
 import 'l10n/app_localizations.dart';
 
-class MyApp extends StatefulWidget {
+class FocusPlannerApp extends StatefulWidget {
   final AuthRepo authRepo = FirebaseAuthRepo();
 
-  MyApp({super.key});
+  FocusPlannerApp({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _MyAppState createState() => _MyAppState();
+  _FocusPlannerAppState createState() => _FocusPlannerAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _FocusPlannerAppState extends State<FocusPlannerApp> {
   AppUser? user;
   Locale _locale = const Locale('en');
 
@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<DbCubit>(
           create: (context) => DbCubit(FirestoreDbRepo()),
-        ),        
+        ),
       ],
       child: MaterialApp(
         locale: _locale,
