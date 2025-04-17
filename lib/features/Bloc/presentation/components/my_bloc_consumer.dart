@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:focus_planner/features/Intro/presentation/pages/intro.dart';
 import 'package:focus_planner/features/auth/data/firebase_auth_repo.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_states.dart';
+import 'package:focus_planner/features/auth/presentation/pages/auth_page.dart';
 import 'package:focus_planner/features/database/data/firestore_db_repo.dart';
 import 'package:focus_planner/features/database/presentation/cubits/db_cubit.dart';
 import 'package:focus_planner/features/database/presentation/cubits/db_states.dart';
 
 class MyBlocConsumer extends StatelessWidget {
-  const MyBlocConsumer({super.key});
+  final Locale? currentLocale;
+  final void Function(Locale)? setLocale;
+  const MyBlocConsumer({
+    super.key,
+    this.currentLocale,
+    this.setLocale,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +32,7 @@ class MyBlocConsumer extends StatelessWidget {
       child: MultiBlocListener(
         listeners: [
           BlocListener<AuthCubit, AuthState>(
-            listener: (context, state) {
-              if (state is AuthError) {
-                // Show an error message
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error: ${state.message}')),
-                );
-              } else if (state is Authenticated) {
-                // Display information about the authenticated user
-                Navigator.of(context).pushNamed('/intro',
-                    arguments: BlocProvider.of<DbCubit>(context));
-              } else if (state is Unauthenticated) {
-                Navigator.of(context).pushNamed('/auth',
-                    arguments: BlocProvider.of<DbCubit>(context));
-              }
-            },
+            listener: (context, state) {},
           ),
           BlocListener<DbCubit, DbStates>(
             listener: (context, state) {
@@ -137,15 +131,40 @@ class MyBlocConsumer extends StatelessWidget {
                   child: Text('Initializing authentication...'),
                 ),
               );
-            } else {
-              // Default UI for unknown state
-              print(state);
+            } else if (state is AuthError) {
+              // Show an error message
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Error: ${state.message}')),
+              );
+            } else if (state is Authenticated) {
+              // Navigate to the home page
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => IntroPage(
+                    setLocale: setLocale,
+                    currentLocale: currentLocale,
+                  ),
+                ),
+              );
+            } else if (state is Unauthenticated) {
+              // Navigate to the login page
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AuthPage(
+                    setLocale: setLocale,
+                    currentLocale: currentLocale,
+                  ),
+                ),
+              );
+            } 
+            print(state);
               return const Scaffold(
                 body: Center(
                   child: Text('Please wait...'),
                 ),
               );
-            }
           },
         ),
       ),

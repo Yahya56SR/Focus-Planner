@@ -64,7 +64,7 @@ class _FocusPlannerAppState extends State<FocusPlannerApp> {
         routes: {
           '/': (context) => MyBlocConsumer(),
           '/auth': (context) =>
-              AuthPage(setLocale: setLocale, currentLocale: _locale),
+              AuthPage(setLocale: setLocale, currentLocale: _locale,),
           '/intro': (context) => IntroPage(
                 currentLocale: _locale,
                 setLocale: setLocale,

@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "1023060754466",
-    "project_id": "nexordev-focus-planner",
-    "storage_bucket": "nexordev-focus-planner.firebasestorage.app"
+    "project_number": "217096367032",
+    "firebase_url": "https://focus-planer-default-rtdb.firebaseio.com",
+    "project_id": "focus-planer",
+    "storage_bucket": "focus-planer.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1023060754466:android:5487f997a91d9dc25c4a7b",
+        "mobilesdk_app_id": "1:217096367032:android:00e7090b0a9974f2fb7d4d",
         "android_client_info": {
           "package_name": "com.nexordev.focusplanner"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "217096367032-a2tqtli7mmeqvkg51mlg3ugs09kdvtbq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCxQ1j1zE1kplA8tgmlffrWr0ATPrHgcEA"
+          "current_key": "AIzaSyCOQ6DkjhMbmeyVZ0guT-p7Usj9fA0HF8o"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217096367032-a2tqtli7mmeqvkg51mlg3ugs09kdvtbq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "217096367032-12tm59201foopsqvdrsbpbb7khu1d5dd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nexordev.myapp"
+              }
+            }
+          ]
         }
       }
     }
