@@ -2,7 +2,10 @@ import 'package:excel/excel.dart';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
+import 'package:focus_planner/features/database/data/firestore_db_repo.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart'; // Import for kIsWeb
 import 'package:flutter_bloc/flutter_bloc.dart'; // Import flutter_bloc if not already imported
@@ -11,15 +14,27 @@ import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart'
 Future<void> extractAndSaveTimetable(BuildContext context) async {
   try {
     final authCubit = context.read<AuthCubit>();
-    final currentUser = authCubit.currentUser;
+    final currentUser = FirebaseAuth.instance.currentUser;
+    FirestoreDbRepo dbRepo = FirestoreDbRepo();
+    AppUser? userDoc;
+    if (currentUser != null) {
+      final userId = currentUser.uid;
+      try {
+        userDoc = await dbRepo.getCurrentUserDoc(userId);
+        print("User document exists: ${userDoc.toJson()}"); // Assuming toJson() is the correct method
+      } catch (error) {
+        print("Error fetching user: $error");
+      }
+    } else {
+      print("No user is currently logged in.");
+    }
 
-    if (currentUser == null || currentUser.name.isEmpty) {
-      print("Error: No authenticated user or username is missing.");
-      // Handle the case where there's no user or username (e.g., show an error message)
+    if (currentUser == null || userDoc == null) {
+      debugPrint("Error: No authenticated user or user document found.");
       return;
     }
 
-    final username = currentUser.name;
+    final username = userDoc.name;
 
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -62,16 +77,35 @@ Future<void> _processExcelData(Uint8List bytes, String username) async {
 
     for (int row = 1; row < sheet.maxRows; row++) {
       try {
-        String subject = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: row)).value.toString();
-        String dayString = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: row)).value.toString();
-        String startTimeString = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: row)).value.toString();
-        String endTimeString = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: row)).value.toString();
-        String classRoom = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: row)).value.toString();
-        String teacher = sheet.cell(CellIndex.indexByColumnRow(columnIndex: 5, rowIndex: row)).value.toString();
+        String subject = sheet
+            .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: row))
+            .value
+            .toString();
+        String dayString = sheet
+            .cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: row))
+            .value
+            .toString();
+        String startTimeString = sheet
+            .cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: row))
+            .value
+            .toString();
+        String endTimeString = sheet
+            .cell(CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: row))
+            .value
+            .toString();
+        String classRoom = sheet
+            .cell(CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: row))
+            .value
+            .toString();
+        String teacher = sheet
+            .cell(CellIndex.indexByColumnRow(columnIndex: 5, rowIndex: row))
+            .value
+            .toString();
 
         String dayOfWeek = _parseDayToString(dayString);
-        String? startTime = _formatTime(startTimeString); // Format time as HH:mm a
-        String? endTime = _formatTime(endTimeString);     // Format time as HH:mm a
+        String? startTime =
+            _formatTime(startTimeString); // Format time as HH:mm a
+        String? endTime = _formatTime(endTimeString); // Format time as HH:mm a
 
         // Skip if time parsing/formatting failed
         if (startTime == null || endTime == null) {
@@ -83,7 +117,7 @@ Future<void> _processExcelData(Uint8List bytes, String username) async {
           'subject': subject,
           'day': dayOfWeek,
           'startTime': startTime, // Save as formatted string
-          'endTime': endTime,     // Save as formatted string
+          'endTime': endTime, // Save as formatted string
           'class': classRoom,
           'teacher': teacher,
         });

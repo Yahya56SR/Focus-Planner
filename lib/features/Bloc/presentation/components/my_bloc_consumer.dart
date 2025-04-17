@@ -138,33 +138,21 @@ class MyBlocConsumer extends StatelessWidget {
               );
             } else if (state is Authenticated) {
               // Navigate to the home page
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => IntroPage(
-                    setLocale: setLocale,
-                    currentLocale: currentLocale,
-                  ),
-                ),
+              return IntroPage(
+                currentLocale: currentLocale,
+                setLocale: setLocale,
               );
             } else if (state is Unauthenticated) {
               // Navigate to the login page
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AuthPage(
-                    setLocale: setLocale,
-                    currentLocale: currentLocale,
-                  ),
-                ),
-              );
-            } 
+              return AuthPage(
+                  setLocale: setLocale, currentLocale: currentLocale);
+            }
             print(state);
-              return const Scaffold(
-                body: Center(
-                  child: Text('Please wait...'),
-                ),
-              );
+            return const Scaffold(
+              body: Center(
+                child: Text('Please wait...'),
+              ),
+            );
           },
         ),
       ),

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class AppUser {
   final String uid;
   final String email;
-  final String name;
+  late final String name;
 
   AppUser({
     required this.uid,

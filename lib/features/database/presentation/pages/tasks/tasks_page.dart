@@ -1,11 +1,14 @@
 import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
 import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:focus_planner/features/database/data/firestore_db_repo.dart';
 import 'package:focus_planner/features/database/presentation/cubits/db_cubit.dart';
+import 'package:focus_planner/features/enum/tag.dart';
 import 'package:intl/intl.dart';
 
 class TasksPage extends StatefulWidget {
@@ -21,28 +24,62 @@ class _TasksPageState extends State<TasksPage> {
   List<String> tasks = ['Task No° ${Random().nextInt(1)}'];
   final FirestoreDbRepo firestoreDbRepo = FirestoreDbRepo();
   List<DateTime?> programmedDates =
-      List<DateTime?>.filled(2, null, growable: true);
+      List<DateTime?>.filled(double.maxFinite.toInt(), null, growable: true);
   List<TimeOfDay?> programmedTimes =
-      List<TimeOfDay?>.filled(2, null, growable: true);
+      List<TimeOfDay?>.filled(double.maxFinite.toInt(), null, growable: true);
 
-  void saveTasks() {
+  void saveTasks() async {
     final dbCubit = context.read<DbCubit>();
     final authCubit = context.read<AuthCubit>();
-    final currentUser = authCubit.currentUser;
+    final currentUser = FirebaseAuth.instance.currentUser;
+    FirestoreDbRepo dbRepo = FirestoreDbRepo();
+    AppUser? userDoc;
 
-    if (currentUser == null || currentUser.name.isEmpty) {
-      print("Error: No authenticated user or username is missing.");
+    if (currentUser != null) {
+      final userId = currentUser.uid;
+      try {
+        userDoc = await dbRepo.getCurrentUserDoc(userId);
+        debugPrint(
+            "User document exists: ${userDoc.toJson()}"); // Assuming toJson() is the correct method
+      } catch (error) {
+        debugPrint("Error fetching user: $error");
+        return;
+      }
+    } else {
+      debugPrint("No user is currently logged in.");
+      return;
+    }
+
+    if (userDoc.name.isEmpty) {
+      debugPrint("Error: User document not found or username is missing.");
       return;
     }
 
     for (var task in tasks) {
       dbCubit.addTaskData(
-        {'task': task}, // Example task data
+        {
+          'thumbnail': "images/task_default.jpg",
+          'taskTitle': task,
+          'programmedDate': programmedDates[tasks.indexOf(task)] != null
+              ? DateFormat('yyyy-MM-dd')
+                  .format(programmedDates[tasks.indexOf(task)]!)
+              : "every day",
+          'programmedTime':
+              programmedTimes[tasks.indexOf(task)]?.format(context) ??
+                  "Not set",
+          'todoBefore': programmedTimes[tasks.indexOf(task)] != null
+              ? programmedTimes[tasks.indexOf(task)]!
+                  .replacing(hour: 23, minute: 59)
+                  .format(context)
+              : "end of day",
+          'tag': Tag.routineTasks,
+          'isFinished': false,
+        },
         currentUser.uid,
       ).catchError((error) {
-        print("Error adding task: $error");
+        debugPrint("Error adding task: $error");
       }).then((_) {
-        print("Task added successfully");
+        debugPrint("Task added successfully");
       });
     }
   }
@@ -70,21 +107,6 @@ class _TasksPageState extends State<TasksPage> {
       _controller.clear();
     });
     Navigator.of(context).pop();
-  }
-
-  Future<void> _pickDate(BuildContext context, int index) async {
-    final datePicked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now().add(Duration(days: 1)),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100, 12, 31),
-    );
-
-    if (datePicked != null) {
-      setState(() {
-        programmedDates[index] = datePicked;
-      });
-    }
   }
 
   Future<void> _pickTime(BuildContext context, int index) async {
@@ -180,15 +202,6 @@ class _TasksPageState extends State<TasksPage> {
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextButton(
-                              onPressed: () => _pickDate(context, index),
-                              child: Text(
-                                programmedDates[index] != null
-                                    ? DateFormat('yyyy-MM-dd')
-                                        .format(programmedDates[index]!)
-                                    : 'Pick a date',
-                              ),
-                            ),
                             TextButton(
                               onPressed: () => _pickTime(context, index),
                               child: Text(
