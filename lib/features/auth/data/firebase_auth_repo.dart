@@ -66,7 +66,7 @@ class FirebaseAuthRepo implements AuthRepo {
 
       return user;
     } catch (e) {
-      print('Registration failed: $e');
+      debugPrint('Registration failed: $e');
       throw Exception('Registration failed: $e');
     }
   }

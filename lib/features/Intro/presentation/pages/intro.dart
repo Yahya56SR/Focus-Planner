@@ -45,10 +45,10 @@ class _IntroPageState extends State<IntroPage> {
         });
       }).catchError((error) {
         // Handle error if needed
-        print("Error fetching user: $error");
+        debugPrint("Error fetching user: $error");
       });
     } else {
-      print("No user is currently logged in.");
+      debugPrint("No user is currently logged in.");
     }
   }
 

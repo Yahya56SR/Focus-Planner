@@ -8,12 +8,9 @@ import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
 import 'package:focus_planner/features/database/data/firestore_db_repo.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart'; // Import for kIsWeb
-import 'package:flutter_bloc/flutter_bloc.dart'; // Import flutter_bloc if not already imported
-import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart'; // Adjust the import path
 
 Future<void> extractAndSaveTimetable(BuildContext context) async {
   try {
-    final authCubit = context.read<AuthCubit>();
     final currentUser = FirebaseAuth.instance.currentUser;
     FirestoreDbRepo dbRepo = FirestoreDbRepo();
     AppUser? userDoc;
@@ -21,12 +18,12 @@ Future<void> extractAndSaveTimetable(BuildContext context) async {
       final userId = currentUser.uid;
       try {
         userDoc = await dbRepo.getCurrentUserDoc(userId);
-        print("User document exists: ${userDoc.toJson()}"); // Assuming toJson() is the correct method
+        debugPrint("User document exists: ${userDoc.toJson()}"); // Assuming toJson() is the correct method
       } catch (error) {
-        print("Error fetching user: $error");
+        debugPrint("Error fetching user: $error");
       }
     } else {
-      print("No user is currently logged in.");
+      debugPrint("No user is currently logged in.");
     }
 
     if (currentUser == null || userDoc == null) {
@@ -48,7 +45,7 @@ Future<void> extractAndSaveTimetable(BuildContext context) async {
         if (fileBytes != null) {
           await _processExcelData(fileBytes, username);
         } else {
-          print("Error: Could not read file bytes on web.");
+          debugPrint("Error: Could not read file bytes on web.");
         }
       } else {
         // Mobile/Desktop platform: use path
@@ -57,14 +54,14 @@ Future<void> extractAndSaveTimetable(BuildContext context) async {
           var bytes = File(filePath).readAsBytesSync();
           await _processExcelData(bytes, username);
         } else {
-          print("Error: Could not get file path on native platform.");
+          debugPrint("Error: Could not get file path on native platform.");
         }
       }
     } else {
-      print("User canceled file picking or no file selected.");
+      debugPrint("User canceled file picking or no file selected.");
     }
   } catch (e) {
-    print("Error: $e");
+    debugPrint("Error: $e");
   }
 }
 
@@ -109,7 +106,7 @@ Future<void> _processExcelData(Uint8List bytes, String username) async {
 
         // Skip if time parsing/formatting failed
         if (startTime == null || endTime == null) {
-          print("Skipping row $row due to time parsing/formatting error.");
+          debugPrint("Skipping row $row due to time parsing/formatting error.");
           continue;
         }
 
@@ -122,7 +119,7 @@ Future<void> _processExcelData(Uint8List bytes, String username) async {
           'teacher': teacher,
         });
       } catch (e) {
-        print("Error processing row $row: $e");
+        debugPrint("Error processing row $row: $e");
       }
     }
 
@@ -132,12 +129,12 @@ Future<void> _processExcelData(Uint8List bytes, String username) async {
           .collection('timetables')
           .doc(username) // Use username as document ID
           .set({'entries': timetableEntries});
-      print("Timetable data saved to Firestore for user: $username");
+      debugPrint("Timetable data saved to Firestore for user: $username");
     } else {
-      print("No timetable entries found to save.");
+      debugPrint("No timetable entries found to save.");
     }
   } catch (e) {
-    print("Error processing Excel data: $e");
+    debugPrint("Error processing Excel data: $e");
   }
 }
 
@@ -179,7 +176,7 @@ String? _formatTime(String timeString) {
       return DateFormat("HH:mm a").format(timeWithoutSeconds); // Format here
     }
   } catch (e) {
-    print("Error parsing/formatting time: $e");
+    debugPrint("Error parsing/formatting time: $e");
     return null;
   }
 }

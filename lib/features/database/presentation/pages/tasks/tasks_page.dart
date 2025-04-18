@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
 import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
-import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:focus_planner/features/database/data/firestore_db_repo.dart';
 import 'package:focus_planner/features/database/presentation/cubits/db_cubit.dart';
 import 'package:focus_planner/features/enum/tag.dart';
@@ -23,14 +22,11 @@ class _TasksPageState extends State<TasksPage> {
   int itemCount = 1;
   List<String> tasks = ['Task No° ${Random().nextInt(1)}'];
   final FirestoreDbRepo firestoreDbRepo = FirestoreDbRepo();
-  List<DateTime?> programmedDates =
-      List<DateTime?>.filled(double.maxFinite.toInt(), null, growable: true);
-  List<TimeOfDay?> programmedTimes =
-      List<TimeOfDay?>.filled(double.maxFinite.toInt(), null, growable: true);
+  List<DateTime> programmedDates = [DateTime.now()];
+  List<TimeOfDay> programmedTimes = [TimeOfDay.now()];
 
   void saveTasks() async {
     final dbCubit = context.read<DbCubit>();
-    final authCubit = context.read<AuthCubit>();
     final currentUser = FirebaseAuth.instance.currentUser;
     FirestoreDbRepo dbRepo = FirestoreDbRepo();
     AppUser? userDoc;
@@ -60,22 +56,17 @@ class _TasksPageState extends State<TasksPage> {
         {
           'thumbnail': "images/task_default.jpg",
           'taskTitle': task,
-          'programmedDate': programmedDates[tasks.indexOf(task)] != null
-              ? DateFormat('yyyy-MM-dd')
-                  .format(programmedDates[tasks.indexOf(task)]!)
-              : "every day",
+          'programmedDate': DateFormat('yyyy-MM-dd')
+              .format(programmedDates[tasks.indexOf(task)]),
           'programmedTime':
-              programmedTimes[tasks.indexOf(task)]?.format(context) ??
-                  "Not set",
-          'todoBefore': programmedTimes[tasks.indexOf(task)] != null
-              ? programmedTimes[tasks.indexOf(task)]!
-                  .replacing(hour: 23, minute: 59)
-                  .format(context)
-              : "end of day",
+              programmedTimes[tasks.indexOf(task)].format(context),
+          'todoBefore': programmedTimes[tasks.indexOf(task)]
+              .replacing(hour: 23, minute: 59)
+              .format(context),
           'tag': Tag.routineTasks,
           'isFinished': false,
         },
-        currentUser.uid,
+        userDoc.name,
       ).catchError((error) {
         debugPrint("Error adding task: $error");
       }).then((_) {
@@ -84,11 +75,12 @@ class _TasksPageState extends State<TasksPage> {
     }
   }
 
-  // ignore: unused_element
   void _addItem() {
     setState(() {
       itemCount++;
       tasks.add(_controller.text);
+      programmedDates.add(DateTime.now()); // Add a default date
+      programmedTimes.add(TimeOfDay.now()); // Add a default time
       _controller.clear();
     });
     Navigator.of(context).pop();
@@ -98,6 +90,8 @@ class _TasksPageState extends State<TasksPage> {
     setState(() {
       itemCount--;
       tasks.removeAt(index);
+      programmedDates.removeAt(index); // Remove the corresponding date
+      programmedTimes.removeAt(index); // Remove the corresponding time
     });
   }
 
@@ -112,7 +106,7 @@ class _TasksPageState extends State<TasksPage> {
   Future<void> _pickTime(BuildContext context, int index) async {
     final timePicked = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: programmedTimes[index], // Use the existing time
     );
 
     if (timePicked != null) {
@@ -205,9 +199,7 @@ class _TasksPageState extends State<TasksPage> {
                             TextButton(
                               onPressed: () => _pickTime(context, index),
                               child: Text(
-                                programmedTimes[index] != null
-                                    ? programmedTimes[index]!.format(context)
-                                    : 'Pick a time',
+                                programmedTimes[index].format(context),
                               ),
                             ),
                           ],

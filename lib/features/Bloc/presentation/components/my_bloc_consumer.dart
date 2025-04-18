@@ -147,7 +147,7 @@ class MyBlocConsumer extends StatelessWidget {
               return AuthPage(
                   setLocale: setLocale, currentLocale: currentLocale);
             }
-            print(state);
+            debugPrint(state.toString());
             return const Scaffold(
               body: Center(
                 child: Text('Please wait...'),
