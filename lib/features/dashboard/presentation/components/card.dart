@@ -56,7 +56,7 @@ class MyCard extends StatelessWidget {
 
     return Container(
       width: 200,
-      height: 900,
+      height: 500,
       padding: const EdgeInsets.all(8.0),
       alignment: Alignment.topLeft,
       decoration: BoxDecoration(
@@ -65,20 +65,17 @@ class MyCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              alignment: Alignment.center,
-              width: 200,
-              decoration: BoxDecoration(
-                color: blue200,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Image.asset(
-                Subject().getSubjectById(context, subId ?? '')!.thumbPath!,
-                scale: 5,
-              ),
+          Container(
+            width: 200,
+            padding: const EdgeInsets.all(16),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: blue200,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Image.asset(
+              Subject().getSubjectById(context, subId ?? '')!.thumbPath!,
+              scale: 5,
             ),
           ),
           Expanded(
