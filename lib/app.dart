@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:focus_planner/features/Bloc/presentation/components/my_bloc_consumer.dart';
 import 'package:focus_planner/features/Intro/presentation/pages/intro.dart';
 import 'package:focus_planner/features/auth/data/firebase_auth_repo.dart';
 import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
 import 'package:focus_planner/features/auth/domain/repos/auth_repo.dart';
 import 'package:focus_planner/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:focus_planner/features/auth/presentation/pages/auth_page.dart';
+import 'package:focus_planner/features/dashboard/presentation/pages/dash_page.dart';
 import 'package:focus_planner/features/database/data/firestore_db_repo.dart';
 import 'package:focus_planner/features/database/presentation/cubits/db_cubit.dart';
 import 'package:focus_planner/features/database/presentation/pages/tasks/tasks_page.dart';
 import 'package:focus_planner/features/database/presentation/pages/timetables/timetable_page.dart';
-import 'package:focus_planner/themes/ligth_mode.dart';
+import 'package:focus_planner/themes/light_mode.dart';
 import 'l10n/app_localizations.dart';
 
 class FocusPlannerApp extends StatefulWidget {
@@ -62,10 +62,7 @@ class _FocusPlannerAppState extends State<FocusPlannerApp> {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         routes: {
-          '/': (context) => MyBlocConsumer(
-                setLocale: setLocale,
-                currentLocale: _locale,
-              ),
+          '/': (context) => DashboardPage(),
           '/auth': (context) => AuthPage(
                 setLocale: setLocale,
                 currentLocale: _locale,
@@ -79,6 +76,7 @@ class _FocusPlannerAppState extends State<FocusPlannerApp> {
                 setLocale: setLocale,
               ),
           '/tasks': (context) => const TasksPage(),
+          '/dashboard': (context) => const DashboardPage(),
         },
       ),
     );

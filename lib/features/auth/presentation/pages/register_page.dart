@@ -151,6 +151,7 @@ class _RegisterPageState extends State<RegisterPage>
       final notes = await authCubit.fetchKeepNotes();
       // Display or use the notes as needed
     } catch (e) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

@@ -30,7 +30,7 @@ class _TuesdayPageState extends State<TuesdayPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final subjectsList = getSubjects(context);
+    final subjectsList = Subject().getSubjects(context);
     subjectNames = subjectsList.map((subject) => subject.subName!).toList();
   }
 

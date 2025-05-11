@@ -77,10 +77,11 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/
-    - fonts/
+    - assets/
+    - assets/images/
+    - assets/fonts/
     - l10n/
-    - animations/
+    - assets/animations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -94,12 +95,12 @@ flutter:
   fonts:
     - family: Rochester
       fonts:
-        - asset: fonts/Rochester-Regular.ttf
+        - asset: assets/fonts/Rochester-Regular.ttf
     - family: RockSalt
       fonts:
-        - asset: fonts/RockSalt-Regular.ttf
+        - asset: assets/fonts/RockSalt-Regular.ttf
     - family: Romanesco
       fonts:
-        - asset: fonts/Romanesco-Regular.ttf
+        - asset: assets/fonts/Romanesco-Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

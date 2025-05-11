@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:focus_planner/features/database/domain/entities/subject.dart';
 
 class Timetable {
   final Subject subjectName;
-  final String from;
-  final String to;
+  final TimeOfDay from;
+  final TimeOfDay to;
   final String day;
 
   Timetable({

@@ -69,9 +69,8 @@ class DbCubit extends Cubit<DbStates> {
     }
   }
 
-  Future<void> addTaskData(Map<String, dynamic> data, String docId) async {
+  Future<void> addTaskData({required Task data, String? docId}) async {
     try {
-      emit(DbLoading());
       await repository.createTaskData(data, docId);
       await fetchTaskData();
     } catch (e) {
@@ -113,7 +112,7 @@ class DbCubit extends Cubit<DbStates> {
     }
   }
 
-  Future<void> addHolidayData(String data) async {
+  Future<void> addHolidayData(Holiday data) async {
     try {
       emit(DbLoading());
       await repository.createHolidayData(data);
@@ -157,7 +156,7 @@ class DbCubit extends Cubit<DbStates> {
     }
   }
 
-  Future<void> addExerciseData(String data) async {
+  Future<void> addExerciseData(Exercice data) async {
     try {
       emit(DbLoading());
       await repository.createExerciseData(data);
@@ -201,7 +200,7 @@ class DbCubit extends Cubit<DbStates> {
     }
   }
 
-  Future<void> addConnectedDevicesData(String data) async {
+  Future<void> addConnectedDevicesData(ConnectedDevices data) async {
     try {
       emit(DbLoading());
       await repository.createConnectedDevicesData(data);
@@ -245,7 +244,7 @@ class DbCubit extends Cubit<DbStates> {
     }
   }
 
-  Future<void> addSchoolLevelData(String data) async {
+  Future<void> addSchoolLevelData(SchoolLevel data) async {
     try {
       emit(DbLoading());
       await repository.createSchoolLevelData(data);

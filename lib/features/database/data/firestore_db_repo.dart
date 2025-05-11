@@ -86,8 +86,15 @@ class FirestoreDbRepo implements DbRepo {
   }
 
   @override
-  Future<void> createTaskData(Map<String, dynamic>? data, String? docId) {
-    return taskData.doc(docId).set(data);
+  Future<void> createTaskData(Task? data, String? docId) {
+    if (docId != null) {
+      // Si un ID est fourni (pour une mise à jour potentielle future)
+      return taskData.doc(docId).set(data?.toJson());
+    } else {
+      // Si aucun ID n'est fourni (pour une nouvelle tâche), utilise add()
+      // pour générer un ID automatiquement.
+      return taskData.add(data?.toJson());
+    }
   }
 
   @override
@@ -109,7 +116,7 @@ class FirestoreDbRepo implements DbRepo {
   }
 
   @override
-  Future<void> createHolidayData(String? data) {
+  Future<void> createHolidayData(Holiday? data) {
     return holidaysData.add({'data': data});
   }
 
@@ -132,7 +139,7 @@ class FirestoreDbRepo implements DbRepo {
   }
 
   @override
-  Future<void> createExerciseData(String? data) {
+  Future<void> createExerciseData(Exercice? data) {
     return exercicesData.add({'data': data});
   }
 
@@ -155,7 +162,7 @@ class FirestoreDbRepo implements DbRepo {
   }
 
   @override
-  Future<void> createConnectedDevicesData(String? data) {
+  Future<void> createConnectedDevicesData(ConnectedDevices? data) {
     return connectedDevicesData.add({'data': data});
   }
 
@@ -178,7 +185,7 @@ class FirestoreDbRepo implements DbRepo {
   }
 
   @override
-  Future<void> createSchoolLevelData(String? data) {
+  Future<void> createSchoolLevelData(SchoolLevel? data) {
     return schoolLevelData.add({'data': data});
   }
 

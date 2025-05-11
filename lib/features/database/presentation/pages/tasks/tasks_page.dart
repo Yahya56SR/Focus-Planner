@@ -6,9 +6,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:focus_planner/features/auth/domain/entities/app_user.dart';
 import 'package:focus_planner/features/auth/presentation/components/text_field.dart';
 import 'package:focus_planner/features/database/data/firestore_db_repo.dart';
+import 'package:focus_planner/features/database/domain/entities/task.dart';
 import 'package:focus_planner/features/database/presentation/cubits/db_cubit.dart';
 import 'package:focus_planner/features/enum/tag.dart';
-import 'package:intl/intl.dart';
 
 class TasksPage extends StatefulWidget {
   const TasksPage({super.key});
@@ -51,27 +51,42 @@ class _TasksPageState extends State<TasksPage> {
       return;
     }
 
-    for (var task in tasks) {
-      dbCubit.addTaskData(
-        {
-          'thumbnail': "images/task_default.jpg",
-          'taskTitle': task,
-          'programmedDate': DateFormat('yyyy-MM-dd')
-              .format(programmedDates[tasks.indexOf(task)]),
-          'programmedTime':
-              programmedTimes[tasks.indexOf(task)].format(context),
-          'todoBefore': programmedTimes[tasks.indexOf(task)]
-              .replacing(hour: 23, minute: 59)
-              .format(context),
-          'tag': Tag.routineTasks,
-          'isFinished': false,
-        },
-        userDoc.name,
-      ).catchError((error) {
+    for (int i = 0; i < tasks.length; i++) {
+      try {
+        await dbCubit.addTaskData(
+          data: Task(
+            thumbPath: 'images/task_default.jpg',
+            taskTitle: tasks[i],
+            tag: Tag.routineTasks,
+            // progDate conserve la date initiale (peut servir de date de début)
+            progTime: programmedTimes[i], // L'heure de la tâche quotidienne
+            todoBefore: TimeOfDay(hour: 23, minute: 59),
+            isRecurringDaily:
+                true, // <-- Définit la tâche comme récurrente quotidienne
+          ),  
+          // Pas de docId ici pour permettre la création de documents uniques
+        );
+        debugPrint("Task added successfully: ${tasks[i]}");
+      } catch (error) {
         debugPrint("Error adding task: $error");
-      }).then((_) {
-        debugPrint("Task added successfully");
-      });
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error adding task: ${tasks[i]}'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    }
+
+    if (mounted) {
+      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('All tasks saved successfully!'),
+          duration: Duration(seconds: 2),
+        ),
+      );
     }
   }
 
