@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:focus_planner/features/database/domain/entities/subject.dart';
 import 'package:focus_planner/themes/light_mode.dart';
 
-class MyCard extends StatelessWidget {
+class MySubjectCard extends StatelessWidget {
   final String? subId;
   final DateTime? subjectTiming;
 
-  const MyCard({
+  const MySubjectCard({
     super.key,
     this.subId,
     this.subjectTiming,

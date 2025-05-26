@@ -5,6 +5,7 @@ class DashSection extends StatelessWidget {
   final String title;
   final List<String> contentTitles;
   final Map<String, dynamic> contentSubtitles;
+  final bool? isTimetable;
   const DashSection({
     super.key,
     this.title = 'Timetables',
@@ -20,6 +21,7 @@ class DashSection extends StatelessWidget {
       'Art': null,
       'Chemistry': null,
     },
+    this.isTimetable,
   });
 
   @override
@@ -43,13 +45,13 @@ class DashSection extends StatelessWidget {
                     SizedBox(
                       width: 20,
                     ),
-                    MyCard(),
+                    MySubjectCard(),
                   ],
                 );
               }
               return Row(
                 children: [
-                  MyCard(
+                  MySubjectCard(
                     subId: contentTitles.elementAt(index),
                     subjectTiming: contentSubtitles.values.elementAt(index),
                   ),
