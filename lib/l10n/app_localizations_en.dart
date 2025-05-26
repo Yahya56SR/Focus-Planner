@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -94,7 +96,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get helloMessage => 'Hi';
 
   @override
-  String get helloMessageComplete => ', you\'ve created (or logged in) your account, and now; let\'s take the';
+  String get helloMessageComplete =>
+      ', you\'ve created (or logged in) your account, and now; let\'s take the';
 
   @override
   String get timetableIntroTitle => 'Enter Your Timetable';
@@ -160,7 +163,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get allowPermissionsTitle => 'Allow Permissions';
 
   @override
-  String get allowNotificationsInDoNotDisturbMode => 'Allow notifications in Do Not Disturb mode';
+  String get allowNotificationsInDoNotDisturbMode =>
+      'Allow notifications in Do Not Disturb mode';
 
   @override
   String get theLastStepTitle => 'For The Last Step';
@@ -904,7 +908,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aiTitle => 'AI Homework Helper';
 
   @override
-  String get premiumBlock => 'You need to have Premium to be able to use the AI Homework Helper';
+  String get premiumBlock =>
+      'You need to have Premium to be able to use the AI Homework Helper';
 
   @override
   String get typeMessage => 'Type a message';
@@ -1117,11 +1122,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otherSubjects => 'Other Subjects';
 
   @override
-  String get timetableImportSuccess => 'Your Timetable was imported successfully';
+  String get timetableImportSuccess =>
+      'Your Timetable was imported successfully';
 
   @override
   String get timetableImportEmpty => 'Your Excel File is Empty or Invalid';
 
   @override
-  String get timetableImportError => 'An uncaught Error was occured while importing your file, Please try again';
+  String get timetableImportError =>
+      'An uncaught Error was occured while importing your file, Please try again';
 }

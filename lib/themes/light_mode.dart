@@ -26,7 +26,7 @@ final ThemeData lightTheme = ThemeData(
   ),
 
   // Card Theme
-  cardTheme: CardTheme(
+  cardTheme: CardThemeData(
     color: Colors.white,
     elevation: 2,
     margin: const EdgeInsets.all(8),

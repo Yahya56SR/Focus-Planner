@@ -251,17 +251,13 @@ Subject? getSubjectById(BuildContext context, String subId) {
     ),
   ];
 
-  return subjects.firstWhere(
-    (subject) => subject.subId == subId,
-    orElse: () => Subject(
-      subId: '',
-      subName: '',
-      thumbPath: '',
-      subLang: '',
-      subLessons: [],
-      isLitter: false,
-      isScience: false,
-    ),
-  );
+  try {
+    return subjects.firstWhere(
+      (subject) => subject.subId == subId,
+    );
+  } catch (e) {
+    debugPrint('Subject with ID $subId not found');
+    return null;
+  }
 }
 }

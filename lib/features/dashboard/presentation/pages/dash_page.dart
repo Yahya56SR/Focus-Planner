@@ -46,6 +46,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     'Art': DateTime(0, 0, DateTime.monday, 10, 30),
                     'Chemistry': DateTime(0, 0, DateTime.monday, 11, 30),
                   },
+                  isTimetable: true,
                 ),
                 DashSection(
                   title: 'Exercices',
@@ -67,6 +68,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     '8': DateTime(0, 0, DateTime.tuesday, 14, 30),
                     '9': DateTime(0, 0, DateTime.tuesday, 15, 30),
                   },
+                  isTimetable: false,
                 ),
               ],
             ),

@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -94,7 +96,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get helloMessage => 'مرحبًا';
 
   @override
-  String get helloMessageComplete => '، لقد أنشأت (أو سجلت الدخول) حسابك، والآن؛ دعنا نبدأ';
+  String get helloMessageComplete =>
+      '، لقد أنشأت (أو سجلت الدخول) حسابك، والآن؛ دعنا نبدأ';
 
   @override
   String get timetableIntroTitle => 'أدخل جدولك الزمني';
@@ -160,7 +163,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get allowPermissionsTitle => 'السماح بالأذونات';
 
   @override
-  String get allowNotificationsInDoNotDisturbMode => 'السماح بالإشعارات في وضع عدم الإزعاج';
+  String get allowNotificationsInDoNotDisturbMode =>
+      'السماح بالإشعارات في وضع عدم الإزعاج';
 
   @override
   String get theLastStepTitle => 'للخطوة الأخيرة';
@@ -904,7 +908,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get aiTitle => 'مساعد الواجبات المنزلية بالذكاء الاصطناعي';
 
   @override
-  String get premiumBlock => 'تحتاج إلى الحصول على Premium لاستخدام مساعد الواجبات المنزلية بالذكاء الاصطناعي';
+  String get premiumBlock =>
+      'تحتاج إلى الحصول على Premium لاستخدام مساعد الواجبات المنزلية بالذكاء الاصطناعي';
 
   @override
   String get typeMessage => 'اكتب رسالة';
@@ -1030,7 +1035,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterEmailPw => 'يرجى إدخال البريد الإلكتروني وكلمة المرور';
 
   @override
-  String get enterNameEmailPw => 'يرجى إدخال اسم المستخدم، البريد الإلكتروني وكلمة المرور';
+  String get enterNameEmailPw =>
+      'يرجى إدخال اسم المستخدم، البريد الإلكتروني وكلمة المرور';
 
   @override
   String get pwNotMatch => 'كلمات المرور غير متطابقة!';
@@ -1123,5 +1129,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get timetableImportEmpty => 'ملف Excel الخاص بك فارغ أو غير صالح';
 
   @override
-  String get timetableImportError => 'حدث خطأ غير متوقع أثناء استيراد الملف، يرجى المحاولة مرة أخرى';
+  String get timetableImportError =>
+      'حدث خطأ غير متوقع أثناء استيراد الملف، يرجى المحاولة مرة أخرى';
 }

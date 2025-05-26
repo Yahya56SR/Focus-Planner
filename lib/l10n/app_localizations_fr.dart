@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -22,7 +24,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get focus => 'Concentration';
 
   @override
-  String get textOfIntro => 'Commencez une nouvelle ère de \nconcentration extrême pour prendre la';
+  String get textOfIntro =>
+      'Commencez une nouvelle ère de \nconcentration extrême pour prendre la';
 
   @override
   String get slogan => 'Route du Succès';
@@ -94,7 +97,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get helloMessage => 'Salut';
 
   @override
-  String get helloMessageComplete => ', vous avez créé (ou connecté) votre compte, et maintenant ; prenons la';
+  String get helloMessageComplete =>
+      ', vous avez créé (ou connecté) votre compte, et maintenant ; prenons la';
 
   @override
   String get timetableIntroTitle => 'Entrez votre emploi du temps';
@@ -160,7 +164,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get allowPermissionsTitle => 'Autoriser les permissions';
 
   @override
-  String get allowNotificationsInDoNotDisturbMode => 'Autoriser les notifications en mode Ne pas déranger';
+  String get allowNotificationsInDoNotDisturbMode =>
+      'Autoriser les notifications en mode Ne pas déranger';
 
   @override
   String get theLastStepTitle => 'Pour la dernière étape';
@@ -904,7 +909,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get aiTitle => 'Assistant de devoirs IA';
 
   @override
-  String get premiumBlock => 'Vous devez avoir Premium pour pouvoir utiliser l\'assistant de devoirs IA';
+  String get premiumBlock =>
+      'Vous devez avoir Premium pour pouvoir utiliser l\'assistant de devoirs IA';
 
   @override
   String get typeMessage => 'Tapez un message';
@@ -1009,7 +1015,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get premiumAdButton => 'Obtenez Premium maintenant !';
 
   @override
-  String get premiumAdChoice => 'Ou abonnez-vous sur Patreon et obtenez de grandes offres';
+  String get premiumAdChoice =>
+      'Ou abonnez-vous sur Patreon et obtenez de grandes offres';
 
   @override
   String get perMonth => '\$ / Mois';
@@ -1030,7 +1037,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get enterEmailPw => 'Veuillez entrer l\'email et le mot de passe';
 
   @override
-  String get enterNameEmailPw => 'Veuillez entrer le nom d\'utilisateur, l\'email et le mot de passe';
+  String get enterNameEmailPw =>
+      'Veuillez entrer le nom d\'utilisateur, l\'email et le mot de passe';
 
   @override
   String get pwNotMatch => 'Les mots de passe ne correspondent pas !';
@@ -1117,11 +1125,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get otherSubjects => 'Autres Matières';
 
   @override
-  String get timetableImportSuccess => 'Votre emploi du temps a été importé avec succès';
+  String get timetableImportSuccess =>
+      'Votre emploi du temps a été importé avec succès';
 
   @override
   String get timetableImportEmpty => 'Votre fichier Excel est vide ou invalide';
 
   @override
-  String get timetableImportError => 'Une erreur inattendue s\'est produite lors de l\'importation de votre fichier, veuillez réessayer';
+  String get timetableImportError =>
+      'Une erreur inattendue s\'est produite lors de l\'importation de votre fichier, veuillez réessayer';
 }
